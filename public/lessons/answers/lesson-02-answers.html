@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 Answers — Aristocrat</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- Title -->
+  <div class="slide title-slide">
+    <div class="big-icon">🔑</div>
+    <div class="lesson-num">Lesson 2 — Answer Key</div>
+    <h1>ARISTOCRAT</h1>
+    <div class="callout red" style="margin-top:1.5rem">Coach use only — do not distribute to students</div>
+  </div>
+
+  <!-- ── Coach notes: alphabet rules ── -->
+  <div class="slide">
+    <h2>Coach Notes — How These Ciphers Were Built</h2>
+    <ul>
+      <li><strong>K1 or random only.</strong> The 2027 rules allow only K1 or random alphabets for Aristocrats at Regionals. The key-given problems use a K1 alphabet with keyword WIZARD.</li>
+      <li><strong>No letter maps to itself.</strong> The rules forbid it for Aristocrats, Patristocrats, and Xenocrypts. Every alphabet in this lesson was checked.</li>
+      <li><strong>One alphabet per crib problem.</strong> Each C-type problem uses its own random alphabet, so the slide 11 key will not solve them.</li>
+      <li><strong>K1 means the keyword goes in the plain row.</strong> The cipher row is plain A to Z, which makes decoding a lookup in alphabetical order.</li>
+    </ul>
+  </div>
+
+  <!-- ── Walkthrough solution ── -->
+  <div class="slide">
+    <h2>Lesson Walkthrough — Full Solution</h2>
+    <div class="example">
+      <div class="row ct" style="font-size:1.1rem;letter-spacing:0.08em">GTM PSALW JVBXH YBZ ISEUF BQMV GTM CNOR KBD</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crack path (cipher = plain)</div>
+      <div class="row">GTM appears twice → THE → G=T, T=H, M=E</div>
+      <div class="row">BQMV: _ _ E _ → OVER → B=O, Q=V, V=R</div>
+      <div class="row">YBZ and KBD: _ O _ → FOX, DOG → Y=F, Z=X, K=D, D=G</div>
+      <div class="row">JVBXH: _ R O _ _ → BROWN → J=B, X=W, H=N</div>
+      <div class="row">PSALW: THE _ _ _ _ _ BROWN FOX → QUICK → P=Q, S=U, A=I, L=C, W=K</div>
+      <div class="row">ISEUF: _ U _ _ _ → JUMPS → I=J, E=M, U=P, F=S</div>
+      <div class="row">CNOR: THE _ _ _ _ DOG → LAZY → C=L, N=A, O=Z, R=Y</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.1rem;letter-spacing:0.08em">THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</div>
+    </div>
+    <div class="callout blue">Teaching note: this sentence uses all 26 letters, so solving it recovers the whole key. Once students recognize the famous phrase, every remaining word falls out.</div>
+  </div>
+
+  <!-- ── Practice solution ── -->
+  <div class="slide">
+    <h2>Lesson Practice Problem — Solution</h2>
+    <div class="example">
+      <div class="row ct" style="font-size:1.1rem;letter-spacing:0.08em">DKN LDFWNUD QXJINDNL VU DKN QXWNMFLDNCL NONUD</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crack path (cipher = plain)</div>
+      <div class="row">DKN appears twice → THE → D=T, K=H, N=E</div>
+      <div class="row">NONUD: E _ E _ T → EVENT → O=V, U=N</div>
+      <div class="row">VU: _ N → IN → V=I</div>
+      <div class="row">LDFWNUD: _ T _ _ E N T → STUDENT → L=S, F=U, W=D</div>
+      <div class="row">QXJINDNL: _ _ _ _ E T E S → COMPETES → Q=C, X=O, J=M, I=P</div>
+      <div class="row">QXWNMFLDNCL: C O D E _ U S T E _ S → CODEBUSTERS → M=B, C=R</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.1rem;letter-spacing:0.08em">THE STUDENT COMPETES IN THE CODEBUSTERS EVENT</div>
+    </div>
+    <div class="callout blue">Teaching note: the last word, E _ E _ T, is a strong pattern. Repeated letters in a known spot narrow the choices fast.</div>
+  </div>
+
+  <!-- ── Exam Q1 (D) restate ── -->
+  <div class="slide">
+    <h2>Exam Q1 — Aristocrat (D) · Problem</h2>
+    <div class="callout yellow">Keyword: WIZARD · K1 alphabet · D-type</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.4rem">
+      <div class="cell top">W</div><div class="cell top">I</div><div class="cell top">Z</div><div class="cell top">A</div><div class="cell top">R</div><div class="cell top">D</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">E</div><div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">J</div>
+      <div class="cell bot">A</div><div class="cell bot">B</div><div class="cell bot">C</div><div class="cell bot">D</div><div class="cell bot">E</div><div class="cell bot">F</div><div class="cell bot">G</div><div class="cell bot">H</div><div class="cell bot">I</div><div class="cell bot">J</div><div class="cell bot">K</div><div class="cell bot">L</div><div class="cell bot">M</div>
+    </div>
+    <div class="alpha-map" style="font-size:0.78rem">
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div><div class="cell top">N</div><div class="cell top">O</div><div class="cell top">P</div><div class="cell top">Q</div><div class="cell top">S</div><div class="cell top">T</div><div class="cell top">U</div><div class="cell top">V</div><div class="cell top">X</div><div class="cell top">Y</div>
+      <div class="cell bot">N</div><div class="cell bot">O</div><div class="cell bot">P</div><div class="cell bot">Q</div><div class="cell bot">R</div><div class="cell bot">S</div><div class="cell bot">T</div><div class="cell bot">U</div><div class="cell bot">V</div><div class="cell bot">W</div><div class="cell bot">X</div><div class="cell bot">Y</div><div class="cell bot">Z</div>
+    </div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">PDSOI ABQU VRFDZ</div>
+    </div>
+  </div>
+
+  <!-- ── Exam A1 (D) solution ── -->
+  <div class="slide">
+    <h2>Exam Q1 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Letter-by-letter decode (cipher → plain)</div>
+      <div class="row">P→M &nbsp; D→A &nbsp; S→P &nbsp; O→L &nbsp; I→E = <span class="pt">MAPLE</span></div>
+      <div class="row">A→W &nbsp; B→I &nbsp; Q→N &nbsp; U→S = <span class="pt">WINS</span></div>
+      <div class="row">V→T &nbsp; R→O &nbsp; F→D &nbsp; D→A &nbsp; Z→Y = <span class="pt">TODAY</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">MAPLE WINS TODAY</div>
+    </div>
+    <div class="callout green">WIZARD keyword (K1): write W-I-Z-A-R-D first in the plain row, then the remaining letters B C E F G H J K L M N O P Q S T U V X Y in order. The cipher row underneath is A to Z.</div>
+  </div>
+
+  <!-- ── Exam Q2 (C) restate ── -->
+  <div class="slide">
+    <h2>Exam Q2 — Aristocrat (C) · Problem</h2>
+    <div class="callout yellow">C-type · Crib: THE = RGD</div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.1em">RGD DTYMF JOYA LTRLGDQ RGD HXYW</div>
+    </div>
+    <ul class="sub"><li>Write T over every R, H over every G, and E over every D, then work outward from short words.</li></ul>
+  </div>
+
+  <!-- ── Exam A2 (C) solution ── -->
+  <div class="slide">
+    <h2>Exam Q2 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Crack path</div>
+      <div class="row">RGD=THE (crib) → R=T, G=H, D=E</div>
+      <div class="row">LTRLGDQ: _ _ T _ H E _, 1st and 4th letters match → CATCHES → L=C, T=A, Q=S</div>
+      <div class="row">DTYMF: E A _ _ _ → EARLY → Y=R, M=L, F=Y</div>
+      <div class="row">JOYA: _ _ R _ → BIRD → J=B, O=I, A=D</div>
+      <div class="row">HXYW: _ _ R _ after THE → WORM → H=W, X=O, W=M</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.35rem;letter-spacing:0.1em">THE EARLY BIRD CATCHES THE WORM</div>
+    </div>
+    <div class="callout blue">Teaching note: after the crib, attack the word with the most known letters. LTRLGDQ reads _ _ T _ H E _, and its repeated letter points to CATCHES. The new A turns DTYMF into E A _ _ _, which is EARLY.</div>
+  </div>
+
+  <!-- ── HW1 (D) restate ── -->
+  <div class="slide">
+    <h2>HW 1 — Aristocrat (D) · Problem</h2>
+    <div class="callout yellow">D-type · Same WIZARD alphabet</div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">UVWFZ LDEF ABQ GBK</div>
+    </div>
+  </div>
+
+  <!-- ── HW1 (D) solution ── -->
+  <div class="slide">
+    <h2>HW 1 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Decode</div>
+      <div class="row">U→S &nbsp; V→T &nbsp; W→U &nbsp; F→D &nbsp; Z→Y = <span class="pt">STUDY</span></div>
+      <div class="row">L→H &nbsp; D→A &nbsp; E→R &nbsp; F→D = <span class="pt">HARD</span></div>
+      <div class="row">A→W &nbsp; B→I &nbsp; Q→N = <span class="pt">WIN</span></div>
+      <div class="row">G→B &nbsp; B→I &nbsp; K→G = <span class="pt">BIG</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">STUDY HARD WIN BIG</div>
+    </div>
+  </div>
+
+  <!-- ── HW2 (C) restate ── -->
+  <div class="slide">
+    <h2>HW 2 — Aristocrat (C) · Problem</h2>
+    <div class="callout yellow">C-type · Crib: THE = XFA</div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">XFA GJRA QK GLTGDAR</div>
+    </div>
+    <ul class="sub"><li>4-word answer. QK is a 2-letter word.</li></ul>
+  </div>
+
+  <!-- ── HW2 (C) solution ── -->
+  <div class="slide">
+    <h2>HW 2 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Crack path</div>
+      <div class="row">XFA=THE (crib) → X=T, F=H, A=E</div>
+      <div class="row">GJRA: A=E → _ _ _ E → CODE → G=C, J=O, R=D</div>
+      <div class="row">QK: Q=I, K=S → IS</div>
+      <div class="row">GLTGDAR: G=C, L=R, T=A, G=C, D=K, A=E, R=D → CRACKED</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">THE CODE IS CRACKED</div>
+    </div>
+    <div class="callout blue">Teaching note: 2-letter words like QK have only a few likely values (IS, IT, IN, OF, OR, AT). GLTGDAR starts and repeats with G, the same first letter as GJRA = CODE, so it begins with C. C _ _ C _ E D points to CRACKED.</div>
+  </div>
+
+  <!-- ── HW3 (D) restate ── -->
+  <div class="slide">
+    <h2>HW 3 — Aristocrat (D) · Problem</h2>
+    <div class="callout yellow">D-type · Same WIZARD alphabet</div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">QIXIE KBXI WS</div>
+    </div>
+  </div>
+
+  <!-- ── HW3 (D) solution ── -->
+  <div class="slide">
+    <h2>HW 3 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Decode</div>
+      <div class="row">Q→N &nbsp; I→E &nbsp; X→V &nbsp; I→E &nbsp; E→R = <span class="pt">NEVER</span></div>
+      <div class="row">K→G &nbsp; B→I &nbsp; X→V &nbsp; I→E = <span class="pt">GIVE</span></div>
+      <div class="row">W→U &nbsp; S→P = <span class="pt">UP</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">NEVER GIVE UP</div>
+    </div>
+    <div class="callout blue">Teaching note: in a K1 alphabet the cipher row is in plain A–Z order, so decoding is quick. Find the cipher letter in the bottom row and read the plain letter above it. For example, cipher V sits under plain T.</div>
+  </div>
+
+  <!-- ── HW4 (C) restate ── -->
+  <div class="slide">
+    <h2>HW 4 — Aristocrat (C) · Problem</h2>
+    <div class="callout yellow">C-type · Crib: WIN = JAI</div>
+    <div class="example">
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">JAI WXH SYIWHVW</div>
+    </div>
+    <ul class="sub"><li>3-word answer. Crib gives J=W, A=I, I=N.</li></ul>
+  </div>
+
+  <!-- ── HW4 (C) solution ── -->
+  <div class="slide">
+    <h2>HW 4 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Crack path</div>
+      <div class="row">JAI=WIN (crib) → J=W, A=I, I=N</div>
+      <div class="row">WXH: a 3-letter word after WIN → THE → W=T, X=H, H=E</div>
+      <div class="row">SYIWHVW: S=C, Y=O, I=N, W=T, H=E, V=S, W=T → CONTEST</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Answer</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">WIN THE CONTEST</div>
+    </div>
+    <div class="callout blue">Teaching note: each C-type problem uses its own alphabet, just like a real exam. Mappings from one problem do not carry over to another. Here the crib plus a THE guess gives _ _ N T E _ T, and CONTEST fits.</div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

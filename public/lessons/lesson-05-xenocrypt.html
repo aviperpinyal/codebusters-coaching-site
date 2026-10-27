@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 5 — Xenocrypt</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🌍</div>
+    <div class="lesson-num">Lesson 5</div>
+    <h1>XENOCRYPT</h1>
+    <div class="subtitle">Aristocrat in Spanish — foreign letter frequencies</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>What is a Xenocrypt?</h2>
+    <ul>
+      <li>A monoalphabetic substitution cipher — just like Aristocrat</li>
+      <li>Key difference: the <strong>plaintext is in Spanish</strong> (in Science Olympiad)</li>
+      <li>Word spaces are <strong>preserved</strong> (like Aristocrat, not Patristocrat)</li>
+      <li>Appears as DC at all levels — can be Decrypt or Cryptanalysis</li>
+      <li>The test will indicate it's a Xenocrypt</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>Why Spanish Matters</h2>
+    <ul>
+      <li>Spanish has different letter frequencies than English</li>
+      <li>Spanish top letters: <em>E A O S R N I D L C T U M P</em></li>
+      <li>Most common word: <em>DE, LA, EL, EN, LOS</em></li>
+      <li>Common endings: <em>-CIÓN, -MENTE, -ANDO, -IENDO</em></li>
+      <li>Letters Q, K, W, X are very rare in Spanish</li>
+    </ul>
+    <div class="callout yellow">If the test says Xenocrypt — switch to Spanish frequency tables immediately.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Spanish Frequency Table</h2>
+    <table>
+      <thead>
+        <tr><th>Rank</th><th>Letter</th><th>Freq %</th><th>Rank</th><th>Letter</th><th>Freq %</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>E</td><td>13.7</td><td>6</td><td>N</td><td>6.7</td></tr>
+        <tr><td>2</td><td>A</td><td>11.5</td><td>7</td><td>I</td><td>6.3</td></tr>
+        <tr><td>3</td><td>O</td><td>8.7</td><td>8</td><td>D</td><td>5.9</td></tr>
+        <tr><td>4</td><td>S</td><td>7.9</td><td>9</td><td>L</td><td>5.0</td></tr>
+        <tr><td>5</td><td>R</td><td>6.9</td><td>10</td><td>C</td><td>4.6</td></tr>
+      </tbody>
+    </table>
+    <ul class="sub"><li>E is still #1 but A and O are much higher than in English</li></ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Useful Spanish Words to Know</h2>
+    <div class="two-col">
+      <ul>
+        <li><em>DE</em> — of / from</li>
+        <li><em>LA / LAS</em> — the (fem.)</li>
+        <li><em>EL / LOS</em> — the (masc.)</li>
+        <li><em>EN</em> — in</li>
+        <li><em>QUE</em> — that / which</li>
+        <li><em>UNA / UN</em> — a / an</li>
+      </ul>
+      <ul>
+        <li><em>ES</em> — is</li>
+        <li><em>SE</em> — reflexive particle</li>
+        <li><em>CON</em> — with</li>
+        <li><em>POR</em> — for / by</li>
+        <li><em>NO</em> — no / not</li>
+        <li><em>SU</em> — his / her / their</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Worked Example</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">QT WMBQF MTH JMHQF XW QHDMSQWBAR</div>
+    </div>
+    <ul>
+      <li>2-letter word <span class="ct">QT</span> — try <span class="pt">EL, LA, DE, EN</span></li>
+      <li>Repeated <span class="ct">Q</span> in <span class="ct">QT</span> and <span class="ct">WMBQF</span> and <span class="ct">JMHQF</span> → Q is probably E</li>
+      <li>With Q=E: <span class="ct">QT</span> = E? → try <span class="pt">EL, ES, EN</span></li>
+      <li>T=L → check <span class="ct">XW</span> → fill in and iterate</li>
+    </ul>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Strategy Summary</h2>
+    <ul>
+      <li>Confirm it's Spanish (test label says Xenocrypt)</li>
+      <li>Count cipher letter frequencies → map to E A O S R N …</li>
+      <li>Find 1-letter words: only <em>A</em> or <em>Y</em> in Spanish</li>
+      <li>Find 2-letter words: DE, LA, EL, EN, ES, UN, NO</li>
+      <li>Use common endings: <em>-CIÓN, -ANDO, -MENTE</em></li>
+    </ul>
+    <div class="callout green">The test always provides a Spanish frequency guide — use it!</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Xenocrypt = Aristocrat with Spanish plaintext</li>
+      <li>Use Spanish letter frequencies (E A O S R N …), not English</li>
+      <li>Learn 10–15 common Spanish words for pattern matching</li>
+      <li>Appears as DC at all levels</li>
+      <li>Next class: <strong>Fractionated Morse</strong> — Morse code + substitution</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Xenocrypt D-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Xenocrypt (D)</h2>
+    <div class="callout yellow">D-type: cipher alphabet given. Plaintext is Spanish.</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.4rem">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div><div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div><div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">T</div><div class="cell bot">O</div><div class="cell bot">R</div><div class="cell bot">N</div><div class="cell bot">A</div><div class="cell bot">D</div><div class="cell bot">B</div><div class="cell bot">C</div><div class="cell bot">E</div><div class="cell bot">F</div><div class="cell bot">G</div><div class="cell bot">H</div><div class="cell bot">I</div>
+    </div>
+    <div class="alpha-map" style="font-size:0.78rem">
+      <div class="cell top">N</div><div class="cell top">O</div><div class="cell top">P</div><div class="cell top">Q</div><div class="cell top">R</div><div class="cell top">S</div><div class="cell top">T</div><div class="cell top">U</div><div class="cell top">V</div><div class="cell top">W</div><div class="cell top">X</div><div class="cell top">Y</div><div class="cell top">Z</div>
+      <div class="cell bot">J</div><div class="cell bot">K</div><div class="cell bot">L</div><div class="cell bot">M</div><div class="cell bot">P</div><div class="cell bot">Q</div><div class="cell bot">S</div><div class="cell bot">U</div><div class="cell bot">V</div><div class="cell bot">W</div><div class="cell bot">X</div><div class="cell bot">Y</div><div class="cell bot">Z</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext (keyword: TORNADO, K1)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">HT VENT AQ OAHHT</div>
+    </div>
+    <ul class="sub"><li>Decrypt each letter, then read the resulting Spanish phrase</li></ul>
+  </div>
+
+  <!-- ── Exam A1: Xenocrypt D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Xenocrypt (D)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">HT VENT AQ OAHHT</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext (Spanish)</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">LA VIDA ES BELLA</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Translation</div>
+      <div class="row" style="color:#57606a">Life is beautiful</div>
+    </div>
+    <div class="callout green">H→L, T→A &nbsp;|&nbsp; V→V, E→I, N→D, T→A &nbsp;|&nbsp; A→E, Q→S &nbsp;|&nbsp; O→B, A→E, H→L, H→L, T→A</div>
+  </div>
+
+  <!-- ── Exam Q2: Xenocrypt C-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Xenocrypt (C)</h2>
+    <div class="callout yellow">C-type: no key. Use Spanish letter frequencies: E, A, O, S, N, R, I, L, D, T are most common.</div>
+    <div class="example">
+      <div class="lbl">Crib: ES = AQ &nbsp;(Spanish for "is")</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.15rem;letter-spacing:0.09em">AH RKJKREIEAJSK AQ LKNAP</div>
+    </div>
+    <ul class="sub">
+      <li>Fill E=A, S=Q everywhere first</li>
+      <li>Common 2-letter Spanish words: EL, LA, DE, EN, UN, ES, SE, AL</li>
+      <li>Answer is a well-known Spanish phrase</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Xenocrypt C-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Xenocrypt (C)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">AH RKJKREIEAJSK AQ LKNAP</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext (Spanish)</div>
+      <div class="row pt" style="font-size:1.35rem;letter-spacing:0.1em">EL CONOCIMIENTO ES PODER</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Translation</div>
+      <div class="row" style="color:#57606a">Knowledge is power</div>
+    </div>
+    <div class="callout green">Crack path: AQ=ES gives E=A, S=Q → AH=EL → H=L → PKFKPAEAAJQK → CONOCIMIENTO (use Spanish word patterns)</div>
+  </div>
+
+
+  <!-- ── HW1: Xenocrypt D-type ── -->
+  <div class="slide">
+    <h2>Homework 1 — Xenocrypt (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword TORNADO cipher from class. Plaintext is Spanish.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">HT ITBET AQ PATH</div>
+    </div>
+    <ul class="sub"><li>4-word Spanish phrase. Use the TORNADO cipher alphabet from slide 9.</li></ul>
+  </div>
+
+  <!-- ── HW2: Xenocrypt D-type ── -->
+  <div class="slide">
+    <h2>Homework 2 — Xenocrypt (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword TORNADO cipher from class.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">HT IAJSA AQ HEOPA</div>
+    </div>
+    <ul class="sub"><li>4-word Spanish phrase.</li></ul>
+  </div>
+
+  <!-- ── HW3: Xenocrypt C-type ── -->
+  <div class="slide">
+    <h2>Homework 3 — Xenocrypt (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key. Use Spanish frequencies and the crib.</div>
+    <div class="example">
+      <div class="lbl">Crib: ES = AQ &nbsp;(Spanish for "is")</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">AH SEAILK AQ KPK</div>
+    </div>
+    <ul class="sub">
+      <li>Fill E=A, S=Q everywhere, then use 2-letter word AH to find more mappings.</li>
+      <li>4-word Spanish phrase.</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4: Xenocrypt C-type ── -->
+  <div class="slide">
+    <h2>Homework 4 — Xenocrypt (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key. Use Spanish frequencies and the crib.</div>
+    <div class="example">
+      <div class="lbl">Crib: ES = AQ</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">AH TIKP AQ SKNK</div>
+    </div>
+    <ul class="sub">
+      <li>E=A, S=Q from crib. 2-letter word AH → EL (A=E gives H=L). Decode remaining.</li>
+      <li>4-word Spanish phrase.</li>
+    </ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 — Baconian Cipher</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">📖</div>
+    <div class="lesson-num">Lesson 4</div>
+    <h1>BACONIAN</h1>
+    <div class="subtitle">Binary encoding disguised as text</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>Background</h2>
+    <ul>
+      <li>Invented by <strong>Francis Bacon</strong> in 1605</li>
+      <li>Each letter is encoded as a 5-character sequence of two symbols — traditionally <em>A</em> and <em>B</em></li>
+      <li>A precursor to modern binary encoding</li>
+      <li>Also used as <strong>steganography</strong> — hiding a secret inside an innocent-looking text</li>
+      <li>Appears as <strong>Cryptanalysis (C)</strong> at all levels — you decode from the pattern</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>The Baconian Alphabet</h2>
+    <table>
+      <thead>
+        <tr><th>Letter</th><th>Code</th><th>Letter</th><th>Code</th><th>Letter</th><th>Code</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>AAAAA</td><td>J</td><td>ABAAA</td><td>S</td><td>BAABA</td></tr>
+        <tr><td>B</td><td>AAAAB</td><td>K</td><td>ABAAB</td><td>T</td><td>BAABB</td></tr>
+        <tr><td>C</td><td>AAABA</td><td>L</td><td>ABABA</td><td>U/V</td><td>BABAA</td></tr>
+        <tr><td>D</td><td>AAABB</td><td>M</td><td>ABABB</td><td>W</td><td>BABAB</td></tr>
+        <tr><td>E</td><td>AABAA</td><td>N</td><td>ABBAA</td><td>X</td><td>BABBA</td></tr>
+        <tr><td>F</td><td>AABAB</td><td>O</td><td>ABBAB</td><td>Y</td><td>BABBB</td></tr>
+        <tr><td>G</td><td>AABBA</td><td>P</td><td>ABBBA</td><td>Z</td><td>BAAAA</td></tr>
+        <tr><td>H</td><td>AABBB</td><td>Q</td><td>ABBBB</td><td></td><td></td></tr>
+        <tr><td>I/J</td><td>ABAAA</td><td>R</td><td>BAAAA</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <ul class="sub"><li>I and J share a code; U and V share a code in the traditional system</li></ul>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Reading a Baconian Message</h2>
+    <ul>
+      <li>The ciphertext is a stream of A's and B's grouped into <strong>5-letter chunks</strong></li>
+      <li>Each chunk maps to one plaintext letter</li>
+      <li>Think of A = 0, B = 1 → it's binary!</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">AAABA AABAA ABABB ABBAB BAAAB</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Decode each group</div>
+      <div class="row">AAABA=<span class="pt">C</span> &nbsp;AABAA=<span class="pt">E</span> &nbsp;ABABB=<span class="pt">M</span> &nbsp;ABBAB=<span class="pt">O</span> &nbsp;BAAAB=? </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Steganographic Version</h2>
+    <ul>
+      <li>The A/B sequence can be hidden in <em>font changes</em> — bold vs. normal, italic vs. roman</li>
+      <li>Two typefaces represent A and B — the hidden message is in the pattern of typefaces</li>
+      <li>In a test, you may see a block of text with two different fonts — read the pattern!</li>
+    </ul>
+    <div class="callout yellow">Group every 5 characters, classify each as "font A" or "font B," look up in the table.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Practice</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext (A/B groups)</div>
+      <div class="row ct">BAABB AABAA AABAA BAABB</div>
+    </div>
+    <div class="example" style="margin-top:0.8rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">TEST</div>
+    </div>
+    <ul class="sub"><li>T=BAABB, E=AABAA, E=AABAA, T=BAABB</li></ul>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Baconian = 5-character A/B encoding of each letter (binary!)</li>
+      <li>Look up each 5-character group in the Baconian table</li>
+      <li>May be steganographic — hidden in font differences</li>
+      <li>Appears as Cryptanalysis (C) — no key given, but the table is always provided on the test</li>
+      <li>Next class: <strong>Xenocrypt</strong> — Aristocrat in a foreign language</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Baconian A/B decode ── -->
+  <div class="slide">
+    <h2>Exam Practice — Baconian (C)</h2>
+    <div class="callout yellow">Decode each group of 5 A/B symbols into a letter using the Baconian table.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext — 8 groups of 5</div>
+      <div class="row ct" style="font-size:1.1rem;letter-spacing:0.08em">AABBA ABBAB ABBAB AAABB &nbsp; ABABA BABAA AAABA ABAAB</div>
+    </div>
+    <ul class="sub">
+      <li>Look up each 5-symbol group in the Baconian table (provided on test)</li>
+      <li>The space in the middle separates the two words</li>
+      <li>U and V share the same code (BABAA) — context tells you which</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Baconian Answer ── -->
+  <div class="slide">
+    <h2>Answer — Baconian (C)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1rem">AABBA ABBAB ABBAB AAABB &nbsp; ABABA BABAA AAABA ABAAB</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Decoded letter by letter</div>
+      <div class="row">AABBA=G &nbsp; ABBAB=O &nbsp; ABBAB=O &nbsp; AAABB=D &nbsp;|&nbsp; ABABA=L &nbsp; BABAA=U &nbsp; AAABA=C &nbsp; ABAAB=K</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.5rem;letter-spacing:0.15em">GOOD LUCK</div>
+    </div>
+  </div>
+
+  <!-- ── Exam Q2: Word Baconian ── -->
+  <div class="slide">
+    <h2>Exam Practice — Word Baconian (C)</h2>
+    <div class="callout yellow">UPPERCASE words = B &nbsp;·&nbsp; lowercase words = A &nbsp;·&nbsp; 5 words = 1 decoded letter.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (20 words → 4 letters)</div>
+      <div class="row" style="font-size:1.05rem;line-height:1.8">
+        a good cipher <strong>HIDES</strong> its &nbsp; meaning <strong>DEEP</strong> <strong>WITHIN</strong> the <strong>TEXT</strong> &nbsp; so only those <strong>WHO</strong> <strong>KNOW</strong> &nbsp; can read <strong>SECRET</strong> words within
+      </div>
+    </div>
+    <ul class="sub">
+      <li>Group words in sets of 5, convert UPPER=B / lower=A, look up in Baconian table</li>
+      <li>Crib: answer is a common 4-letter word</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Word Baconian Answer ── -->
+  <div class="slide">
+    <h2>Answer — Word Baconian (C)</h2>
+    <div class="example">
+      <div class="lbl">Pattern extraction</div>
+      <div class="row">Group 1: a(A) good(A) cipher(A) <strong>HIDES</strong>(B) its(A) → AAABA = C</div>
+      <div class="row">Group 2: meaning(A) <strong>DEEP</strong>(B) <strong>WITHIN</strong>(B) the(A) <strong>TEXT</strong>(B) → ABBAB = O</div>
+      <div class="row">Group 3: so(A) only(A) those(A) <strong>WHO</strong>(B) <strong>KNOW</strong>(B) → AAABB = D</div>
+      <div class="row">Group 4: can(A) read(A) <strong>SECRET</strong>(B) words(A) within(A) → AABAA = E</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.5rem;letter-spacing:0.15em">CODE</div>
+    </div>
+  </div>
+
+
+  <!-- ── HW1: Baconian A/B decode ── -->
+  <div class="slide">
+    <h2>Homework 1 — Baconian (C)</h2>
+    <div class="callout blue">Due next class · Decode each 5-symbol group using the Baconian table (slide 3).</div>
+    <div class="example">
+      <div class="lbl">Ciphertext — 8 groups of 5 (space separates 2 words)</div>
+      <div class="row ct" style="font-size:1.1rem;letter-spacing:0.08em">AAABA ABBAB AAABB AABAA &nbsp; ABABB AAAAA BAABB AABBB</div>
+    </div>
+    <ul class="sub"><li>4-letter word + 4-letter word</li></ul>
+  </div>
+
+  <!-- ── HW2: Baconian A/B decode ── -->
+  <div class="slide">
+    <h2>Homework 2 — Baconian (C)</h2>
+    <div class="callout blue">Due next class · Decode each 5-symbol group using the Baconian table.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext — 8 groups of 5 (space separates 2 words)</div>
+      <div class="row ct" style="font-size:1.1rem;letter-spacing:0.08em">ABBBA ABABA AAAAA ABBAA &nbsp; BABAB AABAA ABABA ABABA</div>
+    </div>
+    <ul class="sub"><li>4-letter word + 4-letter word</li></ul>
+  </div>
+
+  <!-- ── HW3: Word Baconian ── -->
+  <div class="slide">
+    <h2>Homework 3 — Word Baconian (C)</h2>
+    <div class="callout blue">Due next class · UPPERCASE = B &nbsp;·&nbsp; lowercase = A &nbsp;·&nbsp; 5 words = 1 decoded letter.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (20 words → 4-letter answer)</div>
+      <div class="row" style="font-size:1.0rem;line-height:1.9">
+        <strong>SOLVE</strong> a cipher <strong>NOW</strong> <strong>HERE</strong> &nbsp;
+        each day <strong>KEEP</strong> your focus &nbsp;
+        and win through careful study &nbsp;
+        because <strong>TEAMWORK</strong> beats <strong>SOLO</strong> <strong>EFFORT</strong>
+      </div>
+    </div>
+    <ul class="sub"><li>Group in sets of 5 words, UPPER=B / lower=A, look up each group in the Baconian table.</li></ul>
+  </div>
+
+  <!-- ── HW4: Word Baconian ── -->
+  <div class="slide">
+    <h2>Homework 4 — Word Baconian (C)</h2>
+    <div class="callout blue">Due next class · UPPERCASE = B &nbsp;·&nbsp; lowercase = A &nbsp;·&nbsp; 5 words = 1 decoded letter.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (20 words → 4-letter answer)</div>
+      <div class="row" style="font-size:1.0rem;line-height:1.9">
+        <strong>PRACTICE</strong> the <strong>CODE</strong> as <strong>OFTEN</strong> &nbsp;
+        as <strong>POSSIBLE</strong> for every contest &nbsp;
+        and <strong>HELP</strong> <strong>OTHERS</strong> learn too &nbsp;
+        <strong>SOLVE</strong> and decode <strong>EVERY</strong> time
+      </div>
+    </div>
+    <ul class="sub"><li>Group in sets of 5 words, UPPER=B / lower=A, look up in Baconian table. Hint: 4-letter word for winning.</li></ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

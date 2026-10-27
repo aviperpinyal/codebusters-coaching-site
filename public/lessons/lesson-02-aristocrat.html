@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Aristocrat</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 Title -->
+  <div class="slide title-slide">
+    <div class="big-icon">🕵️</div>
+    <div class="lesson-num">Lesson 2</div>
+    <h1>ARISTOCRAT</h1>
+    <div class="subtitle">Monoalphabetic Substitution — word spaces intact</div>
+  </div>
+
+  <!-- 2 What is it -->
+  <div class="slide">
+    <h2>What is an Aristocrat?</h2>
+    <ul>
+      <li>A <strong>monoalphabetic substitution cipher</strong> — each plaintext letter maps to a unique cipher letter (scrambled alphabet)</li>
+      <li>Word spacing and punctuation are <strong>preserved</strong></li>
+      <li>The key is a full 26-letter <strong>mixed alphabet</strong> — not just a shift</li>
+      <li>At Invitationals/Regionals: may be Decrypt (key given) or Cryptanalysis (no key)</li>
+      <li>At State/Nationals: always Cryptanalysis — you must <em>break</em> it</li>
+    </ul>
+  </div>
+
+  <!-- 3 Key types -->
+  <div class="slide">
+    <h2>Types of Keys</h2>
+    <ul>
+      <li><strong>Random key</strong> — 26 letters scrambled arbitrarily</li>
+      <li><strong>Keyword key</strong> — write a keyword (removing duplicates), then fill remaining letters in order</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Keyword: CIPHER</div>
+      <div class="row">Plain:  <span class="pt">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span></div>
+      <div class="row">Cipher: <span class="ct">C I P H E R A B D F G J K L M N O Q S T U V W X Y Z</span></div>
+    </div>
+    <ul class="sub"><li>C I P H E R fills first 6 slots, then remaining letters A B D F G … in order</li></ul>
+  </div>
+
+  <!-- 4 Frequency analysis -->
+  <div class="slide">
+    <h2>Breaking It — Frequency Analysis</h2>
+    <ul>
+      <li>In English, letter frequency is predictable: <em>E T A O I N S H R</em> are most common</li>
+      <li>Count how many times each cipher letter appears</li>
+      <li>The most frequent cipher letter is probably <em>E</em></li>
+      <li>Second and third most frequent → <em>T</em> or <em>A</em></li>
+    </ul>
+    <div class="callout yellow">Memorize: <strong>ETAOIN SHRDLU</strong> — the 12 most common English letters, roughly in order.</div>
+  </div>
+
+  <!-- 5 Pattern words -->
+  <div class="slide">
+    <h2>Pattern Words</h2>
+    <ul>
+      <li>Look for 1-letter words: <em>A</em> or <em>I</em></li>
+      <li>Look for 2-letter words: <em>OF, TO, IN, IS, IT, BE, AS, AT, OR, AN, HE…</em></li>
+      <li>Look for double letters: <em>SS, LL, EE, TT, FF, RR, NN…</em></li>
+      <li>A 3-letter cipher word that appears more than once: likely <em>THE</em></li>
+    </ul>
+    <div class="callout blue">THE is the single most common 3-letter word. Find it first.</div>
+  </div>
+
+  <!-- 6 Worked example -->
+  <div class="slide">
+    <h2>Cryptanalysis Walkthrough</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">GTM PSALW JVBXH YBZ ISEUF BQMV GTM CNOR KBD</div>
+    </div>
+    <ul>
+      <li><span class="ct">GTM</span> appears twice — almost certainly <span class="pt">THE</span> → G=T, T=H, M=E</li>
+      <li><span class="ct">BQMV</span> becomes _ _ E _ — <span class="pt">OVER</span> fits → B=O, Q=V, V=R</li>
+      <li>Now <span class="ct">YBZ</span> and <span class="ct">KBD</span> are both _ O _ — try <span class="pt">FOX</span> and <span class="pt">DOG</span></li>
+      <li>Fill in confirmed letters everywhere and guess the remaining words</li>
+      <li>Iterate — each confirmed letter constrains others</li>
+    </ul>
+  </div>
+
+  <!-- 7 Decrypt type (key given) -->
+  <div class="slide">
+    <h2>Decrypt Type — Key Given</h2>
+    <ul>
+      <li>The problem provides the full cipher alphabet or states the keyword</li>
+      <li>Build a lookup table: cipher letter → plain letter</li>
+      <li>Substitute every letter mechanically</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Given key (plain → cipher)</div>
+      <div class="row">A→<span class="ct">Q</span> &nbsp;B→<span class="ct">W</span> &nbsp;C→<span class="ct">E</span> &nbsp;D→<span class="ct">R</span> &nbsp;E→<span class="ct">T</span> &nbsp; …</div>
+    </div>
+    <div class="callout green">For D-type: focus on <em>speed</em>. Write cipher→plain above each letter immediately.</div>
+  </div>
+
+  <!-- 8 Tips -->
+  <div class="slide">
+    <h2>Competition Tips</h2>
+    <ul>
+      <li>Always write guessed plain letters <em>above</em> the cipher letters — easy to erase</li>
+      <li>Use a separate letter-tracking grid: 26 plain / 26 cipher slots</li>
+      <li>Confirm a guess with at least two independent words before committing</li>
+      <li>If stuck, look for <em>-ING, -TION, -ED</em> endings</li>
+      <li>Leave blanks and come back — partial solves still earn points</li>
+    </ul>
+  </div>
+
+  <!-- 9 Practice -->
+  <div class="slide">
+    <h2>Practice Problem</h2>
+    <div class="callout yellow">Cryptanalysis — no key given</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">DKN LDFWNUD QXJINDNL VU DKN QXWNMFLDNCL NONUD</div>
+    </div>
+    <div class="example" style="margin-top:1rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">THE STUDENT COMPETES IN THE CODEBUSTERS EVENT</div>
+    </div>
+    <ul class="sub"><li>Hint: DKN appears twice — it's THE. Work outward from there.</li></ul>
+  </div>
+
+  <!-- 10 Takeaways -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Aristocrat = scrambled alphabet, word spaces preserved</li>
+      <li>Break it with frequency analysis + pattern words</li>
+      <li>ETAOIN SHRDLU and THE/AND/OF are your best friends</li>
+      <li>Appears as DC (either D or C) at all levels</li>
+      <li>Next class: <strong>Patristocrat</strong> — same cipher, but word spaces are removed</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Aristocrat D-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Aristocrat (D)</h2>
+    <div class="callout yellow">D-type: full cipher alphabet given below.</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.4rem">
+      <div class="cell top">W</div><div class="cell top">I</div><div class="cell top">Z</div><div class="cell top">A</div><div class="cell top">R</div><div class="cell top">D</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">E</div><div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">J</div>
+      <div class="cell bot">A</div><div class="cell bot">B</div><div class="cell bot">C</div><div class="cell bot">D</div><div class="cell bot">E</div><div class="cell bot">F</div><div class="cell bot">G</div><div class="cell bot">H</div><div class="cell bot">I</div><div class="cell bot">J</div><div class="cell bot">K</div><div class="cell bot">L</div><div class="cell bot">M</div>
+    </div>
+    <div class="alpha-map" style="font-size:0.78rem">
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div><div class="cell top">N</div><div class="cell top">O</div><div class="cell top">P</div><div class="cell top">Q</div><div class="cell top">S</div><div class="cell top">T</div><div class="cell top">U</div><div class="cell top">V</div><div class="cell top">X</div><div class="cell top">Y</div>
+      <div class="cell bot">N</div><div class="cell bot">O</div><div class="cell bot">P</div><div class="cell bot">Q</div><div class="cell bot">R</div><div class="cell bot">S</div><div class="cell bot">T</div><div class="cell bot">U</div><div class="cell bot">V</div><div class="cell bot">W</div><div class="cell bot">X</div><div class="cell bot">Y</div><div class="cell bot">Z</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext (keyword: WIZARD, K1)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">PDSOI ABQU VRFDZ</div>
+    </div>
+  </div>
+
+  <!-- ── Exam A1: Aristocrat D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Aristocrat (D)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">PDSOI ABQU VRFDZ</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">MAPLE WINS TODAY</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Key steps</div>
+      <div class="row">P→M &nbsp; D→A &nbsp; S→P &nbsp; O→L &nbsp; I→E &nbsp;|&nbsp; A→W &nbsp; B→I &nbsp; Q→N &nbsp; U→S &nbsp;|&nbsp; V→T &nbsp; R→O &nbsp; F→D &nbsp; D→A &nbsp; Z→Y</div>
+    </div>
+    <div class="callout green">Keyword WIZARD (K1): write it first in the plain row, then the remaining letters in order. The cipher row is plain A to Z.</div>
+  </div>
+
+  <!-- ── Exam Q2: Aristocrat C-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Aristocrat (C)</h2>
+    <div class="callout yellow">C-type: no key given. Use frequency analysis. Crib provided.</div>
+    <div class="example">
+      <div class="lbl">Crib: THE = RGD</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.1em">RGD DTYMF JOYA LTRLGDQ RGD HXYW</div>
+    </div>
+    <ul class="sub">
+      <li>Write T over every R, H over every G, and E over every D first</li>
+      <li>Word lengths: 3, 5, 4, 7, 3, 4</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Aristocrat C-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Aristocrat (C)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">RGD DTYMF JOYA LTRLGDQ RGD HXYW</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.35rem;letter-spacing:0.1em">THE EARLY BIRD CATCHES THE WORM</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crack path</div>
+      <div class="row">RGD = THE (crib) → R=T, G=H, D=E → LTRLGDQ = _ _ T _ H E _ with a repeated 1st and 4th letter → CATCHES → L=C, T=A, Q=S → DTYMF = E A _ _ _ → EARLY → …</div>
+    </div>
+  </div>
+
+
+  <!-- ── HW1: Aristocrat D-type ── -->
+  <div class="slide">
+    <h2>Homework 1 — Aristocrat (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword WIZARD cipher from today's slides.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">UVWFZ LDEF ABQ GBK</div>
+    </div>
+    <ul class="sub">
+      <li>Use the WIZARD cipher alphabet from slide 11 to decode each letter.</li>
+      <li>4-word answer</li>
+    </ul>
+  </div>
+
+  <!-- ── HW2: Aristocrat C-type ── -->
+  <div class="slide">
+    <h2>Homework 2 — Aristocrat (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key given — use the crib to bootstrap.</div>
+    <div class="example">
+      <div class="lbl">Crib: THE = XFA</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">XFA GJRA QK GLTGDAR</div>
+    </div>
+    <ul class="sub">
+      <li>Write T over every X, H over every F, and E over every A first, then work outward.</li>
+      <li>4-word answer: _ _ _ &nbsp; _ _ _ _ &nbsp; _ _ &nbsp; _ _ _ _ _ _ _</li>
+    </ul>
+  </div>
+
+  <!-- ── HW3: Aristocrat D-type ── -->
+  <div class="slide">
+    <h2>Homework 3 — Aristocrat (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword WIZARD cipher from today's slides.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">QIXIE KBXI WS</div>
+    </div>
+    <ul class="sub">
+      <li>3-word answer: _ _ _ _ _ &nbsp; _ _ _ _ &nbsp; _ _</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4: Aristocrat C-type ── -->
+  <div class="slide">
+    <h2>Homework 4 — Aristocrat (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key given — use the crib.</div>
+    <div class="example">
+      <div class="lbl">Crib: WIN = JAI</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.1em">JAI WXH SYIWHVW</div>
+    </div>
+    <ul class="sub">
+      <li>Write W over every J, I over every A, and N over every I, then identify the remaining words.</li>
+      <li>3-word answer: _ _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _ _ _</li>
+    </ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

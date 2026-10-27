@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 Answers — Complete Columnar Transposition</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <div class="slide title-slide">
+    <div class="big-icon">🔑</div>
+    <div class="lesson-num">Lesson 9 — Answer Key</div>
+    <h1>COMPLETE COLUMNAR</h1>
+    <div class="callout red" style="margin-top:1.5rem">Coach use only — do not distribute to students</div>
+  </div>
+
+  <!-- Exam Q1 -->
+  <div class="slide">
+    <h2>Exam Q1 — Columnar (D) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Keyword: ACE &nbsp;·&nbsp; Ranks: A=1, C=2, E=3 &nbsp;·&nbsp; Cipher: CEU OSL DRE</div>
+      <div class="row">Segments (by rank): CEU (rank 1) · OSL (rank 2) · DRE (rank 3)</div>
+    </div>
+    <div class="callout blue">3 segments → 3 columns; 3 rows. Place by rank, read across rows.</div>
+  </div>
+
+  <div class="slide">
+    <h2>Exam Q1 — Solution: CODES RULE</h2>
+    <div class="example">
+      <div class="lbl">Grid (key order A C E, ranks 1 2 3)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="key">A &nbsp; C &nbsp; E</span><br>
+        <span class="key">1 &nbsp; 2 &nbsp; 3</span><br>
+        <span class="pt">C &nbsp; O &nbsp; D</span><br>
+        <span class="pt">E &nbsp; S &nbsp; R</span><br>
+        <span class="pt">U &nbsp; L &nbsp; E</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>CODES RULE</strong> &nbsp;·&nbsp; Col A=CEU, col C=OSL, col E=DRE → read rows left to right ✓</div>
+  </div>
+
+  <!-- Exam Q2 -->
+  <div class="slide">
+    <h2>Exam Q2 — Columnar (C) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Key length 4 · Crib FIND (first 4 plain letters) · Cipher IHC DLS FTO NEK</div>
+      <div class="row">12 letters ÷ 4 cols = 3 rows. Segments: IHC · DLS · FTO · NEK</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib matching</div>
+      <div class="row">F → FTO (key pos 1) &nbsp; I → IHC (key pos 2) &nbsp; N → NEK (key pos 3) &nbsp; D → DLS (key pos 4)</div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h2>Exam Q2 — Solution: FIND THE LOCKS</h2>
+    <div class="example">
+      <div class="lbl">Grid (columns placed at their key positions)</div>
+      <div class="row" style="font-family:monospace;font-size:1.05rem;line-height:2">
+        <span class="pt">F &nbsp; I &nbsp; N &nbsp; D</span><br>
+        <span class="pt">T &nbsp; H &nbsp; E &nbsp; L</span><br>
+        <span class="pt">O &nbsp; C &nbsp; K &nbsp; S</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>FIND THE LOCKS</strong></div>
+  </div>
+
+  <!-- HW1 -->
+  <div class="slide">
+    <h2>HW 1 — Columnar (D) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Keyword: CAT &nbsp;·&nbsp; Ranks: A=1, C=2, T=3 &nbsp;·&nbsp; Cipher: END LRO ACE</div>
+      <div class="row">Segments: END (rank 1) · LRO (rank 2) · ACE (rank 3)</div>
+    </div>
+    <div class="callout blue">Key order is C A T: rank 2 goes under C, rank 1 under A, rank 3 under T.</div>
+  </div>
+
+  <div class="slide">
+    <h2>HW 1 — Solution: LEARN CODE</h2>
+    <div class="example">
+      <div class="lbl">Grid (key order C A T)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="key">C &nbsp; A &nbsp; T</span><br>
+        <span class="key">2 &nbsp; 1 &nbsp; 3</span><br>
+        <span class="pt">L &nbsp; E &nbsp; A</span><br>
+        <span class="pt">R &nbsp; N &nbsp; C</span><br>
+        <span class="pt">O &nbsp; D &nbsp; E</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>LEARN CODE</strong> &nbsp;·&nbsp; Rank 1 (END) → col A; rank 2 (LRO) → col C; rank 3 (ACE) → col T ✓</div>
+  </div>
+
+  <!-- HW2 -->
+  <div class="slide">
+    <h2>HW 2 — Columnar (D) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Keyword: MATH &nbsp;·&nbsp; Ranks: A=1, H=2, M=3, T=4 &nbsp;·&nbsp; Cipher: EE TM BT SA</div>
+      <div class="row">Segments: EE (rank 1) · TM (rank 2) · BT (rank 3) · SA (rank 4)</div>
+    </div>
+    <div class="callout blue">Key order is M A T H: rank 3 under M, rank 1 under A, rank 4 under T, rank 2 under H.</div>
+  </div>
+
+  <div class="slide">
+    <h2>HW 2 — Solution: BEST TEAM</h2>
+    <div class="example">
+      <div class="lbl">Grid (key order M A T H)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="key">M &nbsp; A &nbsp; T &nbsp; H</span><br>
+        <span class="key">3 &nbsp; 1 &nbsp; 4 &nbsp; 2</span><br>
+        <span class="pt">B &nbsp; E &nbsp; S &nbsp; T</span><br>
+        <span class="pt">T &nbsp; E &nbsp; A &nbsp; M</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>BEST TEAM</strong> &nbsp;·&nbsp; Rank 1 (EE) → col A; rank 2 (TM) → col H; rank 3 (BT) → col M; rank 4 (SA) → col T ✓</div>
+  </div>
+
+  <!-- HW3 -->
+  <div class="slide">
+    <h2>HW 3 — Columnar (C) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Key length 3 · Crib SO (first 2 plain letters) · Cipher SVO LCE OED</div>
+      <div class="row">9 letters ÷ 3 cols = 3 rows. Segments: SVO · LCE · OED</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib matching</div>
+      <div class="row">S → SVO (key pos 1) &nbsp; O → OED (key pos 2) &nbsp; LCE → key pos 3 (by elimination)</div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h2>HW 3 — Solution: SOLVE CODE</h2>
+    <div class="example">
+      <div class="lbl">Grid (columns at key positions)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="pt">S &nbsp; O &nbsp; L</span><br>
+        <span class="pt">V &nbsp; E &nbsp; C</span><br>
+        <span class="pt">O &nbsp; D &nbsp; E</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>SOLVE CODE</strong></div>
+  </div>
+
+  <!-- HW4 -->
+  <div class="slide">
+    <h2>HW 4 — Columnar (C) · Problem</h2>
+    <div class="example">
+      <div class="lbl">Key length 4 · Crib TEA (first 3 plain letters) · Cipher TW EO AR MK</div>
+      <div class="row">8 letters ÷ 4 cols = 2 rows. Segments: TW · EO · AR · MK</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib matching</div>
+      <div class="row">T → TW (key pos 1) &nbsp; E → EO (key pos 2) &nbsp; A → AR (key pos 3) &nbsp; MK → key pos 4 (elimination)</div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h2>HW 4 — Solution: TEAMWORK</h2>
+    <div class="example">
+      <div class="lbl">Grid (columns at key positions)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="pt">T &nbsp; E &nbsp; A &nbsp; M</span><br>
+        <span class="pt">W &nbsp; O &nbsp; R &nbsp; K</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>TEAMWORK</strong></div>
+    <div class="callout blue">Key reconstruction: BEST (B=1,E=2,S=3,T=4). Pos 1=rank3(BT), pos 2=rank1(EE), pos 3=rank4(SA), pos 4=rank2(TM) → key = _ E _ _ where ranks match BEST.</div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

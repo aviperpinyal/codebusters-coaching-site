@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6 Answers — Fractionated Morse</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <div class="slide title-slide">
+    <div class="big-icon">🔑</div>
+    <div class="lesson-num">Lesson 6 — Answer Key</div>
+    <h1>FRACTIONATED MORSE</h1>
+    <div class="callout red" style="margin-top:1.5rem">Coach use only — do not distribute to students</div>
+  </div>
+
+  <!-- Exam Q1 -->
+  <div class="slide">
+    <h2>Exam Q1 — FM (D) · G C K K E → COME</h2>
+    <div class="example">
+      <div class="lbl">Step 1: cipher → trigraphs (STUDY key)</div>
+      <div class="row">G→−·− &nbsp; C→·X− &nbsp; K→−−X &nbsp; K→−−X &nbsp; E→·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2: concatenate</div>
+      <div class="row ct">−·−·X−−−X−−X·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3: split on X → Morse → letters</div>
+      <div class="row">−·−· = C &nbsp; −−− = O &nbsp; −− = M &nbsp; · = E</div>
+    </div>
+    <div class="callout green">Answer: <strong>COME</strong></div>
+  </div>
+
+  <!-- Exam Q2 -->
+  <div class="slide">
+    <h2>Exam Q2 — FM (C) · H D N G U T O D F → CODE WIN</h2>
+    <div class="example">
+      <div class="lbl">Crib CODE=HDNG reveals 4 key mappings</div>
+      <div class="row">CODE Morse: −·−·X−−−X−··X· → trigraphs: −·− / ·X− / −−X / −··</div>
+      <div class="row">∴ H→−·− &nbsp; D→·X− &nbsp; N→−−X &nbsp; G→−··</div>
+      <div class="row">Keyword: MAPLE (confirms remaining: U→X·X, T→X·−, O→−X·, F→·XX)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode → Morse stream</div>
+      <div class="row ct" style="font-size:0.85rem">−·−·X−−−X−··X·XX·−−X··X−·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Split on X → letters</div>
+      <div class="row">−·−·=C  −−−=O  −··=D  ·=E &nbsp;|&nbsp; ·−−=W  ··=I  −·=N</div>
+    </div>
+    <div class="callout green">Answer: <strong>CODE WIN</strong></div>
+  </div>
+
+  <!-- HW1 -->
+  <div class="slide">
+    <h2>HW 1 — FM (D) · Y O R → WIN</h2>
+    <div class="example">
+      <div class="lbl">Step 1: trigraphs (STUDY key)</div>
+      <div class="row">Y→·−− &nbsp; O→X·· &nbsp; R→X−·</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2: concatenate</div>
+      <div class="row ct">·−−X··X−·</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3: split on X → Morse → letters</div>
+      <div class="row">·−− = W &nbsp; ·· = I &nbsp; −· = N</div>
+    </div>
+    <div class="callout green">Answer: <strong>WIN</strong></div>
+  </div>
+
+  <!-- HW2 -->
+  <div class="slide">
+    <h2>HW 2 — FM (D) · I V L L F → GOAL</h2>
+    <div class="example">
+      <div class="lbl">Step 1: trigraphs</div>
+      <div class="row">I→−−· &nbsp; V→X−− &nbsp; L→−X· &nbsp; L→−X· &nbsp; F→−··</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2: concatenate</div>
+      <div class="row ct">−−·X−−−X·−X·−··</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3: split on X → letters</div>
+      <div class="row">−−· = G &nbsp; −−− = O &nbsp; ·− = A &nbsp; ·−·· = L</div>
+    </div>
+    <div class="callout green">Answer: <strong>GOAL</strong></div>
+  </div>
+
+  <!-- HW3 -->
+  <div class="slide">
+    <h2>HW 3 — FM (D) · F B O C → BEST</h2>
+    <div class="example">
+      <div class="lbl">Step 1: trigraphs</div>
+      <div class="row">F→−·· &nbsp; B→·X· &nbsp; O→X·· &nbsp; C→·X−</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2: concatenate</div>
+      <div class="row ct">−···X·X···X−</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3: split on X → letters</div>
+      <div class="row">−··· = B &nbsp; · = E &nbsp; ··· = S &nbsp; − = T</div>
+    </div>
+    <div class="callout green">Answer: <strong>BEST</strong></div>
+    <div class="callout blue">Teaching note: B's Morse is −··· (4 symbols) so the first trigraph is −·· (just the first 3), and the 4th dot carries into the next trigraph ·X·. This "fractionation" is the key concept — letters don't align with trigraphs.</div>
+  </div>
+
+  <!-- HW4 -->
+  <div class="slide">
+    <h2>HW 4 — FM (D) · K J O A E → MOVE</h2>
+    <div class="example">
+      <div class="lbl">Step 1: trigraphs</div>
+      <div class="row">K→−−X &nbsp; J→−−− &nbsp; O→X·· &nbsp; A→·−X &nbsp; E→·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2: concatenate</div>
+      <div class="row ct">−−X−−−X···−X·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3: split on X → letters</div>
+      <div class="row">−− = M &nbsp; −−− = O &nbsp; ···− = V &nbsp; · = E</div>
+    </div>
+    <div class="callout green">Answer: <strong>MOVE</strong></div>
+    <div class="callout blue">Teaching note: E→·XX at the end. The XX here is padding (end of stream) — in decoding, once we've identified M, O, V, E from the Morse segments, any trailing X's are ignored.</div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

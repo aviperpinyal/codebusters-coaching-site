@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Patristocrat</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🧩</div>
+    <div class="lesson-num">Lesson 3</div>
+    <h1>PATRISTOCRAT</h1>
+    <div class="subtitle">Monoalphabetic substitution — word spaces removed</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>Patristocrat vs. Aristocrat</h2>
+    <ul>
+      <li>Same monoalphabetic substitution as Aristocrat</li>
+      <li>Key difference: <strong>all spaces removed</strong>, ciphertext split into 5-letter groups</li>
+      <li>This removes the word-boundary clue — much harder to crack!</li>
+      <li>Still appears as DC at all competition levels</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Aristocrat vs. Patristocrat</div>
+      <div class="row">Aristo:  <span class="ct">LPM HDTZX YQJVB</span></div>
+      <div class="row">Patri:   <span class="ct">LPMHD TZXYQ JVBEJ</span></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>Why 5-Letter Groups?</h2>
+    <ul>
+      <li>Standard cryptographic practice — hides word lengths</li>
+      <li>Padding: a random letter fills the last group if text length isn't a multiple of 5</li>
+      <li>You may see a note like <em>"K = null"</em> (K is the padding letter)</li>
+      <li>Don't try to decode the null letter — ignore it</li>
+    </ul>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Breaking a Patristocrat</h2>
+    <ul>
+      <li>Frequency analysis still works — letter frequencies don't change</li>
+      <li>Without word spaces, use <strong>digraph and trigraph frequencies</strong></li>
+      <li>Most common English digraphs: <em>TH, HE, IN, ER, AN, RE, ON, EN</em></li>
+      <li>Most common trigraphs: <em>THE, AND, ING, ION, ENT</em></li>
+      <li>Look for repeated 3-letter sequences — same trigraph often = THE</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Index of Coincidence</h2>
+    <ul>
+      <li>A statistical tool: measures how often two randomly chosen letters match</li>
+      <li>English text IC ≈ <em>0.065</em></li>
+      <li>Random (polyalphabetic) IC ≈ <em>0.038</em></li>
+      <li>If IC is near 0.065 → monoalphabetic → use frequency analysis</li>
+    </ul>
+    <div class="callout blue">You won't need to calculate IC by hand on the test, but knowing it confirms you're dealing with a monoalphabetic cipher.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Strategy for Patristocrats</h2>
+    <ul>
+      <li><strong>Step 1</strong>: Count all 26 cipher letters, rank by frequency</li>
+      <li><strong>Step 2</strong>: Map top frequencies to ETAOIN…</li>
+      <li><strong>Step 3</strong>: Look for repeating bigrams/trigrams in the ciphertext</li>
+      <li><strong>Step 4</strong>: Try substitutions and check if real words appear</li>
+      <li><strong>Step 5</strong>: Extend confirmed letters; iterate</li>
+    </ul>
+    <div class="callout yellow">Write your current mapping on a separate line — update it as you go.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Practice Problem</h2>
+    <div class="callout yellow">Cryptanalysis — no key. Null = X</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (5-letter groups)</div>
+      <div class="row ct">ACOSK PVBER HACKS OCBEP AOCSK X</div>
+    </div>
+    <ul class="sub"><li>Count letters. Find the most frequent. Look for repeating trigrams.</li></ul>
+    <div class="example" style="margin-top:0.8rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">SOLVE THE CODE BEFORE TIME RUNS OUT</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Patristocrat = Aristocrat without word spaces, in 5-letter blocks</li>
+      <li>Harder than Aristocrat — rely on digraphs, trigraphs, and frequency</li>
+      <li>Null letter may pad the final group — problem will note it</li>
+      <li>Appears as DC at all levels</li>
+      <li>Next class: <strong>Baconian Cipher</strong> — hiding letters in patterns of A and B</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Patristocrat D-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Patristocrat (D)</h2>
+    <div class="callout yellow">D-type: cipher alphabet given. Spaces removed — ciphertext in 5-letter groups.</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.4rem">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div><div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div><div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">F</div><div class="cell bot">R</div><div class="cell bot">E</div><div class="cell bot">Q</div><div class="cell bot">U</div><div class="cell bot">N</div><div class="cell bot">C</div><div class="cell bot">Y</div><div class="cell bot">A</div><div class="cell bot">B</div><div class="cell bot">D</div><div class="cell bot">G</div><div class="cell bot">H</div>
+    </div>
+    <div class="alpha-map" style="font-size:0.78rem">
+      <div class="cell top">N</div><div class="cell top">O</div><div class="cell top">P</div><div class="cell top">Q</div><div class="cell top">R</div><div class="cell top">S</div><div class="cell top">T</div><div class="cell top">U</div><div class="cell top">V</div><div class="cell top">W</div><div class="cell top">X</div><div class="cell top">Y</div><div class="cell top">Z</div>
+      <div class="cell bot">I</div><div class="cell bot">J</div><div class="cell bot">K</div><div class="cell bot">L</div><div class="cell bot">M</div><div class="cell bot">O</div><div class="cell bot">P</div><div class="cell bot">S</div><div class="cell bot">T</div><div class="cell bot">V</div><div class="cell bot">W</div><div class="cell bot">X</div><div class="cell bot">Z</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext (keyword: FREQUENCY, K1)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">OEAUI EUJGX HKAFQ</div>
+    </div>
+    <ul class="sub"><li>Decode all 15 letters, then restore word breaks to find the two-word answer</li></ul>
+  </div>
+
+  <!-- ── Exam A1: Patristocrat D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Patristocrat (D)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">OEAUI EUJGX HKAFQ</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Decoded (no spaces)</div>
+      <div class="row pt">SCIENCEOLYMPIAD</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">SCIENCE OLYMPIAD</div>
+    </div>
+    <div class="callout green">The challenge: you don't know where words end! Context and letter patterns guide you.</div>
+  </div>
+
+  <!-- ── Exam Q2: Patristocrat C-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Patristocrat (C)</h2>
+    <div class="callout yellow">C-type: no key. Same cipher alphabet — use crib to bootstrap.</div>
+    <div class="example">
+      <div class="lbl">Crib: THE = PYU</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">EJQUO YAQUP YUPMS PY</div>
+    </div>
+    <ul class="sub">
+      <li>Fill T=P, H=Y, E=U everywhere first, then look for known words</li>
+      <li>The answer is a 4-word phrase: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ (17 letters)</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Patristocrat C-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Patristocrat (C)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">EJQUO YAQUP YUPMS PY</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Decoded (no spaces)</div>
+      <div class="row pt">CODESHIDETHETRUTH</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.35rem;letter-spacing:0.1em">CODES HIDE THE TRUTH</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crack path</div>
+      <div class="row">PYU=THE (crib) → T=P, H=Y, E=U → EJQUO starts with E_Q_O → C=E, O=J, D=Q, S=O → CODES → …</div>
+    </div>
+  </div>
+
+
+  <!-- ── HW1: Patristocrat D-type ── -->
+  <div class="slide">
+    <h2>Homework 1 — Patristocrat (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword FREQUENCY cipher. Spaces removed — decode all letters, then find the word break.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (10 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">VJMDY FMQUM</div>
+    </div>
+    <ul class="sub"><li>2-word answer</li></ul>
+  </div>
+
+  <!-- ── HW2: Patristocrat D-type ── -->
+  <div class="slide">
+    <h2>Homework 2 — Patristocrat (D)</h2>
+    <div class="callout blue">Due next class · D-type: same keyword FREQUENCY cipher.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (10 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">PUFHO KAMAP</div>
+    </div>
+    <ul class="sub"><li>2-word answer</li></ul>
+  </div>
+
+  <!-- ── HW3: Patristocrat C-type ── -->
+  <div class="slide">
+    <h2>Homework 3 — Patristocrat (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key given — use the crib.</div>
+    <div class="example">
+      <div class="lbl">Crib: CODES = EJQUO (last 5 letters)</div>
+      <div class="lbl">Ciphertext (10 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">RMUFD EJQUO</div>
+    </div>
+    <ul class="sub">
+      <li>Use the crib to map C=E, O=J, D=Q, E=U, S=O, then decode the first group.</li>
+      <li>2-word answer</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4: Patristocrat C-type ── -->
+  <div class="slide">
+    <h2>Homework 4 — Patristocrat (C)</h2>
+    <div class="callout blue">Due next class · C-type: no key given — use the crib.</div>
+    <div class="example">
+      <div class="lbl">Crib: CRYPT = EMXKP (last 5 letters)</div>
+      <div class="lbl">Ciphertext (10 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">GUFMI EMXKP</div>
+    </div>
+    <ul class="sub">
+      <li>C=E, R=M, Y=X, P=K, T=P from the crib. Now decode the first group.</li>
+      <li>2-word answer</li>
+    </ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

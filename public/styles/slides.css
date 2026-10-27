@@ -1,0 +1,90 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; background: #f6f8fa; font-family: 'Segoe UI', system-ui, sans-serif; color: #1f2328; overflow: hidden; }
+
+/* ── Deck & Slides ── */
+.deck { position: fixed; inset: 0 0 56px 0; }
+
+.slide {
+  display: none; position: absolute; inset: 0;
+  padding: 2.5rem 4rem; flex-direction: column;
+  justify-content: center; background: #ffffff;
+}
+.slide.active { display: flex; }
+
+/* Title slide */
+.slide.title-slide { align-items: center; text-align: center; background: #f0f6ff; }
+.slide.title-slide .lesson-num { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: #57606a; margin-bottom: 0.75rem; }
+.slide.title-slide h1 { font-family: monospace; font-size: 3rem; color: #0969da; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+.slide.title-slide .subtitle { font-size: 1.3rem; color: #57606a; margin-top: 0.5rem; }
+.slide.title-slide .big-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+/* Content slides */
+.slide h2 { font-size: 1.9rem; color: #0969da; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #d0d7de; }
+
+.slide ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.slide ul li { font-size: 1.25rem; padding-left: 1.4rem; position: relative; color: #1f2328; line-height: 1.45; }
+.slide ul li::before { content: '▸'; position: absolute; left: 0; color: #0969da; }
+.slide ul li strong { color: #1f2328; font-weight: 600; }
+.slide ul li em { color: #7d4e00; font-style: normal; }
+
+.slide ul.sub { margin-top: 0.3rem; gap: 0.3rem; }
+.slide ul.sub li { font-size: 1.05rem; color: #57606a; padding-left: 1.2rem; }
+.slide ul.sub li::before { content: '–'; color: #57606a; }
+
+/* Code / cipher blocks */
+.example {
+  background: #f6f8fa; border: 1px solid #d0d7de;
+  border-left: 3px solid #0969da; border-radius: 6px;
+  padding: 1rem 1.4rem; margin: 0.8rem 0;
+  font-family: 'Consolas', 'Courier New', monospace; font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+.example .lbl { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #0969da; margin-bottom: 0.35rem; }
+.example .ct { color: #cf222e; }
+.example .pt { color: #1a7f37; }
+.example .key { color: #8250df; }
+.example .arr { color: #57606a; margin: 0 0.4rem; }
+.example .row { margin: 0.2rem 0; color: #1f2328; }
+
+/* Alphabet mapping table */
+.alpha-map { display: grid; grid-template-columns: repeat(13, 1fr); gap: 2px; font-family: monospace; font-size: 0.95rem; margin: 0.8rem 0; }
+.alpha-map .cell { text-align: center; padding: 0.25rem 0; }
+.alpha-map .cell.top { color: #57606a; font-size: 0.75rem; }
+.alpha-map .cell.bot { color: #7d4e00; background: #fff8c5; border-radius: 3px; }
+
+/* Tables */
+.slide table { border-collapse: collapse; font-family: monospace; font-size: 1rem; margin: 0.6rem 0; }
+.slide table th { background: #f6f8fa; color: #0969da; padding: 0.35rem 0.75rem; border: 1px solid #d0d7de; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.slide table td { padding: 0.3rem 0.75rem; border: 1px solid #d0d7de; color: #1f2328; }
+.slide table tr:nth-child(even) td { background: #f6f8fa; }
+
+/* Callouts */
+.callout { border-radius: 6px; padding: 0.75rem 1.1rem; font-size: 1.1rem; margin: 0.6rem 0; }
+.callout.blue   { background: #ddf4ff; border: 1px solid #54aeff; color: #0550ae; }
+.callout.green  { background: #dafbe1; border: 1px solid #4ac26b; color: #1a7f37; }
+.callout.yellow { background: #fff8c5; border: 1px solid #d4a72c; color: #7d4e00; }
+.callout.red    { background: #fff0ee; border: 1px solid #ff8182; color: #cf222e; }
+
+/* Two-column */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; }
+
+/* Progress bar */
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: #0969da; transition: width 0.25s; z-index: 10; }
+
+/* Nav bar */
+.slide-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 56px;
+  background: #ffffff; border-top: 1px solid #d0d7de;
+  display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+}
+.slide-nav a.back { position: absolute; left: 1.5rem; color: #57606a; text-decoration: none; font-size: 0.85rem; }
+.slide-nav a.back:hover { color: #0969da; }
+.slide-nav button {
+  background: #f6f8fa; border: 1px solid #d0d7de; color: #1f2328;
+  padding: 0.35rem 1.1rem; border-radius: 6px; font-size: 1.1rem;
+  cursor: pointer; transition: background 0.15s;
+}
+.slide-nav button:hover { background: #e8ecf0; }
+.slide-nav button:disabled { opacity: 0.35; cursor: default; }
+.slide-nav .counter { font-size: 0.82rem; color: #57606a; min-width: 55px; text-align: center; }

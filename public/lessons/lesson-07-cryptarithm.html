@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 7 — Cryptarithm</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🔢</div>
+    <div class="lesson-num">Lesson 7</div>
+    <h1>CRYPTARITHM</h1>
+    <div class="subtitle">Solve the arithmetic — find the hidden digits</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>What is a Cryptarithm?</h2>
+    <ul>
+      <li>Letters replace digits in an arithmetic problem (addition, subtraction, multiplication)</li>
+      <li>Each letter consistently represents the same digit (0–9)</li>
+      <li>Each digit is represented by exactly one letter</li>
+      <li>Leading letters are never zero</li>
+      <li>Appears as <strong>Math (M)</strong> at all levels</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>Classic Example — SEND + MORE = MONEY</h2>
+    <div class="example">
+      <div class="lbl">The puzzle</div>
+      <div class="row ct" style="font-size:1.4rem; letter-spacing:0.15em;">
+        &nbsp;&nbsp;S E N D<br>
+        + M O R E<br>
+        ─────────<br>
+        M O N E Y
+      </div>
+    </div>
+    <div class="callout blue">Answer: S=9, E=5, N=6, D=7, M=1, O=0, R=8, Y=2 → 9567 + 1085 = 10652</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Constraints to Use Immediately</h2>
+    <ul>
+      <li><strong>Leading digits ≠ 0</strong> — the leftmost letter of any number is not zero</li>
+      <li>If the sum has more digits than either addend, the leading digit of the sum = <em>1</em> (it's a carry)</li>
+      <li>In SEND + MORE = MONEY → M = 1 (carry from addition)</li>
+      <li>From M=1 → O is constrained by the thousands column</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Solving Strategy</h2>
+    <ul>
+      <li><strong>1.</strong> Write out columns right-to-left</li>
+      <li><strong>2.</strong> Identify forced values first (leading digit of sum = 1)</li>
+      <li><strong>3.</strong> Work column by column, tracking carry</li>
+      <li><strong>4.</strong> Use modular arithmetic: if D + E ≡ Y (mod 10), only certain (D, E) pairs work</li>
+      <li><strong>5.</strong> Try and eliminate — use a tracking grid of remaining digits</li>
+    </ul>
+    <div class="callout yellow">Carry is either 0 or 1 — never more. Use this to constrain each column.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Worked Mini-Example</h2>
+    <div class="example">
+      <div class="lbl">Puzzle</div>
+      <div class="row ct" style="font-size:1.3rem">
+        &nbsp;A B<br>
+        + B A<br>
+        ──────<br>
+        &nbsp;C C
+      </div>
+    </div>
+    <ul>
+      <li>Units: B + A = C (no carry) or B + A = 10 + C (carry 1)</li>
+      <li>Tens: A + B + carry = C</li>
+      <li>Both columns give C → A + B = C (same sum both ways means carry = 0 in units)</li>
+      <li>CC is a 2-digit repdigit: try C=9, A+B=9, e.g. A=4, B=5 → 45+54=99 ✓</li>
+    </ul>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Practice Problem</h2>
+    <div class="example">
+      <div class="lbl">Solve for unique digits</div>
+      <div class="row ct" style="font-size:1.3rem">
+        &nbsp;&nbsp;B A S E<br>
+        + &nbsp;B A L L<br>
+        ──────────<br>
+        G A M E S
+      </div>
+    </div>
+    <div class="example" style="margin-top:0.8rem;">
+      <div class="lbl">One solution (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">B=7, A=4, S=8, E=5, L=1, G=1... (work it out!)</div>
+    </div>
+    <ul class="sub"><li>Hint: G = 1 (carry). Start there.</li></ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Each letter = unique digit 0–9; leading letters ≠ 0</li>
+      <li>Carry in each column is 0 or 1</li>
+      <li>Start with forced values (carries, leading-digit-of-sum = 1)</li>
+      <li>Appears as Math (M) — this is the only M-type cipher this year</li>
+      <li>Next class: <strong>Porta Cipher</strong> — a keyed polyalphabetic cipher</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Cryptarithm (M-type) ── -->
+  <div class="slide">
+    <h2>Exam Practice — Cryptarithm (M)</h2>
+    <div class="callout yellow">Each letter = a unique digit 0–9. Leading letters ≠ 0. Zero errors required for full credit.</div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">  S E N D</div>
+        <div class="row">+ M O R E</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">M O N E Y</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>M must be 1 (it's the carry from adding two 4-digit numbers)</li>
+        <li>O = 0 follows from the carry into the ten-thousands column</li>
+        <li>Work column by column from right to left</li>
+        <li>Decode the word: <strong>MONEY</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Exam A1: Cryptarithm Answer ── -->
+  <div class="slide">
+    <h2>Answer — Cryptarithm: SEND + MORE = MONEY</h2>
+    <div class="example">
+      <div class="lbl">Solution</div>
+      <div class="row">S=9 &nbsp; E=5 &nbsp; N=6 &nbsp; D=7 &nbsp; M=1 &nbsp; O=0 &nbsp; R=8 &nbsp; Y=2</div>
+    </div>
+    <div class="example" style="font-size:1.3rem;letter-spacing:0.1em;text-align:right">
+      <div class="row pt">  9 5 6 7</div>
+      <div class="row pt">+ 1 0 8 5</div>
+      <div class="row pt" style="border-top:2px solid #4ac26b;padding-top:0.3rem">1 0 6 5 2</div>
+    </div>
+    <div class="callout green">MONEY = <span style="font-family:monospace;font-size:1.1rem">10652</span> &nbsp;·&nbsp; Verify: 9567 + 1085 = 10652 ✓</div>
+  </div>
+
+  <!-- ── Exam Q2: Cryptarithm (M-type) ── -->
+  <div class="slide">
+    <h2>Exam Practice — Cryptarithm 2 (M)</h2>
+    <div class="callout yellow">Unique digits, leading letters ≠ 0. Decode the word: <strong>EVEN</strong></div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">    O D D</div>
+        <div class="row">+  O D D</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">E V E N</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>EVEN is 4 digits; ODD is 3 — so E = 1 (carry digit)</li>
+        <li>E appears in both thousands and tens positions of EVEN</li>
+        <li>D is the units and tens digit of ODD</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Exam A2: Cryptarithm Answer ── -->
+  <div class="slide">
+    <h2>Answer — Cryptarithm: ODD + ODD = EVEN</h2>
+    <div class="example">
+      <div class="lbl">Solution</div>
+      <div class="row">O=6 &nbsp; D=5 &nbsp; E=1 &nbsp; V=3 &nbsp; N=0</div>
+    </div>
+    <div class="example" style="font-size:1.3rem;letter-spacing:0.1em;text-align:right">
+      <div class="row pt">    6 5 5</div>
+      <div class="row pt">+  6 5 5</div>
+      <div class="row pt" style="border-top:2px solid #4ac26b;padding-top:0.3rem">1 3 1 0</div>
+    </div>
+    <div class="callout green">EVEN = <span style="font-family:monospace;font-size:1.1rem">1310</span> &nbsp;·&nbsp; Verify: 655 + 655 = 1310 ✓</div>
+    <ul class="sub"><li>Note: O=8, V=7 also works (855+855=1710). Cryptarithms can have multiple solutions!</li></ul>
+  </div>
+
+
+  <!-- ── HW1: Cryptarithm ── -->
+  <div class="slide">
+    <h2>Homework 1 — Cryptarithm (M)</h2>
+    <div class="callout blue">Due next class · Each letter = unique digit 0–9. Leading letters ≠ 0. Zero errors required.</div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">  B I G</div>
+        <div class="row">+ B I G</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">M A T H</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>M = 1 (carry from adding two 3-digit numbers)</li>
+        <li>Decode the word: <strong>MATH</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── HW2: Cryptarithm ── -->
+  <div class="slide">
+    <h2>Homework 2 — Cryptarithm (M)</h2>
+    <div class="callout blue">Due next class · Each letter = unique digit 0–9. Decode: <strong>CODE</strong></div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">  W I N</div>
+        <div class="row">+ W I N</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">C O D E</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>C = 1 (carry digit)</li>
+        <li>Work column by column right-to-left</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── HW3: Cryptarithm ── -->
+  <div class="slide">
+    <h2>Homework 3 — Cryptarithm (M)</h2>
+    <div class="callout blue">Due next class · Note: A and E appear in both addend and sum. Decode: <strong>TEAM</strong></div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">  A C E</div>
+        <div class="row">+ A C E</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">T E A M</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>T = 1 (carry digit)</li>
+        <li>A appears in tens column of TEAM — same letter, constrained by both sides</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── HW4: Cryptarithm ── -->
+  <div class="slide">
+    <h2>Homework 4 — Cryptarithm (M)</h2>
+    <div class="callout blue">Due next class · Note: result is a 3-digit number. Decode: <strong>BEE</strong></div>
+    <div class="two-col" style="align-items:start;gap:1.5rem">
+      <div class="example" style="font-size:1.4rem;letter-spacing:0.1em;text-align:right">
+        <div class="row">  A D D</div>
+        <div class="row">+ A D D</div>
+        <div class="row" style="border-top:2px solid #d0d7de;padding-top:0.3rem">  B E E</div>
+      </div>
+      <ul style="margin-top:0.5rem">
+        <li>BEE: last two digits are identical</li>
+        <li>2×D must end in E; 2×D tens + carry must also end in E</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

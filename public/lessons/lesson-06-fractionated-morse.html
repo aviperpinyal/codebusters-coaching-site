@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6 — Fractionated Morse</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">📡</div>
+    <div class="lesson-num">Lesson 6</div>
+    <h1>FRACTIONATED MORSE</h1>
+    <div class="subtitle">Morse code + trigraph substitution</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>Overview</h2>
+    <ul>
+      <li>A two-step cipher invented by M.E. Ohaver</li>
+      <li><strong>Step 1</strong>: Convert plaintext to Morse code (dots, dashes, separators)</li>
+      <li><strong>Step 2</strong>: Split the Morse stream into trigraphs and substitute each with a letter using a key alphabet</li>
+      <li>Appears as <strong>Cryptanalysis (C)</strong> at all levels</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>Morse Code Quick Reference</h2>
+    <table>
+      <thead><tr><th>Letter</th><th>Morse</th><th>Letter</th><th>Morse</th><th>Letter</th><th>Morse</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>·–</td><td>J</td><td>·–––</td><td>S</td><td>···</td></tr>
+        <tr><td>B</td><td>–···</td><td>K</td><td>–·–</td><td>T</td><td>–</td></tr>
+        <tr><td>C</td><td>–·–·</td><td>L</td><td>·–··</td><td>U</td><td>··–</td></tr>
+        <tr><td>D</td><td>–··</td><td>M</td><td>––</td><td>V</td><td>···–</td></tr>
+        <tr><td>E</td><td>·</td><td>N</td><td>–·</td><td>W</td><td>·––</td></tr>
+        <tr><td>F</td><td>··–·</td><td>O</td><td>–––</td><td>X</td><td>–··–</td></tr>
+        <tr><td>G</td><td>––·</td><td>P</td><td>·––·</td><td>Y</td><td>–·––</td></tr>
+        <tr><td>H</td><td>····</td><td>Q</td><td>––·–</td><td>Z</td><td>––··</td></tr>
+        <tr><td>I</td><td>··</td><td>R</td><td>·–·</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>The Fractionation Step</h2>
+    <ul>
+      <li>Convert plaintext letters to Morse, separated by <strong>X</strong> between letters</li>
+      <li>Place <strong>XX</strong> between words</li>
+      <li>The key alphabet maps 26 trigraphs of {·, –, X} to letters</li>
+      <li>Split the long Morse string into groups of 3 and look each up in the key</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Example: plain "CAT"</div>
+      <div class="row">C = <span class="key">–·–·</span> X A = <span class="key">·–</span> X T = <span class="key">–</span></div>
+      <div class="row ct">–·–· X ·– X –</div>
+      <div class="row">Split into 3s: <span class="ct">–·– &nbsp;·X· &nbsp;–X–</span></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>The Key Alphabet</h2>
+    <ul>
+      <li>There are 27 possible trigraphs (· – X)³ minus one — 26 map to letters A–Z</li>
+      <li>The key alphabet is usually derived from a <strong>keyword</strong></li>
+      <li>For Cryptanalysis: the key is not given — you find the trigraph-to-letter mapping by working backwards</li>
+    </ul>
+    <div class="callout yellow">On the test, the key alphabet or keyword is always provided — this is a C problem, but the key IS given in the standard form of this cipher in competitions.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Decryption Process</h2>
+    <ul>
+      <li><strong>Step 1</strong>: Using the key, convert each ciphertext letter back to its Morse trigraph</li>
+      <li><strong>Step 2</strong>: Concatenate all trigraphs into one long Morse string</li>
+      <li><strong>Step 3</strong>: Split on X (letter separator) and XX (word separator)</li>
+      <li><strong>Step 4</strong>: Convert each Morse group back to a letter</li>
+    </ul>
+    <div class="callout green">Work backwards: cipher → trigraph stream → Morse groups → plaintext letters.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Common Pitfalls</h2>
+    <ul>
+      <li>The X separator is part of the fractionation — don't confuse it with the letter X's Morse code (–··–)</li>
+      <li>If a Morse group doesn't match any letter, you may have miscounted — recheck boundaries</li>
+      <li>Some versions use different separators — read the problem statement carefully</li>
+    </ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Fractionated Morse = convert to Morse → regroup into trigraphs → substitute</li>
+      <li>Reverse: substitute back to trigraphs → reassemble Morse → convert to letters</li>
+      <li>The Morse code table is always provided on the test</li>
+      <li>Appears as Cryptanalysis (C) at all levels</li>
+      <li>Next class: <strong>Cryptarithm</strong> — substituting digits for letters in arithmetic</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Fractionated Morse D-type ── -->
+  <div class="slide" style="position:relative">
+    <!-- Reference tables float top-right -->
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin:0.35rem 0 0.2rem">FM Key (keyword: STUDY)</div>
+      <div>···→S  ··−→T  ··X→U  ·−·→D  ·−−→Y  ·−X→A</div>
+      <div>·X·→B  ·X−→C  ·XX→E  −··→F  −·−→G  −·X→H</div>
+      <div>−−·→I  −−−→J  −−X→K  −X·→L  −X−→M  −XX→N</div>
+      <div>X··→O  X·−→P  X·X→Q  X−·→R  X−−→V  X−X→W</div>
+      <div>XX·→X  XX−→Z</div>
+    </div>
+    <h2>Exam Practice — Fractionated Morse (D)</h2>
+    <div class="callout yellow">D-type: FM key given (top right). Trigraph table uses · = dot, − = dash, X = separator.</div>
+    <div class="example">
+      <div class="lbl">Crib: first plaintext letter is C &nbsp;·&nbsp; Keyword: STUDY</div>
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">G C K K E</div>
+    </div>
+    <ul class="sub">
+      <li>Step 1: look up each cipher letter in the FM key → get its trigraph</li>
+      <li>Step 2: concatenate all trigraphs into one Morse stream</li>
+      <li>Step 3: split the stream on X to recover Morse codes → decode each to a letter</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Fractionated Morse D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Fractionated Morse (D)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext → trigraphs</div>
+      <div class="row">G→−·− &nbsp; C→·X− &nbsp; K→−−X &nbsp; K→−−X &nbsp; E→·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Concatenated Morse stream</div>
+      <div class="row ct">−·−·X−−−X−−X·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Split on X → Morse codes → letters</div>
+      <div class="row">−·−· = C &nbsp; −−− = O &nbsp; −− = M &nbsp; · = E</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.5rem;letter-spacing:0.15em">COME</div>
+    </div>
+  </div>
+
+  <!-- ── Exam Q2: Fractionated Morse C-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+    </div>
+    <h2>Exam Practice — Fractionated Morse (C)</h2>
+    <div class="callout yellow">C-type: no FM key given. Use the 4-character crib to work backwards.</div>
+    <div class="example">
+      <div class="lbl">Crib: first 4 plain letters = CODE &nbsp;→&nbsp; first 4 cipher letters = H D N G</div>
+      <div class="lbl">Ciphertext (9 letters → 2-word answer)</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">H D N G U T O D F</div>
+    </div>
+    <ul class="sub">
+      <li>Use crib CODE=HDNG to figure out which Morse stream those trigraphs produce, then match remaining cipher letters</li>
+      <li>Hint: the two words are 4 and 3 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Fractionated Morse C-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Fractionated Morse (C)</h2>
+    <div class="example">
+      <div class="lbl">Crib reveals: H→−·−  D→·X−  N→−−X  G→−··  (keyword MAPLE)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode: H D N G U T O D F → trigraph stream</div>
+      <div class="row ct">−·−·X−−−X−··X·XX·−−X··X−·XX</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Split on X → Morse → letters</div>
+      <div class="row">−·−·=C  −−−=O  −··=D  ·=E &nbsp;|&nbsp; ·−−=W  ··=I  −·=N</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.5rem;letter-spacing:0.15em">CODE WIN</div>
+    </div>
+  </div>
+
+
+  <!-- ── HW1: FM D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin:0.35rem 0 0.2rem">FM Key (keyword: STUDY)</div>
+      <div>···→S  ··−→T  ··X→U  ·−·→D  ·−−→Y  ·−X→A</div>
+      <div>·X·→B  ·X−→C  ·XX→E  −··→F  −·−→G  −·X→H</div>
+      <div>−−·→I  −−−→J  −−X→K  −X·→L  −X−→M  −XX→N</div>
+      <div>X··→O  X·−→P  X·X→Q  X−·→R  X−−→V  X−X→W</div>
+      <div>XX·→X  XX−→Z</div>
+    </div>
+    <h2>Homework 1 — Fractionated Morse (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword STUDY. Use the FM key and Morse tables (top right).</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (3 letters → 1 word)</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">Y O R</div>
+    </div>
+    <ul class="sub">
+      <li>Step 1: look up each letter → trigraph. Step 2: concatenate. Step 3: split on X → Morse → letters.</li>
+    </ul>
+  </div>
+
+  <!-- ── HW2: FM D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin:0.35rem 0 0.2rem">FM Key (keyword: STUDY)</div>
+      <div>···→S  ··−→T  ··X→U  ·−·→D  ·−−→Y  ·−X→A</div>
+      <div>·X·→B  ·X−→C  ·XX→E  −··→F  −·−→G  −·X→H</div>
+      <div>−−·→I  −−−→J  −−X→K  −X·→L  −X−→M  −XX→N</div>
+      <div>X··→O  X·−→P  X·X→Q  X−·→R  X−−→V  X−X→W</div>
+      <div>XX·→X  XX−→Z</div>
+    </div>
+    <h2>Homework 2 — Fractionated Morse (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword STUDY.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (5 letters → 1 word)</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">I V L L F</div>
+    </div>
+    <ul class="sub"><li>4-letter answer</li></ul>
+  </div>
+
+  <!-- ── HW3: FM D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin:0.35rem 0 0.2rem">FM Key (keyword: STUDY)</div>
+      <div>···→S  ··−→T  ··X→U  ·−·→D  ·−−→Y  ·−X→A</div>
+      <div>·X·→B  ·X−→C  ·XX→E  −··→F  −·−→G  −·X→H</div>
+      <div>−−·→I  −−−→J  −−X→K  −X·→L  −X−→M  −XX→N</div>
+      <div>X··→O  X·−→P  X·X→Q  X−·→R  X−−→V  X−X→W</div>
+      <div>XX·→X  XX−→Z</div>
+    </div>
+    <h2>Homework 3 — Fractionated Morse (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword STUDY.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (4 letters → 1 word)</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">F B O C</div>
+    </div>
+    <ul class="sub"><li>4-letter answer</li></ul>
+  </div>
+
+  <!-- ── HW4: FM D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:220px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Morse Code</div>
+      <div>A·−  B−···  C−·−·  D−··  E·  F··−·</div>
+      <div>G−−·  H····  I··  J·−−−  K−·−  L·−··</div>
+      <div>M−−  N−·  O−−−  P·−−·  Q−−·−  R·−·</div>
+      <div>S···  T−  U··−  V···−  W·−−  X−··−</div>
+      <div>Y−·−−  Z−−··</div>
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin:0.35rem 0 0.2rem">FM Key (keyword: STUDY)</div>
+      <div>···→S  ··−→T  ··X→U  ·−·→D  ·−−→Y  ·−X→A</div>
+      <div>·X·→B  ·X−→C  ·XX→E  −··→F  −·−→G  −·X→H</div>
+      <div>−−·→I  −−−→J  −−X→K  −X·→L  −X−→M  −XX→N</div>
+      <div>X··→O  X·−→P  X·X→Q  X−·→R  X−−→V  X−X→W</div>
+      <div>XX·→X  XX−→Z</div>
+    </div>
+    <h2>Homework 4 — Fractionated Morse (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword STUDY.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (5 letters → 1 word)</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">K J O A E</div>
+    </div>
+    <ul class="sub"><li>4-letter answer</li></ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

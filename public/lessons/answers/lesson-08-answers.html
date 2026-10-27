@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 Answers — Porta Cipher</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <div class="slide title-slide">
+    <div class="big-icon">🔑</div>
+    <div class="lesson-num">Lesson 8 — Answer Key</div>
+    <h1>PORTA CIPHER</h1>
+    <div class="callout red" style="margin-top:1.5rem">Coach use only — do not distribute to students</div>
+  </div>
+
+  <!-- Exam Q1 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>Exam Q1 — Porta (D) · Problem</h2>
+    <div class="callout blue">Keyword: MAPLE &nbsp;·&nbsp; Self-reciprocal: same tableau + key decrypts.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">DRSQ SIAY</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Key alignment</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A &nbsp;P</span><br>
+        <span class="ct">D &nbsp;R &nbsp;S &nbsp;Q &nbsp;S &nbsp;I &nbsp;A &nbsp;Y</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Q1 answer -->
+  <div class="slide">
+    <h2>Exam Q1 — Solution: WELL DONE</h2>
+    <div class="example">
+      <div class="lbl">Row lookups</div>
+      <div class="row">D(row MN)→W &nbsp; R(row AB)→E &nbsp; S(row OP)→L &nbsp; Q(row KL)→L</div>
+      <div class="row">S(row EF)→D &nbsp; I(row MN)→O &nbsp; A(row AB)→N &nbsp; Y(row OP)→E</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A &nbsp;P</span><br>
+        <span class="ct">D &nbsp;R &nbsp;S &nbsp;Q &nbsp;S &nbsp;I &nbsp;A &nbsp;Y</span><br>
+        <span class="pt">W &nbsp;E &nbsp;L &nbsp;L &nbsp;D &nbsp;O &nbsp;N &nbsp;E</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>WELL DONE</strong></div>
+  </div>
+
+  <!-- Exam Q2 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>Exam Q2 — Porta (C) · Problem</h2>
+    <div class="callout blue">Crib: first 3 plain = COD → first 3 cipher = NKW. No keyword given.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">NKW PZM VVF</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib analysis</div>
+      <div class="row">N+C: row WX has C↔N → key letter W</div>
+      <div class="row">K+O: row IJ has K↔O → key letter I</div>
+      <div class="row">W+D: row MN has D↔W → key letter N</div>
+    </div>
+  </div>
+
+  <!-- Exam Q2 answer -->
+  <div class="slide">
+    <h2>Exam Q2 — Solution: CODE IS KEY (keyword WIN)</h2>
+    <div class="example">
+      <div class="lbl">Keyword recovered: WIN</div>
+      <div class="row">Crib: C(W→WX→N) · O(I→IJ→K) · D(N→MN→W) ∴ keyword = <span class="key">WIN</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.15em">
+        <span class="key">W I N W I N W I N</span><br>
+        <span class="ct">N K W P Z M V V F</span><br>
+        <span class="pt">C O D E I S K E Y</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>CODE IS KEY</strong></div>
+  </div>
+
+  <!-- HW1 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>HW 1 — Porta (D) · Problem</h2>
+    <div class="callout blue">Keyword: MAPLE &nbsp;·&nbsp; Ciphertext: DBKP WTEX</div>
+    <div class="example">
+      <div class="lbl">Key alignment</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A &nbsp;P</span><br>
+        <span class="ct">D &nbsp;B &nbsp;K &nbsp;P &nbsp;W &nbsp;T &nbsp;E &nbsp;X</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HW1 answer -->
+  <div class="slide">
+    <h2>HW 1 — Solution: WORK HARD</h2>
+    <div class="example">
+      <div class="lbl">Row lookups</div>
+      <div class="row">D(row MN)→W &nbsp; B(row AB)→O &nbsp; K(row OP)→R &nbsp; P(row KL)→K</div>
+      <div class="row">W(row EF)→H &nbsp; T(row MN)→A &nbsp; E(row AB)→R &nbsp; X(row OP)→D</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A &nbsp;P</span><br>
+        <span class="ct">D &nbsp;B &nbsp;K &nbsp;P &nbsp;W &nbsp;T &nbsp;E &nbsp;X</span><br>
+        <span class="pt">W &nbsp;O &nbsp;R &nbsp;K &nbsp;H &nbsp;A &nbsp;R &nbsp;D</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>WORK HARD</strong></div>
+  </div>
+
+  <!-- HW2 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>HW 2 — Porta (D) · Problem</h2>
+    <div class="callout blue">Keyword: MAPLE &nbsp;·&nbsp; Ciphertext: MBSDT OG</div>
+    <div class="example">
+      <div class="lbl">Key alignment</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A</span><br>
+        <span class="ct">M &nbsp;B &nbsp;S &nbsp;D &nbsp;T &nbsp;O &nbsp;G</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HW2 answer -->
+  <div class="slide">
+    <h2>HW 2 — Solution: SOLVE IT</h2>
+    <div class="example">
+      <div class="lbl">Row lookups</div>
+      <div class="row">M(row MN)→S &nbsp; B(row AB)→O &nbsp; S(row OP)→L &nbsp; D(row KL)→V &nbsp; T(row EF)→E</div>
+      <div class="row">O(row MN)→I &nbsp; G(row AB)→T</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.18em">
+        <span class="key">M &nbsp;A &nbsp;P &nbsp;L &nbsp;E &nbsp;M &nbsp;A</span><br>
+        <span class="ct">M &nbsp;B &nbsp;S &nbsp;D &nbsp;T &nbsp;O &nbsp;G</span><br>
+        <span class="pt">S &nbsp;O &nbsp;L &nbsp;V &nbsp;E &nbsp;I &nbsp;T</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>SOLVE IT</strong></div>
+  </div>
+
+  <!-- HW3 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>HW 3 — Porta (C) · Problem</h2>
+    <div class="callout blue">Crib: first 3 plain = WIN → first 3 cipher = CWM. No keyword given.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">CWM MVS WARY</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib analysis</div>
+      <div class="row">C+W: row OP has C↔W → key letter O</div>
+      <div class="row">W+I: row CD has I↔W → key letter D</div>
+      <div class="row">M+N: row CD has M↔N → key letter D</div>
+    </div>
+  </div>
+
+  <!-- HW3 answer -->
+  <div class="slide">
+    <h2>HW 3 — Solution: WIN THE CODE (keyword ODD)</h2>
+    <div class="example">
+      <div class="lbl">Keyword recovered: ODD</div>
+      <div class="row">Crib: W(O→OP→C) · I(D→CD→W) · N(D→CD→M) ∴ keyword = <span class="key">ODD</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.15em">
+        <span class="key">O D D O D D O D D O</span><br>
+        <span class="ct">C W M M V S W A R Y</span><br>
+        <span class="pt">W I N T H E C O D E</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>WIN THE CODE</strong></div>
+    <div class="callout blue">Row lookups: C(OP)→W · W(CD)→I · M(CD)→N | M(OP)→T · V(CD)→H · S(CD)→E | W(OP)→C · A(CD)→O · R(CD)→D · Y(OP)→E</div>
+  </div>
+
+  <!-- HW4 problem -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.45rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.65;z-index:5;max-width:270px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.55rem;color:#0969da;margin-bottom:0.2rem">Porta Tableau &nbsp;(top half A–M · bottom half N–Z)</div>
+      <div>Keys│ A B C D E F G H I J K L M</div>
+      <div>AB  │ N O P Q R S T U V W X Y Z</div>
+      <div>CD  │ O P Q R S T U V W X Y Z N</div>
+      <div>EF  │ P Q R S T U V W X Y Z N O</div>
+      <div>GH  │ Q R S T U V W X Y Z N O P</div>
+      <div>IJ  │ R S T U V W X Y Z N O P Q</div>
+      <div>KL  │ S T U V W X Y Z N O P Q R</div>
+      <div>MN  │ T U V W X Y Z N O P Q R S</div>
+      <div>OP  │ U V W X Y Z N O P Q R S T</div>
+      <div>QR  │ V W X Y Z N O P Q R S T U</div>
+      <div>ST  │ W X Y Z N O P Q R S T U V</div>
+      <div>UV  │ X Y Z N O P Q R S T U V W</div>
+      <div>WX  │ Y Z N O P Q R S T U V W X</div>
+      <div>YZ  │ Z N O P Q R S T U V W X Y</div>
+    </div>
+    <h2>HW 4 — Porta (C) · Problem</h2>
+    <div class="callout blue">Crib: first 3 plain = FIG → first 3 cipher = QZP. No keyword given.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.5rem;letter-spacing:0.2em">QZPS CATJ</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Crib analysis</div>
+      <div class="row">Q+F: row WX has F↔Q → key letter W</div>
+      <div class="row">Z+I: row IJ has I↔Z → key letter I</div>
+      <div class="row">P+G: row ST has G↔P → key letter T</div>
+    </div>
+  </div>
+
+  <!-- HW4 answer -->
+  <div class="slide">
+    <h2>HW 4 — Solution: FIGHT WIN (keyword WIT)</h2>
+    <div class="example">
+      <div class="lbl">Keyword recovered: WIT</div>
+      <div class="row">Crib: F(W→WX→Q) · I(I→IJ→Z) · G(T→ST→P) ∴ keyword = <span class="key">WIT</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Full decode</div>
+      <div class="row" style="font-family:monospace;font-size:1rem;letter-spacing:0.15em">
+        <span class="key">W I T W I T W I</span><br>
+        <span class="ct">Q Z P S C A T J</span><br>
+        <span class="pt">F I G H T W I N</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <strong>FIGHT WIN</strong></div>
+    <div class="callout blue">Row lookups: Q(WX)→F · Z(IJ)→I · P(ST)→G · S(WX)→H | C(IJ)→T · A(ST)→W · T(WX)→I · J(IJ)→N</div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

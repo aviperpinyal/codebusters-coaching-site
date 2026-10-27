@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 12 — Homophonic Substitution</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🎭</div>
+    <div class="lesson-num">Lesson 12</div>
+    <h1>HOMOPHONIC</h1>
+    <div class="subtitle">Multiple symbols per letter — defeating frequency analysis</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>The Problem with Simple Substitution</h2>
+    <ul>
+      <li>In a standard monoalphabetic cipher, <em>E</em> always maps to the same symbol</li>
+      <li>Frequency analysis immediately exposes E, T, A, O…</li>
+      <li>Homophonic substitution fixes this by giving <strong>multiple cipher symbols to common letters</strong></li>
+      <li>Rare letters get fewer symbols; common letters get many</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>How it Works</h2>
+    <ul>
+      <li>Each plaintext letter is assigned 1 or more cipher equivalents (homophones)</li>
+      <li>When encrypting, pick <strong>any one</strong> of that letter's homophones at random</li>
+      <li>The more frequent a letter, the more homophones it gets — flattening frequencies</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Example assignment (partial)</div>
+      <div class="row">E → <span class="ct">7, 14, 22, 35, 41, 56, 63</span> (7 homophones)</div>
+      <div class="row">T → <span class="ct">8, 19, 29, 47, 58</span> (5 homophones)</div>
+      <div class="row">Z → <span class="ct">99</span> (1 homophone)</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Cipher Symbol Sets</h2>
+    <ul>
+      <li>Symbols are often <strong>two-digit numbers</strong> (00–99 gives 100 possible symbols)</li>
+      <li>Total symbols used = 100 (or however many) distributed proportionally to letter frequencies</li>
+      <li>On the test, the cipher might use numbers, symbols, or a combination</li>
+    </ul>
+    <div class="callout blue">The key maps each of the 100 symbols to a plaintext letter. It's always provided for D-type problems.</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Decryption (D-type — key given)</h2>
+    <ul>
+      <li>The key table maps each cipher symbol back to a plaintext letter</li>
+      <li>Look up each ciphertext symbol in the table → write the plaintext letter</li>
+      <li>Multiple different symbols all map to the same letter — that's fine</li>
+    </ul>
+    <div class="callout green">Decryption is just lookup — the key resolves all ambiguity. Focus on speed.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Cryptanalysis (DC — no key)</h2>
+    <ul>
+      <li>Count how often <em>each individual symbol</em> appears</li>
+      <li>Group symbols by frequency — all homophones of E will be frequent</li>
+      <li>The total symbol frequencies should match English letter frequencies</li>
+      <li>Try to group symbols into sets that together match E, T, A, O… frequencies</li>
+    </ul>
+    <div class="callout yellow">This is hard! Word patterns and partial guesses are your main tool alongside frequency grouping.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Breaking Strategy</h2>
+    <ul>
+      <li><strong>Step 1</strong>: Tally all 100 possible symbols; find which are used</li>
+      <li><strong>Step 2</strong>: Sort by frequency; the most frequent symbols are likely <em>E-homophones</em></li>
+      <li><strong>Step 3</strong>: Look for single-symbol words → A or I</li>
+      <li><strong>Step 4</strong>: Look for 3-symbol sequences that repeat → likely <em>THE</em></li>
+      <li><strong>Step 5</strong>: Assign letters, check against word boundaries, iterate</li>
+    </ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Practice (D-type)</h2>
+    <div class="callout blue">Key excerpt: 07=T, 14=H, 22=E, 35=S, 41=T, 56=U, 63=D, 47=E, 58=N, 19=T</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">07 14 22 35 41 56 63 22 19 07</div>
+    </div>
+    <div class="example" style="margin-top:0.8rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">THE STUDENT</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Homophonic = multiple cipher symbols per plaintext letter, distributed by frequency</li>
+      <li>Defeats simple frequency analysis — all symbol frequencies appear roughly equal</li>
+      <li>D-type: look up each symbol in the provided key</li>
+      <li>C-type: group symbols by joint frequency, then use word patterns</li>
+      <li>Appears as DC at all levels</li>
+    </ul>
+    <div class="callout green">You've now covered all 13 Division B ciphers. Time to practice full test simulations!</div>
+  </div>
+
+  <!-- ── Exam Q1: Homophonic D-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Homophonic (D)</h2>
+    <div class="callout yellow">D-type: full key provided. Same letter can appear as different symbols — just look each one up.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 05=C &nbsp; 07=D &nbsp; 09=E &nbsp; 12=E &nbsp; 17=H &nbsp; 18=I &nbsp; 28=N &nbsp; 31=O &nbsp; 44=T &nbsp; 67=W</div>
+      <div class="lbl">Ciphertext (10 symbols → 10 letters)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">67 18 28 44 17 09 05 31 07 12</div>
+    </div>
+    <ul class="sub">
+      <li>Symbols 09 and 12 both map to E — homophones for the same letter</li>
+      <li>Look up each number in the key, write the letter, restore word spaces</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Homophonic D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Homophonic (D): WIN THE CODE</h2>
+    <div class="example">
+      <div class="lbl">Symbol-by-symbol lookup</div>
+      <div class="row">67=W &nbsp; 18=I &nbsp; 28=N &nbsp;|&nbsp; 44=T &nbsp; 17=H &nbsp; 09=E &nbsp;|&nbsp; 05=C &nbsp; 31=O &nbsp; 07=D &nbsp; 12=E</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">WIN THE CODE</span></div>
+    <div class="callout blue">Note: 09 and 12 both = E — homophones! Different symbols, same letter. This is what makes Homophonic harder to crack without the key.</div>
+  </div>
+
+  <!-- ── Exam Q2: Homophonic D-type (homophones visible) ── -->
+  <div class="slide">
+    <h2>Exam Practice — Homophonic (D) #2</h2>
+    <div class="callout yellow">In this example, E appears twice with different symbols — look carefully at the key.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 03=A &nbsp; 04=B &nbsp; 06=C &nbsp; 07=D &nbsp; 08=E &nbsp; 10=E &nbsp; 22=K &nbsp; 30=O &nbsp; 37=R &nbsp; 40=S</div>
+      <div class="lbl">Ciphertext (10 symbols → 10 letters)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">04 37 10 03 22 06 30 07 08 40</div>
+    </div>
+    <ul class="sub">
+      <li>Symbols 08 and 10 are both E — spot the difference as you decode</li>
+      <li>The answer is 2 words (5 + 5 letters)</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Homophonic D-type #2 Answer ── -->
+  <div class="slide">
+    <h2>Answer — Homophonic (D) #2: BREAK CODES</h2>
+    <div class="example">
+      <div class="lbl">Symbol-by-symbol lookup</div>
+      <div class="row">04=B &nbsp; 37=R &nbsp; 10=E &nbsp; 03=A &nbsp; 22=K &nbsp;|&nbsp; 06=C &nbsp; 30=O &nbsp; 07=D &nbsp; 08=E &nbsp; 40=S</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">BREAK CODES</span></div>
+    <div class="callout blue">Both E symbols (08 and 10) produce the same plaintext letter — homophones are designed to confuse frequency analysis, but the key resolves them instantly.</div>
+  </div>
+
+  <!-- ── HW1: Homophonic D-type ── -->
+  <div class="slide">
+    <h2>Homework 1 — Homophonic (D)</h2>
+    <div class="callout blue">Due next class · Look up each symbol in the key excerpt below.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 14=L &nbsp; 22=E &nbsp; 28=A &nbsp; 37=R &nbsp; 43=N &nbsp; 51=M &nbsp; 56=O &nbsp; 66=E</div>
+      <div class="lbl">Ciphertext (9 symbols, 2-word answer)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">14 22 28 37 43 51 56 37 66</div>
+    </div>
+    <ul class="sub"><li>Symbols 22 and 66 are homophones — they map to the same letter</li></ul>
+  </div>
+
+  <!-- ── HW2: Homophonic D-type ── -->
+  <div class="slide">
+    <h2>Homework 2 — Homophonic (D)</h2>
+    <div class="callout blue">Due next class · Two different symbols map to E in this problem.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 05=C &nbsp; 09=A &nbsp; 13=D &nbsp; 18=E &nbsp; 24=O &nbsp; 31=E &nbsp; 40=M &nbsp; 47=T</div>
+      <div class="lbl">Ciphertext (8 symbols, 2-word answer)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">05 24 13 18 47 31 09 40</div>
+    </div>
+    <ul class="sub"><li>Symbols 18 and 31 are both E — homophones</li></ul>
+  </div>
+
+  <!-- ── HW3: Homophonic D-type ── -->
+  <div class="slide">
+    <h2>Homework 3 — Homophonic (D)</h2>
+    <div class="callout blue">Due next class · This problem has two pairs of homophones — O and E each appear twice.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 06=C &nbsp; 12=D &nbsp; 18=E &nbsp; 21=L &nbsp; 33=O &nbsp; 38=O &nbsp; 45=S &nbsp; 51=V &nbsp; 57=E</div>
+      <div class="lbl">Ciphertext (9 symbols, 2-word answer)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">45 33 21 51 18 06 38 12 57</div>
+    </div>
+    <ul class="sub"><li>Homophones: 33 and 38 are both O; 18 and 57 are both E</li></ul>
+  </div>
+
+  <!-- ── HW4: Homophonic D-type ── -->
+  <div class="slide">
+    <h2>Homework 4 — Homophonic (D)</h2>
+    <div class="callout blue">Due next class · Short message — but both D and E each have two homophones.</div>
+    <div class="example">
+      <div class="lbl">Key excerpt: 07=C &nbsp; 08=D &nbsp; 13=D &nbsp; 20=E &nbsp; 25=O &nbsp; 29=E</div>
+      <div class="lbl">Ciphertext (6 symbols, 1 word)</div>
+      <div class="row ct" style="font-size:1.2rem;letter-spacing:0.15em">08 20 07 25 13 29</div>
+    </div>
+    <ul class="sub"><li>Homophones: 08 and 13 are both D; 20 and 29 are both E</li></ul>
+  </div>
+
+  <!-- 10 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🏆</div>
+    <div class="lesson-num">Lesson 12 Complete</div>
+    <h1>CIPHER COMPLETE!</h1>
+    <div class="subtitle">All 13 Division B ciphers covered — now practice, practice, practice.</div>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

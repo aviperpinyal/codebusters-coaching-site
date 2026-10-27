@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codebusters — Maple Middle School</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f6f8fa;
+      color: #1f2328;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      font-family: monospace;
+      font-size: 2.2rem;
+      letter-spacing: 0.15em;
+      color: #0969da;
+    }
+    header p {
+      color: #57606a;
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+    header a.admin-link {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      color: #d0d7de;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    header a.admin-link:hover { color: #0969da; }
+
+    /* ── Dashboard grid ── */
+    .dashboard {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0969da;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Table ── */
+    .table-wrap {
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    thead tr { background: #f6f8fa; }
+
+    thead th {
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #57606a;
+      border-bottom: 1px solid #d0d7de;
+    }
+
+    thead th:nth-child(2),
+    thead th:nth-child(3),
+    thead th:nth-child(4) { text-align: center; }
+
+    tbody tr {
+      border-bottom: 1px solid #d0d7de;
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f6f8fa; }
+
+    tbody td {
+      padding: 0.3rem 0.6rem;
+      vertical-align: middle;
+    }
+
+    tfoot td {
+      padding: 0.45rem 0.6rem;
+      font-size: 0.72rem;
+      color: #57606a;
+      border-top: 1px solid #d0d7de;
+      font-style: italic;
+    }
+
+    td.learned { text-align: center; font-size: 1.1rem; }
+    .check { color: #1a7f37; }
+    .uncheck { color: #d0d7de; font-size: 0.9rem; }
+
+    td.cipher-name { color: #1f2328; font-weight: 500; }
+    td.cipher-name small {
+      display: block; color: #57606a; font-size: 0.75rem;
+      font-weight: 400; margin-top: 0.1rem;
+    }
+    td.cipher-name a { color: #0969da; text-decoration: underline; font-weight: 500; }
+    td.cipher-name a:hover { opacity: 0.75; }
+
+    td.level { text-align: center; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge-D  { background: #ddf4ff; color: #0550ae; border: 1px solid #54aeff; }
+    .badge-C  { background: #fff8c5; color: #7d4e00; border: 1px solid #d4a72c; }
+    .badge-DC { background: #dafbe1; color: #1a7f37; border: 1px solid #4ac26b; }
+    .badge-M  { background: #fbefff; color: #8250df; border: 1px solid #d8b4fe; }
+
+    /* ── Tile (generic card) ── */
+    .tile {
+      background: #ffffff;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+    }
+    .tile-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0969da;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #d0d7de;
+    }
+    .tile-empty {
+      color: #57606a;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    /* ── Homework tile ── */
+    .hw-item { font-size: 0.9rem; }
+    .hw-item a { color: #0969da; font-weight: 600; text-decoration: none; }
+    .hw-item a:hover { text-decoration: underline; }
+    .hw-due { font-size: 0.78rem; color: #57606a; margin-top: 0.3rem; }
+
+    /* ── Leaderboard tile ── */
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.9rem;
+    }
+    .lb-row:last-child { border-bottom: none; }
+    .lb-rank {
+      font-size: 1.1rem;
+      width: 1.4rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .lb-name { flex: 1; font-weight: 500; }
+    .lb-score { color: #57606a; font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+
+    /* ── Useful links tile ── */
+    .link-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .link-list li { font-size: 0.88rem; }
+    .link-list a { color: #0969da; text-decoration: none; }
+    .link-list a:hover { text-decoration: underline; }
+    .link-list .link-desc { display: block; color: #57606a; font-size: 0.77rem; margin-top: 0.1rem; }
+
+    /* ── Calendar tile ── */
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .cal-nav button {
+      background: none;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #0969da;
+    }
+    .cal-nav button:hover { background: #f6f8fa; }
+    .cal-month-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #1f2328;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      font-size: 0.72rem;
+    }
+    .cal-grid .dow {
+      text-align: center;
+      font-weight: 600;
+      color: #57606a;
+      padding: 0.2rem 0;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cal-grid .day {
+      min-height: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0.2rem 0.25rem;
+      border-radius: 4px;
+      cursor: default;
+    }
+    .cal-grid .day.other-month { opacity: 0.3; }
+    .cal-grid .day.today .day-num {
+      background: #0969da;
+      color: #fff;
+      border-radius: 50%;
+      width: 1.4em;
+      height: 1.4em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal-grid .day.has-event { background: #f0f6ff; }
+    .cal-grid .day.has-class { background: #f6f8fa; }
+    .event-label {
+      font-size: 0.58rem;
+      color: #0550ae;
+      line-height: 1.25;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      margin-top: 2px;
+      word-break: break-word;
+    }
+    .event-label.reg   { color: #1a7f37; }
+    .event-label.state { color: #8250df; }
+    .event-label.prac  { color: #7d4e00; }
+    .event-label.class { color: #57606a; }
+
+    /* calendar tile spans full width */
+    .cal-tile { grid-column: 1 / -1; }
+
+    @media (max-width: 680px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .cal-tile { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CODEBUSTERS</h1>
+    <p>Maple Middle School &mdash; Science Olympiad Division B &mdash; 2026&ndash;27</p>
+    <a class="admin-link" href="/admin.html">coach login</a>
+  </header>
+
+  <div class="dashboard">
+
+    <!-- ── Cipher Overview ── -->
+    <div>
+      <p class="section-title">Cipher Overview</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cipher</th>
+              <th>Covered in Class</th>
+              <th>Invitationals / Regionals</th>
+              <th>State / Nationals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cipher-name"><a href="/lessons/lesson-01-intro-caesar.html">Caesar</a></td>
+              <td class="learned"><span class="check">✓</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name"><a href="/lessons/lesson-01-intro-caesar.html">Atbash</a></td>
+              <td class="learned"><span class="check">✓</span></td>
+              <td class="level"><span class="badge badge-D">D</span></td>
+              <td class="level"><span class="badge badge-D">D</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Aristocrat</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Patristocrat</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Baconian</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Xenocrypt</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Fractionated Morse</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Cryptarithm</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-M">M</span></td>
+              <td class="level"><span class="badge badge-M">M</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Porta</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-D">D</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Complete Columnar</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+              <td class="level"><span class="badge badge-C">C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Nihilist Substitution</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-D">D</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Checkerboard (5×5)</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-D">D</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+            <tr>
+              <td class="cipher-name">Homophonic</td>
+              <td class="learned"><span class="uncheck">○</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+              <td class="level"><span class="badge badge-DC">D/C</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">D = Decrypt (key given) &nbsp;·&nbsp; C = Cryptanalysis &nbsp;·&nbsp; D/C = Either &nbsp;·&nbsp; M = Math</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Leaderboard (top-right) ── -->
+    <div class="tile">
+      <div class="tile-title">Leaderboard</div>
+      <div id="lb-content">
+        <p class="tile-empty">No scores recorded yet.</p>
+      </div>
+    </div>
+
+    <!-- ── Homework ── -->
+    <div class="tile">
+      <div class="tile-title">Homework</div>
+      <div id="hw-content">
+        <div class="hw-item">
+          Review the <a href="/lessons/lesson-01-intro-caesar.html">Lesson 1 slides</a> and complete the four practice problems at the end of the deck.
+        </div>
+        <p class="hw-due">Due: Tue Oct 27</p>
+      </div>
+    </div>
+
+    <!-- ── Useful Links ── -->
+    <div class="tile">
+      <div class="tile-title">Useful Links</div>
+      <ul class="link-list">
+        <li>
+          <a href="https://toebes.com/codebusters/" target="_blank" rel="noopener">toebes.com/codebusters</a>
+          <span class="link-desc">Practice problems, cipher tools, and reference sheets</span>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@Codebusters-sciol" target="_blank" rel="noopener">Science Olympiad Codebusters — YouTube</a>
+          <span class="link-desc">Video walkthroughs of every cipher type</span>
+        </li>
+        <li>
+          <a href="https://www.soinc.org/codebusters-b" target="_blank" rel="noopener">Codebusters B Event Page</a>
+          <span class="link-desc">Official Science Olympiad page for the event, with rules and clarifications</span>
+        </li>
+        <li>
+          <a href="https://www.soinc.org/" target="_blank" rel="noopener">Science Olympiad Official Site</a>
+          <span class="link-desc">Rules, event updates, and national resources</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── Calendar (full width) ── -->
+    <div class="tile cal-tile">
+      <div class="tile-title">Season Calendar</div>
+      <div class="cal-nav">
+        <button id="cal-prev">&#8592;</button>
+        <span class="cal-month-label" id="cal-label"></span>
+        <button id="cal-next">&#8594;</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+  </div><!-- /.dashboard -->
+
+  <script src="/scripts/class-dates.js"></script>
+  <script>
+    const EVENTS = [
+      // ── Competitions ──
+      { date: '2026-11-01', label: 'Rickards Invitational — Maple Cafeteria',          type: 'inv'   },
+      { date: '2026-12-05', label: 'Battle of the States — Round 1 (Maple)',            type: 'inv'   },
+      { date: '2026-12-12', label: 'Marie Murphy Invitational',                         type: 'inv'   },
+      { date: '2027-01-06', label: 'Battle of the States — Round 2 (Maple)',            type: 'inv'   },
+      { date: '2027-01-09', label: 'U of Chicago Invitational',                         type: 'inv'   },
+      { date: '2027-01-20', label: 'Battle of the States — Round 3 (Maple)',            type: 'inv'   },
+      { date: '2027-02-03', label: 'Battle of the States — Round 4 (Maple)',            type: 'inv'   },
+      { date: '2027-02-06', label: 'Northwestern / Founders Invitational',              type: 'inv'   },
+      { date: '2027-03-13', label: 'Regional — Oakton Community College',               type: 'reg'   },
+      { date: '2027-05-01', label: 'State — U of Illinois Urbana-Champaign',            type: 'state' },
+      // ── Class sessions (list lives in /scripts/class-dates.js) ──
+      ...window.CLASS_DATES.map(date => ({ date, label: 'Class', type: 'class' })),
+    ];
+
+    const MIN_YEAR = 2026, MIN_MONTH = 9; // October minimum
+
+    const calGrid  = document.getElementById('cal-grid');
+    const calLabel = document.getElementById('cal-label');
+    let   calYear, calMonth;
+
+    function initCal() {
+      const today = new Date();
+      calYear  = today.getFullYear();
+      calMonth = today.getMonth();
+      if (calYear < MIN_YEAR || (calYear === MIN_YEAR && calMonth < MIN_MONTH)) {
+        calYear = MIN_YEAR; calMonth = MIN_MONTH;
+      }
+      renderCal();
+    }
+
+    function renderCal() {
+      const today  = new Date();
+      const months = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+      calLabel.textContent = `${months[calMonth]} ${calYear}`;
+      document.getElementById('cal-prev').disabled =
+        (calYear === MIN_YEAR && calMonth === MIN_MONTH);
+
+      const firstDay    = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      const evtMap = {};
+      EVENTS.forEach(e => {
+        if (!evtMap[e.date]) evtMap[e.date] = [];
+        evtMap[e.date].push(e);
+      });
+
+      calGrid.innerHTML = '';
+      ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'dow';
+        el.textContent = d;
+        calGrid.appendChild(el);
+      });
+
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement('div');
+        blank.className = 'day other-month';
+        calGrid.appendChild(blank);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const evts    = evtMap[dateStr] || [];
+        const isToday = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d;
+
+        const cell = document.createElement('div');
+        const hasComp  = evts.some(e => e.type !== 'class');
+        const hasClass = evts.some(e => e.type === 'class');
+        cell.className = 'day' +
+          (hasComp ? ' has-event' : hasClass ? ' has-class' : '') +
+          (isToday ? ' today' : '');
+
+        const num = document.createElement('span');
+        num.className = 'day-num';
+        num.textContent = d;
+        cell.appendChild(num);
+
+        evts.forEach(e => {
+          const lbl = document.createElement('span');
+          lbl.className = `event-label ${e.type}`;
+          lbl.textContent = e.label;
+          cell.appendChild(lbl);
+        });
+
+        calGrid.appendChild(cell);
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      calMonth--;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      if (calYear < MIN_YEAR || (calYear === MIN_YEAR && calMonth < MIN_MONTH)) {
+        calYear = MIN_YEAR; calMonth = MIN_MONTH;
+      }
+      renderCal();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      calMonth++;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      renderCal();
+    });
+
+    initCal();
+  </script>
+
+</body>
+</html>

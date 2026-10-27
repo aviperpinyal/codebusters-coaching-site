@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Codebusters</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f6f8fa;
+      color: #1f2328;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Login gate ── */
+    #login-screen {
+      background: #ffffff;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem;
+      width: 320px;
+      text-align: center;
+    }
+    #login-screen h1 {
+      font-family: monospace;
+      color: #0969da;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    #login-screen p { color: #57606a; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    #login-screen input {
+      width: 100%;
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      color: #1f2328;
+      padding: 0.55rem 0.8rem;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      outline: none;
+    }
+    #login-screen input:focus { border-color: #0969da; }
+    #login-screen button {
+      width: 100%;
+      background: #0969da;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      padding: 0.6rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #login-screen button:hover { background: #0860ca; }
+    #login-screen .err { color: #cf222e; font-size: 0.82rem; margin-top: 0.5rem; min-height: 1.2em; }
+
+    /* ── Admin dashboard ── */
+    #admin-screen { display: none; width: 100%; min-height: 100vh; flex-direction: column; align-items: stretch; }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #d0d7de;
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 { font-family: monospace; color: #0969da; font-size: 1.2rem; letter-spacing: 0.12em; }
+    header nav { display: flex; gap: 1.2rem; align-items: center; }
+    header nav a { color: #57606a; text-decoration: none; font-size: 0.85rem; }
+    header nav a:hover { color: #0969da; }
+    header nav button {
+      background: none; border: 1px solid #d0d7de; border-radius: 6px;
+      color: #57606a; padding: 0.25rem 0.7rem; font-size: 0.82rem; cursor: pointer;
+    }
+    header nav button:hover { color: #cf222e; border-color: #cf222e; }
+
+    main { padding: 2rem; max-width: 1000px; margin: 0 auto; width: 100%; }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0969da;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Lesson plan tile ── */
+    .tile {
+      background: #ffffff;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .tile h2 {
+      font-size: 1rem;
+      color: #1f2328;
+      margin-bottom: 1.1rem;
+      font-weight: 600;
+    }
+
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .lesson-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+      text-decoration: none;
+      color: #1f2328;
+      font-size: 0.9rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .lesson-link:hover { border-color: #0969da; color: #0969da; }
+    .lesson-link .num {
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #57606a;
+      min-width: 24px;
+    }
+
+    /* ── Attendance ── */
+    .att-help { color: #57606a; font-size: 0.82rem; margin-bottom: 0.9rem; }
+    .att-status { font-size: 0.78rem; color: #57606a; min-height: 1.2em; margin-top: 0.6rem; }
+    .att-status.err { color: #cf222e; }
+    .att-wrap { overflow-x: auto; border: 1px solid #d0d7de; border-radius: 6px; }
+    table.att { border-collapse: separate; border-spacing: 0; font-size: 0.85rem; }
+    table.att th, table.att td {
+      border-right: 1px solid #eaeef2; border-bottom: 1px solid #eaeef2;
+      padding: 0; text-align: center; white-space: nowrap;
+    }
+    table.att thead th {
+      background: #f6f8fa; font-weight: 600; font-size: 0.72rem; color: #57606a;
+      padding: 0.45rem 0.35rem; line-height: 1.2;
+    }
+    table.att thead th .dow { display: block; font-weight: 400; font-size: 0.65rem; }
+    table.att th.name, table.att td.name {
+      position: sticky; left: 0; z-index: 1; background: #ffffff;
+      text-align: left; padding: 0.4rem 0.8rem; min-width: 8.5rem;
+      border-right: 1px solid #d0d7de; font-weight: 500;
+    }
+    table.att thead th.name { background: #f6f8fa; z-index: 2; }
+    table.att th.today { background: #ddf4ff; color: #0969da; }
+    table.att td.today { background: #f3faff; }
+    table.att td.total, table.att th.total { padding: 0.4rem 0.6rem; color: #57606a; font-variant-numeric: tabular-nums; }
+    table.att button.mark {
+      width: 2.4rem; height: 2.1rem; border: none; background: transparent;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer; user-select: none;
+    }
+    table.att button.mark:hover { background: #f0f3f6; }
+    table.att button.mark:focus-visible { outline: 2px solid #0969da; outline-offset: -2px; }
+    table.att button.mark.check { color: #1a7f37; }
+    table.att button.mark.x { color: #cf222e; }
+  </style>
+</head>
+<body>
+
+  <!-- Login screen -->
+  <div id="login-screen">
+    <h1>CODEBUSTERS</h1>
+    <p>Coach Admin Access</p>
+    <input type="password" id="pw-input" placeholder="Password" />
+    <button id="login-btn">Sign In</button>
+    <div class="err" id="login-err"></div>
+  </div>
+
+  <!-- Admin dashboard (hidden until login) -->
+  <div id="admin-screen">
+    <header>
+      <h1>CODEBUSTERS ADMIN</h1>
+      <nav>
+        <a href="/">← Back to site</a>
+        <button id="logout-btn">Log out</button>
+      </nav>
+    </header>
+
+    <main>
+      <p class="section-title">Attendance</p>
+
+      <div class="tile">
+        <h2>Class Attendance — Codebusters</h2>
+        <p class="att-help">Click a cell to cycle: once for ✓ present, twice for ✗ absent, three times to clear. Changes save automatically.</p>
+        <div class="att-wrap">
+          <table class="att" id="att-table"></table>
+        </div>
+        <div class="att-status" id="att-status">Loading…</div>
+      </div>
+
+      <p class="section-title" style="margin-top:1rem">Lesson Plans</p>
+
+      <div class="tile">
+        <h2>Lessons — Division B 2026–27</h2>
+        <div class="lesson-grid">
+          <a class="lesson-link" href="/lessons/lesson-01-intro-caesar.html">
+            <span class="num">01</span>Intro, Caesar &amp; Atbash
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-02-aristocrat.html">
+            <span class="num">02</span>Aristocrat
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-03-patristocrat.html">
+            <span class="num">03</span>Patristocrat
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-04-baconian.html">
+            <span class="num">04</span>Baconian
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-05-xenocrypt.html">
+            <span class="num">05</span>Xenocrypt
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-06-fractionated-morse.html">
+            <span class="num">06</span>Fractionated Morse
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-07-cryptarithm.html">
+            <span class="num">07</span>Cryptarithm
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-08-porta.html">
+            <span class="num">08</span>Porta
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-09-columnar.html">
+            <span class="num">09</span>Complete Columnar
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-10-nihilist.html">
+            <span class="num">10</span>Nihilist Sub.
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-11-checkerboard.html">
+            <span class="num">11</span>Checkerboard
+          </a>
+          <a class="lesson-link" href="/lessons/lesson-12-homophonic.html">
+            <span class="num">12</span>Homophonic
+          </a>
+        </div>
+      </div>
+
+      <p class="section-title" style="margin-top:1rem">Answer Keys — Coach Only</p>
+
+      <div class="tile">
+        <h2>Solutions — Division B 2026–27</h2>
+        <div class="lesson-grid">
+          <a class="lesson-link" href="/lessons/answers/lesson-01-answers.html">
+            <span class="num">01</span>Caesar &amp; Atbash
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-02-answers.html">
+            <span class="num">02</span>Aristocrat
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-03-answers.html">
+            <span class="num">03</span>Patristocrat
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-04-answers.html">
+            <span class="num">04</span>Baconian
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-05-answers.html">
+            <span class="num">05</span>Xenocrypt
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-06-answers.html">
+            <span class="num">06</span>Fractionated Morse
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-07-answers.html">
+            <span class="num">07</span>Cryptarithm
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-08-answers.html">
+            <span class="num">08</span>Porta
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-09-answers.html">
+            <span class="num">09</span>Complete Columnar
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-10-answers.html">
+            <span class="num">10</span>Nihilist Sub.
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-11-answers.html">
+            <span class="num">11</span>Checkerboard
+          </a>
+          <a class="lesson-link" href="/lessons/answers/lesson-12-answers.html">
+            <span class="num">12</span>Homophonic
+          </a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/scripts/class-dates.js"></script>
+  <script>
+    const loginScreen = document.getElementById('login-screen');
+    const adminScreen = document.getElementById('admin-screen');
+    const pwInput     = document.getElementById('pw-input');
+    const loginBtn    = document.getElementById('login-btn');
+    const loginErr    = document.getElementById('login-err');
+    const logoutBtn   = document.getElementById('logout-btn');
+    const PW_KEY = 'cb_admin_pw';
+
+    function getPw() { try { return sessionStorage.getItem(PW_KEY) || ''; } catch { return ''; } }
+    function setPw(v) { try { v ? sessionStorage.setItem(PW_KEY, v) : sessionStorage.removeItem(PW_KEY); } catch {} }
+
+    function api(path, opts = {}) {
+      return fetch(path, {
+        ...opts,
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Password': getPw(), ...(opts.headers || {}) },
+      });
+    }
+
+    function unlock() {
+      loginScreen.style.display = 'none';
+      adminScreen.style.display = 'flex';
+      loadAttendance();
+    }
+    function lock(msg = '') {
+      adminScreen.style.display = 'none';
+      loginScreen.style.display = 'block';
+      setPw('');
+      try { sessionStorage.removeItem('cb_admin'); } catch {}
+      pwInput.value = '';
+      loginErr.textContent = msg;
+    }
+
+    async function tryLogin(pw) {
+      setPw(pw);
+      try {
+        const r = await api('/api/login', { method: 'POST' });
+        if (r.ok) { unlock(); return; }
+        lock(r.status === 401 ? 'Incorrect password.' : 'Server error. Try again.');
+      } catch {
+        lock('Could not reach the server.');
+      }
+      pwInput.select();
+    }
+
+    loginBtn.addEventListener('click', () => tryLogin(pwInput.value));
+    pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+    logoutBtn.addEventListener('click', () => lock());
+    if (getPw()) tryLogin(getPw());
+
+    // ── Attendance ──────────────────────────────────────────
+    const table  = document.getElementById('att-table');
+    const status = document.getElementById('att-status');
+    const NEXT   = { '': 'check', check: 'x', x: '' };
+    const GLYPH  = { '': '', check: '✓', x: '✗' };
+    const LABEL  = { '': 'not marked', check: 'present', x: 'absent' };
+    const DATES  = window.CLASS_DATES || [];
+    let students = [], marks = {};
+    const pending = new Map(); // key -> timer, so rapid clicks send only the final value
+
+    function localISO(d) {
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+    function setStatus(text, isErr = false) { status.textContent = text; status.classList.toggle('err', isErr); }
+
+    async function loadAttendance() {
+      setStatus('Loading…');
+      try {
+        const r = await api('/api/attendance');
+        if (r.status === 401) return lock('Session expired. Sign in again.');
+        if (!r.ok) throw new Error();
+        const data = await r.json();
+        students = data.students; marks = data.marks;
+        render();
+        setStatus(students.length ? 'All changes saved.' : 'No students on the roster yet.');
+      } catch {
+        setStatus('Could not load attendance.', true);
+      }
+    }
+
+    function presentCount(student) {
+      return DATES.filter(d => marks[`${student}|${d}`] === 'check').length;
+    }
+
+    function render() {
+      const today = localISO(new Date());
+      const head = DATES.map(d => {
+        const dt = new Date(d + 'T12:00:00');
+        const md = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const dow = dt.toLocaleDateString('en-US', { weekday: 'short' });
+        return `<th class="${d === today ? 'today' : ''}" scope="col">${md}<span class="dow">${dow}</span></th>`;
+      }).join('');
+      const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      const rows = students.map((s, i) => {
+        const cells = DATES.map(d => {
+          const m = marks[`${s}|${d}`] || '';
+          return `<td class="${d === today ? 'today' : ''}"><button class="mark ${m}" data-i="${i}" data-d="${d}" aria-label="${esc(s)}, ${d}: ${LABEL[m]}">${GLYPH[m]}</button></td>`;
+        }).join('');
+        return `<tr><td class="name">${esc(s)}</td>${cells}<td class="total" data-total="${i}">${presentCount(s)}</td></tr>`;
+      }).join('');
+      table.innerHTML = `<thead><tr><th class="name" scope="col">Student</th>${head}<th class="total" scope="col">Present</th></tr></thead><tbody>${rows}</tbody>`;
+    }
+
+    table.addEventListener('click', e => {
+      const btn = e.target.closest('button.mark');
+      if (!btn) return;
+      const student = students[+btn.dataset.i], date = btn.dataset.d, key = `${student}|${date}`;
+      const mark = NEXT[marks[key] || ''];
+      if (mark) marks[key] = mark; else delete marks[key];
+      btn.className = `mark ${mark}`;
+      btn.textContent = GLYPH[mark];
+      btn.setAttribute('aria-label', `${student}, ${date}: ${LABEL[mark]}`);
+      table.querySelector(`[data-total="${btn.dataset.i}"]`).textContent = presentCount(student);
+      setStatus('Saving…');
+      clearTimeout(pending.get(key));
+      pending.set(key, setTimeout(() => save(student, date, key), 500));
+    });
+
+    async function save(student, date, key) {
+      const mark = marks[key] || '';
+      try {
+        const r = await api('/api/attendance', { method: 'PUT', body: JSON.stringify({ student, date, mark }) });
+        if (r.status === 401) return lock('Session expired. Sign in again.');
+        if (!r.ok) throw new Error();
+        pending.delete(key);
+        if (!pending.size) setStatus('All changes saved.');
+      } catch {
+        pending.delete(key);
+        setStatus(`Could not save ${student} on ${date}. Reload the page and try again.`, true);
+      }
+    }
+  </script>
+</body>
+</html>

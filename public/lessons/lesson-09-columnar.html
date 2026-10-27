@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 — Complete Columnar Transposition</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">📊</div>
+    <div class="lesson-num">Lesson 9</div>
+    <h1>COMPLETE COLUMNAR</h1>
+    <div class="subtitle">Rearrange columns, not letters</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>What is Transposition?</h2>
+    <ul>
+      <li>Unlike substitution ciphers, transposition <strong>rearranges</strong> letters — doesn't replace them</li>
+      <li>The same letters appear in plaintext and ciphertext, just in different order</li>
+      <li>Frequency analysis will show normal English — but words won't appear</li>
+      <li>Complete Columnar appears as <strong>Cryptanalysis (C)</strong> at all levels</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>How Columnar Transposition Works</h2>
+    <ul>
+      <li><strong>Step 1</strong>: Write the plaintext in rows under a numeric key</li>
+      <li><strong>Step 2</strong>: Number the key letters alphabetically (A=1, B=2, …)</li>
+      <li><strong>Step 3</strong>: Read off columns in <strong>numeric key order</strong></li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Key: CARGO (C=1, A=2, R=4, G=3, O=5)</div>
+      <div class="row"><span class="key">C A R G O</span></div>
+      <div class="row"><span class="key">1 2 4 3 5</span></div>
+      <div class="row pt">W E A R E</div>
+      <div class="row pt">C O D E B</div>
+      <div class="row pt">U S T E R</div>
+      <div class="row pt">S X X X X</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Completing the Rectangle</h2>
+    <ul>
+      <li>"Complete" means the grid is a full rectangle — null letters pad the last row if needed</li>
+      <li>The number of rows = ⌈message length / key length⌉</li>
+      <li>Null letters are marked on the test</li>
+    </ul>
+    <div class="callout yellow">Read column 1 first, then 2, 3, 4, 5 — always in key-number order.</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Encryption — Reading Off Columns</h2>
+    <div class="example">
+      <div class="lbl">Grid from previous slide (key order: 1=C, 2=A, 3=G, 4=R, 5=O)</div>
+      <div class="row">Col 1 (C): <span class="ct">WCUS</span></div>
+      <div class="row">Col 2 (A): <span class="ct">EOSX</span></div>
+      <div class="row">Col 3 (G): <span class="ct">EEEX</span></div>
+      <div class="row">Col 4 (R): <span class="ct">ADTE</span></div>
+      <div class="row">Col 5 (O): <span class="ct">EBER</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">WCUS EOSX EEEX ADTE EBER</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Decryption Process</h2>
+    <ul>
+      <li><strong>Step 1</strong>: Determine key length (given or solve)</li>
+      <li><strong>Step 2</strong>: Compute number of rows and which columns are longer (if message doesn't divide evenly)</li>
+      <li><strong>Step 3</strong>: Distribute ciphertext back into columns in key-number order</li>
+      <li><strong>Step 4</strong>: Read across rows to get plaintext</li>
+    </ul>
+    <div class="callout green">For C-type: you must figure out the key length. Try lengths 4–8 and see which produces readable text.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Finding Key Length (Cryptanalysis)</h2>
+    <ul>
+      <li>Try dividing message length by 4, 5, 6, 7, 8 — look for a clean rectangle</li>
+      <li>For each candidate length, rearrange columns and check for English digraphs</li>
+      <li>Once rows look like partial English words, you have the right length</li>
+      <li>Then determine column order by matching common digraphs across adjacent columns</li>
+    </ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Columnar transposition rearranges letters — doesn't change them</li>
+      <li>Write in rows, read out in column order (key-number order)</li>
+      <li>Decryption: fill columns in order, read across rows</li>
+      <li>Appears as Cryptanalysis (C) at all levels</li>
+      <li>Next class: <strong>Nihilist Substitution</strong></li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Columnar D-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Columnar Transposition (C)</h2>
+    <div class="callout yellow">D-type: keyword given. Write columns in key-rank order, then read across rows.</div>
+    <div class="example">
+      <div class="lbl">Keyword: ACE &nbsp;·&nbsp; 9-letter ciphertext, no nulls</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">CEU OSL DRE</div>
+    </div>
+    <ul class="sub">
+      <li>Key ACE — alphabetical ranks: A=1, C=2, E=3</li>
+      <li>3 columns, 9 letters → 3 rows. Each segment has 3 letters (one per column)</li>
+      <li>Assign: col A (rank 1) = CEU, col C (rank 2) = OSL, col E (rank 3) = DRE</li>
+      <li>Fill the grid (key order: A C E = cols 1 2 3), then read across rows</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Columnar D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Columnar (D): CODES RULE</h2>
+    <div class="example">
+      <div class="lbl">Grid (key = ACE, rank order A=1 C=2 E=3)</div>
+      <div class="row" style="font-family:monospace;font-size:1.1rem;line-height:2">
+        <span class="key">A &nbsp; C &nbsp; E</span><br>
+        <span class="key">1 &nbsp; 2 &nbsp; 3</span><br>
+        <span class="pt">C &nbsp; O &nbsp; D</span><br>
+        <span class="pt">E &nbsp; S &nbsp; R</span><br>
+        <span class="pt">U &nbsp; L &nbsp; E</span>
+      </div>
+    </div>
+    <div class="example">
+      <div class="lbl">Read across rows</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.15em">CODES RULE</div>
+    </div>
+    <div class="callout green">Col A=CEU fills column 1; col C=OSL fills column 2; col E=DRE fills column 3 → rows read left-to-right.</div>
+  </div>
+
+  <!-- ── Exam Q2: Columnar C-type ── -->
+  <div class="slide">
+    <h2>Exam Practice — Columnar (C)</h2>
+    <div class="callout yellow">C-type: no keyword. Use the crib to identify columns — crib length ≥ key length − 1.</div>
+    <div class="example">
+      <div class="lbl">Key length: 4 &nbsp;·&nbsp; Crib: first 4 plaintext letters = FIND</div>
+      <div class="lbl">Ciphertext (12 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">IHC DLS FTO NEK</div>
+    </div>
+    <ul class="sub">
+      <li>12 letters ÷ 4 cols = 3 rows: split ciphertext into 4 segments of 3: IHC · DLS · FTO · NEK</li>
+      <li>Crib FIND fills row 1: F, I, N, D each start a different segment</li>
+      <li>Match each crib letter to the segment it starts — that tells you each column's rank order</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Columnar C-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Columnar (C): FIND THE LOCKS</h2>
+    <div class="example">
+      <div class="lbl">Crib matching: FIND → rank order of columns</div>
+      <div class="row">F → FTO (rank 3) &nbsp; I → IHC (rank 1) &nbsp; N → NEK (rank 4) &nbsp; D → DLS (rank 2)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Grid (place columns in rank order 1→4, read across rows)</div>
+      <div class="row" style="font-family:monospace;font-size:1.05rem;line-height:2">
+        <span class="key">rank: 3 &nbsp; 1 &nbsp; 4 &nbsp; 2</span><br>
+        <span class="pt">F &nbsp;&nbsp; I &nbsp; N &nbsp; D</span><br>
+        <span class="pt">T &nbsp;&nbsp; H &nbsp; E &nbsp; L</span><br>
+        <span class="pt">O &nbsp;&nbsp; C &nbsp; K &nbsp; S</span>
+      </div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">FIND THE LOCKS</span></div>
+  </div>
+
+
+  <!-- ── HW1: Columnar D-type ── -->
+  <div class="slide">
+    <h2>Homework 1 — Columnar Transposition (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword given. Fill columns, read across rows.</div>
+    <div class="example">
+      <div class="lbl">Keyword: CAT &nbsp;·&nbsp; 9-letter ciphertext, no nulls</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">END LRO ACE</div>
+    </div>
+    <ul class="sub">
+      <li>Key CAT — alphabetical ranks: A=1, C=2, T=3</li>
+      <li>3 columns, 9 letters → 3 rows of 3. Segments: END (rank 1), LRO (rank 2), ACE (rank 3)</li>
+      <li>Place each segment in its column, then read across rows to decode</li>
+    </ul>
+  </div>
+
+  <!-- ── HW2: Columnar D-type ── -->
+  <div class="slide">
+    <h2>Homework 2 — Columnar Transposition (D)</h2>
+    <div class="callout blue">Due next class · D-type: keyword given. 4 columns.</div>
+    <div class="example">
+      <div class="lbl">Keyword: MATH &nbsp;·&nbsp; 8-letter ciphertext, no nulls</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">EE TM BT SA</div>
+    </div>
+    <ul class="sub">
+      <li>Key MATH — alphabetical ranks: A=1, H=2, M=3, T=4</li>
+      <li>4 columns, 8 letters → 2 rows of 4. Each segment has 2 letters.</li>
+      <li>Assign segments to columns by rank, then read across rows</li>
+    </ul>
+  </div>
+
+  <!-- ── HW3: Columnar C-type ── -->
+  <div class="slide">
+    <h2>Homework 3 — Columnar Transposition (C)</h2>
+    <div class="callout blue">Due next class · C-type: no keyword. Use crib ≥ (cols − 1) to find column order.</div>
+    <div class="example">
+      <div class="lbl">Key length: 3 &nbsp;·&nbsp; Crib: first 2 plaintext letters = SO</div>
+      <div class="lbl">Ciphertext (9 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">SVO LCE OED</div>
+    </div>
+    <ul class="sub">
+      <li>9 letters ÷ 3 cols = 3 rows: segments SVO · LCE · OED</li>
+      <li>S starts which segment? O starts which segment? Third segment by elimination</li>
+      <li>Place columns, read across rows to decode (2 words, 5+4 letters)</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4: Columnar C-type ── -->
+  <div class="slide">
+    <h2>Homework 4 — Columnar Transposition (C)</h2>
+    <div class="callout blue">Due next class · C-type: no keyword. Crib of 3 letters for a 4-column key.</div>
+    <div class="example">
+      <div class="lbl">Key length: 4 &nbsp;·&nbsp; Crib: first 3 plaintext letters = TEA</div>
+      <div class="lbl">Ciphertext (8 letters, no nulls)</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.2em">TW EO AR MK</div>
+    </div>
+    <ul class="sub">
+      <li>8 letters ÷ 4 cols = 2 rows: segments TW · EO · AR · MK</li>
+      <li>Use crib to assign 3 segments to positions; 4th segment by elimination</li>
+      <li>Decode (1 word, 8 letters)</li>
+    </ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

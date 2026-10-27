@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    image: codebusters-site:latest
+    container_name: codebusters-site
+    restart: unless-stopped
+    ports:
+      - "10004:10004"
+    env_file: .env
+    environment:
+      - PORT=10004
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:10004/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

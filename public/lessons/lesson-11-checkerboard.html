@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 — Checkerboard (5×5)</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">♟️</div>
+    <div class="lesson-num">Lesson 11</div>
+    <h1>CHECKERBOARD</h1>
+    <div class="subtitle">5×5 grid — two-digit coordinates as cipher</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>What is the Checkerboard Cipher?</h2>
+    <ul>
+      <li>Each letter is encoded as a two-digit coordinate in a 5×5 grid</li>
+      <li>Similar to a Polybius square, but the <strong>row and column headers are key digits</strong>, not always 1–5</li>
+      <li>Often called the "Polybius checkerboard" in competition</li>
+      <li>At Invitationals/Regionals: Decrypt (D) — key given</li>
+      <li>At State/Nationals: Decrypt or Cryptanalysis (DC)</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>The Grid Structure</h2>
+    <ul>
+      <li>A 5×5 grid with a keyword filling it (I/J share)</li>
+      <li>Row headers and column headers are 5 of the 10 digits — chosen as the key</li>
+      <li>To encode: find the letter, read (row header, column header)</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Example grid (rows: 1 3 5 7 9 / cols: 2 4 6 8 0)</div>
+      <div class="row">
+        <table style="display:inline-table;font-size:0.9rem">
+          <tr><th></th><th>2</th><th>4</th><th>6</th><th>8</th><th>0</th></tr>
+          <tr><th>1</th><td>K</td><td>E</td><td>Y</td><td>A</td><td>B</td></tr>
+          <tr><th>3</th><td>C</td><td>D</td><td>F</td><td>G</td><td>H</td></tr>
+          <tr><th>5</th><td>I/J</td><td>L</td><td>M</td><td>N</td><td>O</td></tr>
+          <tr><th>7</th><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td></tr>
+          <tr><th>9</th><td>U</td><td>V</td><td>W</td><td>X</td><td>Z</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Encoding Example</h2>
+    <div class="example">
+      <div class="lbl">Encode "KEY" using above grid</div>
+      <div class="row">K is at row 1, col 2 → <span class="ct">12</span></div>
+      <div class="row">E is at row 1, col 4 → <span class="ct">14</span></div>
+      <div class="row">Y is at row 1, col 6 → <span class="ct">16</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">12 14 16</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Decoding</h2>
+    <ul>
+      <li>Take each pair of digits from the ciphertext</li>
+      <li>First digit = row header, second digit = column header</li>
+      <li>Find the intersection in the grid → plaintext letter</li>
+    </ul>
+    <div class="callout green">If the key grid is provided, decryption is straightforward lookup. Practice for speed!</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Cryptanalysis (State level)</h2>
+    <ul>
+      <li>The ciphertext is a stream of digits — no spaces</li>
+      <li>Identify which 5 digits are row headers and which 5 are column headers</li>
+      <li>Frequency analysis: the 5 row-header digits should each appear ~26% of the time in position 1 of each pair</li>
+      <li>Use known letter frequencies to match digit-pairs to likely letters</li>
+    </ul>
+    <div class="callout yellow">The row/column split into odd/even digits is a common key choice — look for that pattern.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Practice</h2>
+    <div class="callout blue">D-type: key grid given above</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">36 12 34 14 38 77 97 86 78 77 14 78 77</div>
+    </div>
+    <div class="example" style="margin-top:0.8rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">CODE BUSTERS RULES</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Checkerboard = 5×5 grid, letters encoded as (row-header, col-header) digit pairs</li>
+      <li>The key determines grid fill order and which 5 digits label rows/columns</li>
+      <li>Decrypt: split ciphertext into pairs, look up in grid</li>
+      <li>D at Invitationals; DC at State</li>
+      <li>Next class: <strong>Homophonic Substitution</strong> — the final cipher!</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Checkerboard D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:195px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: KEY · rows 1 3 5 7 9 · cols 2 4 6 8 0)</div>
+      <div>&nbsp;&nbsp; 2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8 &nbsp;&nbsp;0</div>
+      <div>1 &nbsp;K &nbsp;&nbsp;E &nbsp;&nbsp;Y &nbsp;&nbsp;A &nbsp;&nbsp;B</div>
+      <div>3 &nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F &nbsp;&nbsp;G &nbsp;&nbsp;H</div>
+      <div>5 &nbsp;IJ &nbsp;L &nbsp;&nbsp;M &nbsp;&nbsp;N &nbsp;&nbsp;O</div>
+      <div>7 &nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;S &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;V &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Exam Practice — Checkerboard (D)</h2>
+    <div class="callout yellow">D-type: grid given. Split ciphertext into digit pairs — first digit = row, second = column.</div>
+    <div class="example">
+      <div class="lbl">Grid keyword: KEY (top right) &nbsp;·&nbsp; 7-letter answer</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">94 52 32 70 50 76 16</div>
+    </div>
+    <ul class="sub">
+      <li>Row headers are odd digits (1,3,5,7,9); column headers are even digits (2,4,6,8,0)</li>
+      <li>Look up each pair: first digit selects the row, second selects the column</li>
+      <li>The answer is a 7-letter word</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Checkerboard D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Checkerboard (D): VICTORY</h2>
+    <div class="example">
+      <div class="lbl">Digit-pair lookups</div>
+      <div class="row">94 → row 9, col 4 = V</div>
+      <div class="row">52 → row 5, col 2 = I &nbsp;&nbsp; 32 → row 3, col 2 = C &nbsp;&nbsp; 70 → row 7, col 0 = T</div>
+      <div class="row">50 → row 5, col 0 = O &nbsp;&nbsp; 76 → row 7, col 6 = R &nbsp;&nbsp; 16 → row 1, col 6 = Y</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">VICTORY</span></div>
+  </div>
+
+  <!-- ── Exam Q2: Checkerboard D-type (different keyword) ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: SOLVE · rows 1 3 5 7 9 · cols 0 2 4 6 8)</div>
+      <div>&nbsp;&nbsp; 0 &nbsp;&nbsp;2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8</div>
+      <div>1 &nbsp;S &nbsp;&nbsp;O &nbsp;&nbsp;L &nbsp;&nbsp;V &nbsp;&nbsp;E</div>
+      <div>3 &nbsp;A &nbsp;&nbsp;B &nbsp;&nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F</div>
+      <div>5 &nbsp;G &nbsp;&nbsp;H &nbsp;&nbsp;IJ &nbsp;K &nbsp;&nbsp;M</div>
+      <div>7 &nbsp;N &nbsp;&nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Y &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Exam Practice — Checkerboard (D) #2</h2>
+    <div class="callout yellow">Different keyword — read the grid carefully before looking up each pair.</div>
+    <div class="example">
+      <div class="lbl">Grid keyword: SOLVE (top right) &nbsp;·&nbsp; 8-digit-pair ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">34 12 36 18 92 54 70 10</div>
+    </div>
+    <ul class="sub">
+      <li>Row headers: 1,3,5,7,9 &nbsp;·&nbsp; Column headers: 0,2,4,6,8</li>
+      <li>8 pairs → 8 letters → 2-word answer</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Checkerboard D-type #2 Answer ── -->
+  <div class="slide">
+    <h2>Answer — Checkerboard (D) #2: CODE WINS</h2>
+    <div class="example">
+      <div class="lbl">Digit-pair lookups (SOLVE grid)</div>
+      <div class="row">34 → row 3, col 4 = C &nbsp;&nbsp; 12 → row 1, col 2 = O</div>
+      <div class="row">36 → row 3, col 6 = D &nbsp;&nbsp; 18 → row 1, col 8 = E</div>
+      <div class="row">92 → row 9, col 2 = W &nbsp;&nbsp; 54 → row 5, col 4 = I</div>
+      <div class="row">70 → row 7, col 0 = N &nbsp;&nbsp; 10 → row 1, col 0 = S</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">CODE WINS</span></div>
+  </div>
+
+
+  <!-- ── HW1: Checkerboard D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:195px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: KEY · rows 1 3 5 7 9 · cols 2 4 6 8 0)</div>
+      <div>&nbsp;&nbsp; 2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8 &nbsp;&nbsp;0</div>
+      <div>1 &nbsp;K &nbsp;&nbsp;E &nbsp;&nbsp;Y &nbsp;&nbsp;A &nbsp;&nbsp;B</div>
+      <div>3 &nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F &nbsp;&nbsp;G &nbsp;&nbsp;H</div>
+      <div>5 &nbsp;IJ &nbsp;L &nbsp;&nbsp;M &nbsp;&nbsp;N &nbsp;&nbsp;O</div>
+      <div>7 &nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;S &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;V &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Homework 1 — Checkerboard (D)</h2>
+    <div class="callout blue">Due next class · Grid keyword: KEY (top right) · 4-letter answer (1 word)</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (4 digit pairs)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">96 50 76 12</div>
+    </div>
+    <ul class="sub"><li>Rows: 1 3 5 7 9 &nbsp;·&nbsp; Cols: 2 4 6 8 0 &nbsp;·&nbsp; First digit = row, second = column</li></ul>
+  </div>
+
+  <!-- ── HW2: Checkerboard D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:195px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: KEY · rows 1 3 5 7 9 · cols 2 4 6 8 0)</div>
+      <div>&nbsp;&nbsp; 2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8 &nbsp;&nbsp;0</div>
+      <div>1 &nbsp;K &nbsp;&nbsp;E &nbsp;&nbsp;Y &nbsp;&nbsp;A &nbsp;&nbsp;B</div>
+      <div>3 &nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F &nbsp;&nbsp;G &nbsp;&nbsp;H</div>
+      <div>5 &nbsp;IJ &nbsp;L &nbsp;&nbsp;M &nbsp;&nbsp;N &nbsp;&nbsp;O</div>
+      <div>7 &nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;S &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;V &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Homework 2 — Checkerboard (D)</h2>
+    <div class="callout blue">Due next class · Grid keyword: KEY (top right) · 2-word answer (4+4 letters)</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (8 digit pairs)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">70 14 18 56 96 52 58 78</div>
+    </div>
+    <ul class="sub"><li>8 pairs → 8 letters. Look up each pair in the grid above.</li></ul>
+  </div>
+
+  <!-- ── HW3: Checkerboard D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: SOLVE · rows 1 3 5 7 9 · cols 0 2 4 6 8)</div>
+      <div>&nbsp;&nbsp; 0 &nbsp;&nbsp;2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8</div>
+      <div>1 &nbsp;S &nbsp;&nbsp;O &nbsp;&nbsp;L &nbsp;&nbsp;V &nbsp;&nbsp;E</div>
+      <div>3 &nbsp;A &nbsp;&nbsp;B &nbsp;&nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F</div>
+      <div>5 &nbsp;G &nbsp;&nbsp;H &nbsp;&nbsp;IJ &nbsp;K &nbsp;&nbsp;M</div>
+      <div>7 &nbsp;N &nbsp;&nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Y &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Homework 3 — Checkerboard (D)</h2>
+    <div class="callout blue">Due next class · Grid keyword: SOLVE (top right) · 4-letter answer (1 word)</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (4 digit pairs)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">32 18 10 78</div>
+    </div>
+    <ul class="sub"><li>Rows: 1 3 5 7 9 &nbsp;·&nbsp; Cols: 0 2 4 6 8 &nbsp;·&nbsp; Note different column order from HW1/HW2!</li></ul>
+  </div>
+
+  <!-- ── HW4: Checkerboard D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Grid (keyword: SOLVE · rows 1 3 5 7 9 · cols 0 2 4 6 8)</div>
+      <div>&nbsp;&nbsp; 0 &nbsp;&nbsp;2 &nbsp;&nbsp;4 &nbsp;&nbsp;6 &nbsp;&nbsp;8</div>
+      <div>1 &nbsp;S &nbsp;&nbsp;O &nbsp;&nbsp;L &nbsp;&nbsp;V &nbsp;&nbsp;E</div>
+      <div>3 &nbsp;A &nbsp;&nbsp;B &nbsp;&nbsp;C &nbsp;&nbsp;D &nbsp;&nbsp;F</div>
+      <div>5 &nbsp;G &nbsp;&nbsp;H &nbsp;&nbsp;IJ &nbsp;K &nbsp;&nbsp;M</div>
+      <div>7 &nbsp;N &nbsp;&nbsp;P &nbsp;&nbsp;Q &nbsp;&nbsp;R &nbsp;&nbsp;T</div>
+      <div>9 &nbsp;U &nbsp;&nbsp;W &nbsp;&nbsp;X &nbsp;&nbsp;Y &nbsp;&nbsp;Z</div>
+    </div>
+    <h2>Homework 4 — Checkerboard (D)</h2>
+    <div class="callout blue">Due next class · Grid keyword: SOLVE (top right) · 2-word answer (5+4 letters)</div>
+    <div class="example">
+      <div class="lbl">Ciphertext (9 digit pairs)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">10 78 90 36 96 58 12 76 18</div>
+    </div>
+    <ul class="sub"><li>9 pairs → 9 letters. Use the SOLVE grid (top right).</li></ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Intro, Caesar &amp; Atbash</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck">
+
+  <!-- ── Slide 1: Title ── -->
+  <div class="slide title-slide">
+    <div class="big-icon">🔐</div>
+    <div class="lesson-num">Lesson 1</div>
+    <h1>CODEBUSTERS</h1>
+    <div class="subtitle">Intro to the Event + Caesar &amp; Atbash</div>
+  </div>
+
+  <!-- ── Slide 2: What is Codebusters? ── -->
+  <div class="slide">
+    <h2>What is Codebusters?</h2>
+    <ul>
+      <li>A Science Olympiad event about <strong>encoding and decoding secret messages</strong></li>
+      <li>Three-person teams compete against the clock — <em>30 minutes</em> per test</li>
+      <li>Questions range from simple decryption (key is given) to full cryptanalysis (no key!)</li>
+      <li>Math-based ciphers (Cryptarithm) also appear</li>
+      <li>We compete at <strong>Invitationals, Regionals,</strong> and hopefully <strong>State</strong></li>
+    </ul>
+  </div>
+
+  <!-- ── Slide 3: Event format ── -->
+  <div class="slide">
+    <h2>Event Format</h2>
+    <ul>
+      <li>Written test — paper and pencil, no computers</li>
+      <li>Up to <strong>3 teammates</strong> in the room, unlimited collaboration</li>
+<li>Scoring: points per correct plaintext letter plus bonus for full solves</li>
+      <li>Strategy matters — <strong>divide and conquer</strong> between teammates</li>
+    </ul>
+  </div>
+
+  <!-- ── Slide 4: Class Structure ── -->
+  <div class="slide">
+    <h2>How Class Works</h2>
+    <ul>
+      <li><strong>Attendance</strong> — taken at the start of every session; let a coach know if you can't make it</li>
+      <li><strong>Teams</strong> — grouped into 3-person teams, same format as competition; you work and compete together</li>
+      <li><strong>Timed Question</strong> — each class opens with a timed team decrypt; fastest correct team solve earns points toward the leaderboard</li>
+      <li><strong>Leaderboard</strong> — top scores from timed questions are posted on the team website, updated each week</li>
+    </ul>
+    <div class="callout blue">Team assignments may shift as the season progresses — it depends on who develops strengths in which ciphers.</div>
+  </div>
+
+  <!-- ── Slide 5: Codebusters Terms ── -->
+  <div class="slide">
+    <h2>Key Terms</h2>
+    <div class="two-col">
+      <ul>
+        <li><strong>Plaintext</strong> — the original readable message</li>
+        <li><strong>Ciphertext</strong> — the encoded/scrambled version</li>
+        <li><strong>Encrypt</strong> — convert plaintext → ciphertext</li>
+        <li><strong>Decrypt (D)</strong> — recover plaintext using the given key</li>
+        <li><strong>Cryptanalysis (C)</strong> — break a cipher with no key provided</li>
+      </ul>
+      <ul>
+        <li><strong>Key</strong> — the secret controlling the cipher (a number, word, or table)</li>
+        <li><strong>Crib</strong> — a known plaintext hint used to start cracking</li>
+        <li><strong>Monoalphabetic</strong> — one fixed substitution rule throughout the whole message</li>
+        <li><strong>Frequency analysis</strong> — use letter counts to guess substitutions (E is most common in English)</li>
+        <li><strong>D-type / C-type</strong> — key given vs. no key; determines how hard a problem is</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Slide 6: Cipher types overview ── -->
+  <div class="slide">
+    <h2>What We'll Learn This Year</h2>
+    <ul>
+      <li><strong>Monoalphabetic</strong> — Caesar, Atbash, Aristocrat, Patristocrat</li>
+      <li><strong>Polyalphabetic / Keyed</strong> — Porta, Nihilist, Homophonic</li>
+      <li><strong>Transposition</strong> — Complete Columnar</li>
+      <li><strong>Encoding / Steganographic</strong> — Baconian, Fractionated Morse, Xenocrypt, Checkerboard</li>
+      <li><strong>Math</strong> — Cryptarithm</li>
+    </ul>
+    <div class="callout blue">Today: Caesar / Shift and Atbash — the two simplest monoalphabetic ciphers.</div>
+  </div>
+
+  <!-- ── Slide 7: Caesar intro ── -->
+  <div class="slide title-slide">
+    <div class="big-icon">🏛️</div>
+    <div class="lesson-num">Caesar / Shift Cipher</div>
+    <h1>SHIFT EVERYTHING</h1>
+    <div class="subtitle">Julius Caesar used this to protect military orders (~58 BCE)</div>
+    <div style="margin-top:1.3rem;font-size:0.95rem;color:#57606a;max-width:560px;font-style:italic;line-height:1.6">
+      "If Caesar had anything confidential to say, he wrote it in cipher — shifting each letter of the alphabet by three."<br>
+      <span style="font-size:0.8rem;font-style:normal">— Suetonius, <em>De Vita Caesarum</em>, ~121 CE</span>
+    </div>
+  </div>
+
+  <!-- ── Slide 8: How it works ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2rem;right:3.5rem;font-family:serif;font-size:2.8rem;font-weight:700;color:#d4a72c;opacity:0.25;letter-spacing:0.12em;line-height:1">SPQR</div>
+    <h2>How the Caesar Cipher Works</h2>
+    <ul>
+      <li>Replace each plaintext letter with the letter <em>N positions later</em> in the alphabet</li>
+      <li>Wrap around: Z + 1 = A</li>
+      <li>The <strong>key</strong> is the shift amount (0–25)</li>
+      <li>Classic Caesar used shift = <strong>3</strong></li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Shift = 3</div>
+      <div class="row">Plain:  <span class="pt">A B C D E F … X Y Z</span></div>
+      <div class="row">Cipher: <span class="ct">D E F G H I … A B C</span></div>
+    </div>
+  </div>
+
+  <!-- ── Slide 7: Encryption example ── -->
+  <div class="slide">
+    <h2>Encrypting with Caesar (shift 3)</h2>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt">HELLO WORLD</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step by step</div>
+      <div class="row">H+3 = <span class="ct">K</span> &nbsp; E+3 = <span class="ct">H</span> &nbsp; L+3 = <span class="ct">O</span> &nbsp; L+3 = <span class="ct">O</span> &nbsp; O+3 = <span class="ct">R</span></div>
+      <div class="row">W+3 = <span class="ct">Z</span> &nbsp; O+3 = <span class="ct">R</span> &nbsp; R+3 = <span class="ct">U</span> &nbsp; L+3 = <span class="ct">O</span> &nbsp; D+3 = <span class="ct">G</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">KHOOR ZRUOG</div>
+    </div>
+  </div>
+
+  <!-- ── Slide 10: Decrypting Caesar ── -->
+  <div class="slide">
+    <h2>Decrypting Caesar — No Key Given</h2>
+    <ul>
+      <li>The rules do <strong>not</strong> provide the shift amount — you find it yourself</li>
+      <li>Only <strong>25 possible shifts</strong> — try them all until the plaintext makes sense (brute force)</li>
+      <li>Faster: try the most common shift values first (3, 13) or look for short words like <em>A, I, THE, AND</em></li>
+      <li>Reverse the shift — subtract N instead of adding; wrap Z+1 = A</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Ciphertext — shift unknown</div>
+      <div class="row ct">PBZROHFGREF</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Try shift 13: subtract 13 from each letter</div>
+      <div class="row pt">CODEBUSTERS</div>
+    </div>
+    <div class="callout green">With only 25 options, Caesar is the easiest cipher to brute-force — even in competition.</div>
+  </div>
+
+  <!-- ── Slide 9: The alphabet strip trick ── -->
+  <div class="slide">
+    <h2>The Alphabet Strip Trick</h2>
+    <ul>
+      <li>Write the alphabet twice in a row</li>
+      <li>Slide the bottom row to align A with the shift letter</li>
+      <li>Read off substitutions directly — no arithmetic needed</li>
+    </ul>
+    <div class="alpha-map">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div>
+      <div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div>
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">D</div><div class="cell bot">E</div><div class="cell bot">F</div><div class="cell bot">G</div><div class="cell bot">H</div>
+      <div class="cell bot">I</div><div class="cell bot">J</div><div class="cell bot">K</div><div class="cell bot">L</div><div class="cell bot">M</div>
+      <div class="cell bot">N</div><div class="cell bot">O</div><div class="cell bot">P</div>
+    </div>
+    <ul class="sub">
+      <li>Top row = plaintext &nbsp;·&nbsp; Bottom row = ciphertext (shift 3)</li>
+    </ul>
+  </div>
+
+  <!-- ── Slide 10: Practice problem ── -->
+  <div class="slide">
+    <h2>Practice — Decrypt This</h2>
+    <div class="callout yellow">Key: shift = 7</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">JVKLIBZALYZ PZ OLYL</div>
+    </div>
+    <ul class="sub">
+      <li>Work through each letter: subtract 7 (wrap around at A)</li>
+    </ul>
+    <div class="example" style="margin-top:1rem;">
+      <div class="lbl">Answer (reveal after attempt)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">CODEBUSTERS IS HERE</div>
+    </div>
+  </div>
+
+  <!-- ── Slide 13: Atbash transition ── -->
+  <div class="slide title-slide">
+    <div class="big-icon">📜</div>
+    <div class="lesson-num">Part 2</div>
+    <h1>ATBASH</h1>
+    <div class="subtitle">The mirror cipher — ancient Hebrew origin, ~600 BCE</div>
+    <div style="margin-top:1.2rem;font-size:2rem;letter-spacing:0.5em;color:#0550ae">
+      א ↔ ת &nbsp;&nbsp; ב ↔ ש
+    </div>
+    <div style="font-size:0.82rem;color:#57606a;margin-top:0.5rem;letter-spacing:0.08em">
+      Aleph–Tav &nbsp;·&nbsp; Bet–Shin &nbsp;·&nbsp; first + last letters of the Hebrew alphabet
+    </div>
+  </div>
+
+  <!-- ── Slide 14: Atbash background ── -->
+  <div class="slide">
+    <h2>Atbash Background</h2>
+    <div style="text-align:center;font-size:1.05rem;letter-spacing:0.35em;padding:0.55rem 1rem;background:#ddf4ff;border:1px solid #54aeff;border-radius:8px;color:#0550ae;margin-bottom:0.9rem">
+      א ב ג ד ה ו ז ח ט י כ ל מ נ ס ע פ צ ק ר <strong>ש</strong> <strong>ת</strong>
+      <div style="font-size:0.7rem;letter-spacing:0.08em;color:#57606a;margin-top:0.25rem;font-style:italic">Hebrew aleph-bet (read right-to-left) · Atbash pairs the first letter with the last, and so on</div>
+    </div>
+    <ul>
+      <li>One of the <strong>oldest ciphers</strong> — used in the Hebrew Bible (~600 BCE)</li>
+      <li>Name from Hebrew: <em>Aleph–Tav, Bet–Shin</em> — first↔last, second↔second-to-last</li>
+      <li>English rule: <strong>A↔Z, B↔Y, C↔X, …</strong> — same idea, reversed alphabet</li>
+      <li>Self-inverse: apply it twice and you're back to the original</li>
+      <li><strong>No secret key</strong> — the reverse-alphabet mapping is fixed and always printed on your resource sheet</li>
+    </ul>
+  </div>
+
+  <!-- ── Slide 13: The mapping ── -->
+  <div class="slide">
+    <h2>The Atbash Mapping</h2>
+    <div class="alpha-map">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div>
+      <div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div>
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">Z</div><div class="cell bot">Y</div><div class="cell bot">X</div><div class="cell bot">W</div><div class="cell bot">V</div>
+      <div class="cell bot">U</div><div class="cell bot">T</div><div class="cell bot">S</div><div class="cell bot">R</div><div class="cell bot">Q</div>
+      <div class="cell bot">P</div><div class="cell bot">O</div><div class="cell bot">N</div>
+    </div>
+    <ul class="sub">
+      <li>Top row = plaintext &nbsp;·&nbsp; Bottom row = ciphertext</li>
+      <li>Quick check: every plain + cipher letter pair sums to 27 (A=1 … Z=26)</li>
+    </ul>
+    <div class="callout blue">Memorize the midpoint pair: M↔N. It's the easiest to confuse.</div>
+  </div>
+
+  <!-- ── Slide 14: Atbash example ── -->
+  <div class="slide">
+    <h2>Atbash Example</h2>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt">SECRET</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Letter by letter</div>
+      <div class="row">S→<span class="ct">H</span> &nbsp; E→<span class="ct">V</span> &nbsp; C→<span class="ct">X</span> &nbsp; R→<span class="ct">I</span> &nbsp; E→<span class="ct">V</span> &nbsp; T→<span class="ct">G</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">HVXIVG</div>
+    </div>
+    <ul class="sub"><li>To decrypt, apply the same mapping in reverse — it's identical.</li></ul>
+  </div>
+
+  <!-- ── Slide 15: Atbash practice ── -->
+  <div class="slide">
+    <h2>Practice — Decrypt This Atbash Message</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">NVVG ZG GSV OLYYB ZG SZOU KZHG GSIVV</div>
+    </div>
+    <div class="example" style="margin-top:1rem;">
+      <div class="lbl">Plaintext (click to reveal)</div>
+      <div class="row pt" style="filter:blur(5px);transition:filter 0.3s" onclick="this.style.filter='none'">MEET AT THE LOBBY AT HALF PAST THREE</div>
+    </div>
+  </div>
+
+  <!-- ── Slide 16: Combined key takeaways ── -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li><strong>Caesar</strong>: shift every letter by a fixed amount; <em>shift is not given</em> — try all 25 (brute force)</li>
+      <li><strong>Atbash</strong>: reverse the alphabet (A↔Z); no secret key — mapping is fixed, always on your resource sheet</li>
+      <li>Both are monoalphabetic; Caesar requires finding the shift, Atbash requires none</li>
+      <li>Caesar has 25 possible shifts; Atbash has exactly one mapping — memorize it cold</li>
+      <li>Next class: <strong>Aristocrat</strong> — full scrambled alphabet + cryptanalysis</li>
+    </ul>
+  </div>
+
+
+  <!-- ── Exam Q1: Caesar ── -->
+  <div class="slide">
+    <h2>Exam Practice — Caesar Cipher</h2>
+    <div class="callout yellow">No shift given — find it yourself. Try common shifts (3, 13) or look for short words.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext — find the shift</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">PBQROHFGREF YBIR PBQRF</div>
+    </div>
+    <ul class="sub">
+      <li>Hint: the first word is 11 letters</li>
+      <li>Try: what common 11-letter phrase could this be? Which shift makes the first word real?</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Caesar Answer ── -->
+  <div class="slide">
+    <h2>Answer — Caesar Cipher (shift = 13)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">PBQROHFGREF YBIR PBQRF</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext — shift 13 (ROT13)</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">CODEBUSTERS LOVE CODES</div>
+    </div>
+    <div class="callout green">ROT13 (shift = 13) is its own inverse — same operation encrypts and decrypts. P(16) − 13 = 3 = C ✓</div>
+    <ul class="sub">
+      <li>How to find it: try P − 3 = M (no), P − 13 = C (yes — "CODEBUSTERS" is 11 letters!)</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q2: Atbash (D-type) ── -->
+  <div class="slide">
+    <h2>Exam Practice — Atbash Cipher (D)</h2>
+    <div class="callout yellow">No key needed — just mirror every letter (A↔Z, B↔Y, …)</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">OVZIM GSV XRKSVI</div>
+    </div>
+    <ul class="sub">
+      <li>Decode each letter: position + mirror position = 27</li>
+      <li>Example: O = 15, 27 − 15 = 12 = L</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Atbash Answer ── -->
+  <div class="slide">
+    <h2>Answer — Atbash Cipher (D)</h2>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct">OVZIM GSV XRKSVI</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Plaintext</div>
+      <div class="row pt" style="font-size:1.4rem;letter-spacing:0.1em">LEARN THE CIPHER</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Letter-by-letter</div>
+      <div class="row">O→L &nbsp; V→E &nbsp; Z→A &nbsp; I→R &nbsp; M→N &nbsp;|&nbsp; G→T &nbsp; S→H &nbsp; V→E &nbsp;|&nbsp; X→C &nbsp; R→I &nbsp; K→P &nbsp; S→H &nbsp; V→E &nbsp; I→R</div>
+    </div>
+  </div>
+
+
+  <!-- ── HW Q1: Caesar (C-type) ── -->
+  <div class="slide">
+    <h2>Homework — Caesar Cipher (C)</h2>
+    <div class="callout blue">No shift given — find it yourself. Write down your shift and full plaintext to share next class.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">XLAWP HTYD DELEP</div>
+    </div>
+    <ul class="sub">
+      <li>Three words: 5 letters, 4 letters, 5 letters</li>
+      <li>Try common shifts first (3, 13) — if those don't produce English words, work through the rest</li>
+      <li>Once you find two letters that make sense, test that shift against the whole message</li>
+    </ul>
+  </div>
+
+  <!-- ── HW Q2: Atbash ── -->
+  <div class="slide">
+    <h2>Homework — Atbash Cipher</h2>
+    <div class="callout blue">The Atbash table is always on your resource sheet — use it.</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.5rem">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div>
+      <div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div>
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">Z</div><div class="cell bot">Y</div><div class="cell bot">X</div><div class="cell bot">W</div><div class="cell bot">V</div>
+      <div class="cell bot">U</div><div class="cell bot">T</div><div class="cell bot">S</div><div class="cell bot">R</div><div class="cell bot">Q</div>
+      <div class="cell bot">P</div><div class="cell bot">O</div><div class="cell bot">N</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">XLWVYFHGVIH MVEVI TREV FK</div>
+    </div>
+    <ul class="sub">
+      <li>Four words — decode each letter using the mirror mapping above (and its symmetric reverse for N–Z)</li>
+      <li>Quick check: every plain + cipher letter pair sums to 25 (A=0 … Z=25)</li>
+    </ul>
+  </div>
+
+  <!-- ── HW Q3: Caesar (C-type, different shift) ── -->
+  <div class="slide">
+    <h2>Homework — Caesar Cipher (C) #2</h2>
+    <div class="callout blue">No shift given — find it yourself.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">YAJLCRLN FRWB</div>
+    </div>
+    <ul class="sub">
+      <li>Two words: 8 letters, 4 letters</li>
+      <li>Try common shifts first — if they fail, work through the rest systematically</li>
+    </ul>
+  </div>
+
+  <!-- ── HW Q4: Atbash (longer phrase) ── -->
+  <div class="slide">
+    <h2>Homework — Atbash Cipher #2</h2>
+    <div class="callout blue">The Atbash table is always on your resource sheet — use it.</div>
+    <div class="alpha-map" style="font-size:0.78rem;margin-bottom:0.5rem">
+      <div class="cell top">A</div><div class="cell top">B</div><div class="cell top">C</div><div class="cell top">D</div><div class="cell top">E</div>
+      <div class="cell top">F</div><div class="cell top">G</div><div class="cell top">H</div><div class="cell top">I</div><div class="cell top">J</div>
+      <div class="cell top">K</div><div class="cell top">L</div><div class="cell top">M</div>
+      <div class="cell bot">Z</div><div class="cell bot">Y</div><div class="cell bot">X</div><div class="cell bot">W</div><div class="cell bot">V</div>
+      <div class="cell bot">U</div><div class="cell bot">T</div><div class="cell bot">S</div><div class="cell bot">R</div><div class="cell bot">Q</div>
+      <div class="cell bot">P</div><div class="cell bot">O</div><div class="cell bot">N</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">PMLDOVWTV RH KLDVI</div>
+    </div>
+    <ul class="sub">
+      <li>Three words — decode each letter using the mirror mapping</li>
+    </ul>
+  </div>
+
+</div><!-- /.deck -->
+
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

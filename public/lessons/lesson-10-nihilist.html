@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 — Nihilist Substitution</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+<div class="progress"></div>
+<div class="deck">
+
+  <!-- 1 -->
+  <div class="slide title-slide">
+    <div class="big-icon">🔲</div>
+    <div class="lesson-num">Lesson 10</div>
+    <h1>NIHILIST SUBSTITUTION</h1>
+    <div class="subtitle">Polybius square + keyword addition</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <h2>Overview</h2>
+    <ul>
+      <li>Used by Russian Nihilist revolutionaries in the 1800s</li>
+      <li>Two-step cipher: <strong>Polybius square</strong> (letter → two digits) + <strong>keyword addition</strong></li>
+      <li>At Invitationals/Regionals: Decrypt (D) — key given</li>
+      <li>At State/Nationals: Decrypt or Cryptanalysis (DC)</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide">
+    <h2>Step 1 — The Polybius Square</h2>
+    <ul>
+      <li>A 5×5 grid of letters, labeled 1–5 on rows and columns</li>
+      <li>I and J share one cell (25 letters fit in 5×5)</li>
+      <li>Each letter → a two-digit number (row, column)</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Standard Polybius Square</div>
+      <div class="row">
+        <table style="display:inline-table;font-size:0.9rem">
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+          <tr><th>2</th><td>F</td><td>G</td><td>H</td><td>I/J</td><td>K</td></tr>
+          <tr><th>3</th><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td></tr>
+          <tr><th>4</th><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td></tr>
+          <tr><th>5</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr>
+        </table>
+      </div>
+    </div>
+    <ul class="sub"><li>A=11, B=12, C=13, … Z=55</li></ul>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <h2>Keyword Square</h2>
+    <ul>
+      <li>The keyword is written into the Polybius square first (no duplicate letters)</li>
+      <li>Remaining letters fill in alphabetical order</li>
+      <li>This creates a non-standard Polybius square — the key</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Keyword: CODE (no duplicates)</div>
+      <div class="row pt">C O D E → then A B F G H I/J K L M N P Q R S T U V W X Y Z</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <h2>Step 2 — Keyword Addition</h2>
+    <ul>
+      <li>Convert each plaintext letter to its two-digit Polybius number</li>
+      <li>Write the keyword above the message, repeating</li>
+      <li>Convert each keyword letter to its Polybius number</li>
+      <li><strong>Add</strong> the plaintext number and keyword number (no carrying)</li>
+    </ul>
+    <div class="example">
+      <div class="lbl">Plain: HI &nbsp;&nbsp; Key: DO</div>
+      <div class="row">H = <span class="pt">23</span> &nbsp; I = <span class="pt">24</span></div>
+      <div class="row">D = <span class="key">13</span> &nbsp; O = <span class="key">34</span></div>
+      <div class="row">Sum: <span class="ct">36</span> &nbsp; <span class="ct">58</span></div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide">
+    <h2>Decryption</h2>
+    <ul>
+      <li>Repeat keyword above ciphertext numbers</li>
+      <li>Convert keyword letters to Polybius numbers</li>
+      <li><strong>Subtract</strong> keyword numbers from ciphertext numbers</li>
+      <li>Look up the resulting number in the Polybius square → plaintext letter</li>
+    </ul>
+    <div class="callout yellow">If subtraction would give a negative digit, add 10 to the ones place (borrow across columns independently).</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <h2>Cryptanalysis (State level)</h2>
+    <ul>
+      <li>Find keyword length using repeated patterns in the ciphertext</li>
+      <li>Group ciphertext numbers by keyword position</li>
+      <li>Use frequency analysis on each group's last digits (column info)</li>
+      <li>The most common Polybius value in English ≈ 23 (H), 15 (E), 44 (T)</li>
+    </ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Nihilist = Polybius square coordinates + keyword number addition</li>
+      <li>The keyword sets the Polybius square filling order</li>
+      <li>Decrypt by subtracting keyword numbers from ciphertext numbers</li>
+      <li>D at Invitationals; DC at State</li>
+      <li>Next class: <strong>Checkerboard (5×5)</strong></li>
+    </ul>
+  </div>
+
+  <!-- ── Exam Q1: Nihilist D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Polybius (keyword: CODE)</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;C &nbsp;O &nbsp;D &nbsp;E &nbsp;A</div>
+      <div>2 &nbsp;B &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ</div>
+      <div>3 &nbsp;K &nbsp;L &nbsp;M &nbsp;N &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Exam Practice — Nihilist (D)</h2>
+    <div class="callout yellow">D-type: both keys given. Subtract keyword Polybius numbers from ciphertext numbers to decrypt.</div>
+    <div class="example">
+      <div class="lbl">Polybius keyword: CODE &nbsp;(square top-right) &nbsp;·&nbsp; Nihilist keyword: KEY</div>
+      <div class="lbl">Ciphertext numbers</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">52 56 68 46 45 65 43 27 68</div>
+    </div>
+    <ul class="sub">
+      <li>Step 1: Convert KEY to Polybius: K=31, E=14, Y=54 — repeat over the 9 ciphertext numbers</li>
+      <li>Step 2: Subtract each keyword number from the corresponding cipher number</li>
+      <li>Step 3: Look up each result in the Polybius square → plaintext letter</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A1: Nihilist D-type Answer ── -->
+  <div class="slide">
+    <h2>Answer — Nihilist (D): BREAK CODE</h2>
+    <div class="example">
+      <div class="lbl">Key alignment (KEY repeating)</div>
+      <div class="row" style="font-family:monospace;font-size:0.9rem;line-height:1.8">
+        Key: &nbsp;<span class="key">31 &nbsp;14 &nbsp;54 &nbsp;31 &nbsp;14 &nbsp;54 &nbsp;31 &nbsp;14 &nbsp;54</span><br>
+        CT: &nbsp;&nbsp;<span class="ct">52 &nbsp;56 &nbsp;68 &nbsp;46 &nbsp;45 &nbsp;65 &nbsp;43 &nbsp;27 &nbsp;68</span><br>
+        PT#: &nbsp;<span class="pt">21 &nbsp;42 &nbsp;14 &nbsp;15 &nbsp;31 &nbsp;11 &nbsp;12 &nbsp;13 &nbsp;14</span>
+      </div>
+    </div>
+    <div class="example">
+      <div class="lbl">Polybius lookup</div>
+      <div class="row">21=B &nbsp; 42=R &nbsp; 14=E &nbsp; 15=A &nbsp; 31=K &nbsp;|&nbsp; 11=C &nbsp; 12=O &nbsp; 13=D &nbsp; 14=E</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">BREAK CODE</span></div>
+  </div>
+
+  <!-- ── Exam Q2: Nihilist D-type (standard square) ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Standard Polybius Square</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;A &nbsp;B &nbsp;C &nbsp;D &nbsp;E</div>
+      <div>2 &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ&nbsp;K</div>
+      <div>3 &nbsp;L &nbsp;M &nbsp;N &nbsp;O &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Exam Practice — Nihilist (D) #2</h2>
+    <div class="callout yellow">Standard Polybius square (no keyword). Ciphertext may include 3-digit numbers — that's normal.</div>
+    <div class="example">
+      <div class="lbl">Nihilist keyword: WIN &nbsp;·&nbsp; 5-letter answer</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">95 58 64 103 39</div>
+    </div>
+    <ul class="sub">
+      <li>Convert WIN: W=52, I=24, N=33 — repeat as needed</li>
+      <li>Subtract: 95−52, 58−24, 64−33, 103−52, 39−24</li>
+      <li>The 4th number 103 − 52 = 51 — look up 51 in the square</li>
+    </ul>
+  </div>
+
+  <!-- ── Exam A2: Nihilist D-type #2 Answer ── -->
+  <div class="slide">
+    <h2>Answer — Nihilist (D) #2: SOLVE</h2>
+    <div class="example">
+      <div class="lbl">Key alignment (WIN repeating)</div>
+      <div class="row" style="font-family:monospace;font-size:0.9rem;line-height:1.8">
+        Key: &nbsp;<span class="key">52 &nbsp;&nbsp;24 &nbsp;&nbsp;33 &nbsp;&nbsp;52 &nbsp;&nbsp;24</span><br>
+        CT: &nbsp;&nbsp;<span class="ct">95 &nbsp;&nbsp;58 &nbsp;&nbsp;64 &nbsp;103 &nbsp;&nbsp;39</span><br>
+        PT#: &nbsp;<span class="pt">43 &nbsp;&nbsp;34 &nbsp;&nbsp;31 &nbsp;&nbsp;51 &nbsp;&nbsp;15</span>
+      </div>
+    </div>
+    <div class="example">
+      <div class="lbl">Polybius lookup (standard square)</div>
+      <div class="row">43=S &nbsp; 34=O &nbsp; 31=L &nbsp; 51=V &nbsp; 15=E</div>
+    </div>
+    <div class="callout green">Plaintext: <span style="font-family:monospace;font-size:1.1rem">SOLVE</span></div>
+  </div>
+
+
+  <!-- ── HW1: Nihilist D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Polybius (keyword: CODE)</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;C &nbsp;O &nbsp;D &nbsp;E &nbsp;A</div>
+      <div>2 &nbsp;B &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ</div>
+      <div>3 &nbsp;K &nbsp;L &nbsp;M &nbsp;N &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Homework 1 — Nihilist (D)</h2>
+    <div class="callout blue">Due next class · Polybius keyword: CODE (square top-right) · Nihilist keyword: MATH</div>
+    <div class="example">
+      <div class="lbl">Ciphertext numbers (6 numbers, 2-word answer)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">85 40 78 68 57 29</div>
+    </div>
+    <ul class="sub">
+      <li>Convert MATH to Polybius numbers: M=33, A=15, T=44, H=24 — repeat over 6 cipher numbers</li>
+      <li>Subtract keyword numbers from cipher numbers; look up result in square</li>
+    </ul>
+  </div>
+
+  <!-- ── HW2: Nihilist D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Standard Polybius Square</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;A &nbsp;B &nbsp;C &nbsp;D &nbsp;E</div>
+      <div>2 &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ&nbsp;K</div>
+      <div>3 &nbsp;L &nbsp;M &nbsp;N &nbsp;O &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Homework 2 — Nihilist (D)</h2>
+    <div class="callout blue">Due next class · Standard Polybius square · Nihilist keyword: BEST</div>
+    <div class="example">
+      <div class="lbl">Ciphertext numbers (5 numbers, 1 word)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">25 49 57 59 55</div>
+    </div>
+    <ul class="sub">
+      <li>Convert BEST: B=12, E=15, S=43, T=44 — repeat over 5 numbers</li>
+      <li>Subtract, then look up in the standard square</li>
+    </ul>
+  </div>
+
+  <!-- ── HW3: Nihilist D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Polybius (keyword: CODE)</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;C &nbsp;O &nbsp;D &nbsp;E &nbsp;A</div>
+      <div>2 &nbsp;B &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ</div>
+      <div>3 &nbsp;K &nbsp;L &nbsp;M &nbsp;N &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Homework 3 — Nihilist (D)</h2>
+    <div class="callout blue">Due next class · Polybius keyword: CODE · Nihilist keyword: WIN</div>
+    <div class="example">
+      <div class="lbl">Ciphertext numbers (4 numbers, 1 word)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">75 37 49 84</div>
+    </div>
+    <ul class="sub">
+      <li>Convert WIN: W=52, I=25, N=34 — repeat over 4 numbers</li>
+      <li>Subtract, then look up in the CODE-keyword square (top right)</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4: Nihilist D-type ── -->
+  <div class="slide" style="position:relative">
+    <div style="position:absolute;top:2.5rem;right:4rem;font-size:0.52rem;font-family:monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:0.5rem 0.65rem;line-height:1.7;z-index:5;max-width:200px">
+      <div style="font-family:system-ui;font-weight:600;font-size:0.6rem;color:#0969da;margin-bottom:0.2rem">Standard Polybius Square</div>
+      <div>&nbsp;&nbsp;&nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5</div>
+      <div>1 &nbsp;A &nbsp;B &nbsp;C &nbsp;D &nbsp;E</div>
+      <div>2 &nbsp;F &nbsp;G &nbsp;H &nbsp;IJ&nbsp;K</div>
+      <div>3 &nbsp;L &nbsp;M &nbsp;N &nbsp;O &nbsp;P</div>
+      <div>4 &nbsp;Q &nbsp;R &nbsp;S &nbsp;T &nbsp;U</div>
+      <div>5 &nbsp;V &nbsp;W &nbsp;X &nbsp;Y &nbsp;Z</div>
+    </div>
+    <h2>Homework 4 — Nihilist (D)</h2>
+    <div class="callout blue">Due next class · Standard Polybius square · Nihilist keyword: CODE</div>
+    <div class="example">
+      <div class="lbl">Ciphertext numbers (7 numbers, 2 words)</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.2em">45 45 58 38 65 58 47</div>
+    </div>
+    <ul class="sub">
+      <li>Convert CODE: C=13, O=34, D=14, E=15 — repeat over 7 numbers</li>
+      <li>Subtract, then look up in the standard square</li>
+    </ul>
+  </div>
+
+</div>
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

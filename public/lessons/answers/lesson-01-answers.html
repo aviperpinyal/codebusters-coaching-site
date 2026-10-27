@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 Answer Key — Caesar &amp; Atbash [COACH ONLY]</title>
+  <link rel="stylesheet" href="/styles/slides.css">
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck">
+
+  <!-- ── Title ── -->
+  <div class="slide title-slide">
+    <div class="big-icon">🔑</div>
+    <div class="lesson-num">Lesson 1 — Coach Answer Key</div>
+    <h1>CAESAR &amp; ATBASH</h1>
+    <div class="subtitle">Step-by-step solutions · In-class exam practice + homework</div>
+    <div class="callout red" style="margin-top:1.5rem;max-width:520px">Coach use only — do not share with students before class</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       IN-CLASS EXAM PRACTICE SOLUTIONS
+       ══════════════════════════════════════════ -->
+
+  <!-- ── EP1 Problem restate ── -->
+  <div class="slide">
+    <h2>Exam Practice 1 — Caesar (C) · Problem</h2>
+    <div class="callout yellow">No shift given — students must find it themselves.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">PBQROHFGREF YBIR PBQRF</div>
+    </div>
+    <ul class="sub">
+      <li>Three words: 11 letters · 4 letters · 5 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── EP1 Solution ── -->
+  <div class="slide">
+    <h2>Exam Practice 1 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Step 1 — count the first word</div>
+      <div class="row">PBQROHFGREF = 11 letters. What common 11-letter phrase fits a Codebusters test? → <span class="pt">CODEBUSTERS</span></div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 2 — find the shift from C→P</div>
+      <div class="row">C = 2 (0-indexed A=0). Cipher P = 15. Shift = 15 − 2 = <strong>13</strong>. Try ROT13.</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 3 — verify all 11 letters (subtract 13 from each, wrap if negative)</div>
+      <div class="row">P(15)−13=2=C &nbsp; B(1)−13=14=O &nbsp; Q(16)−13=3=D &nbsp; R(17)−13=4=E &nbsp; O(14)−13=1=B</div>
+      <div class="row">H(7)−13=20=U &nbsp; F(5)−13=18=S &nbsp; G(6)−13=19=T &nbsp; R(17)−13=4=E &nbsp; E(4)−13=17=R &nbsp; F(5)−13=18=S</div>
+      <div class="row pt">C O D E B U S T E R S ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Step 4 — decode remaining words with shift 13</div>
+      <div class="row">Y(24)−13=11=L &nbsp; B(1)−13=14=O &nbsp; I(8)−13=21=V &nbsp; R(17)−13=4=E → <span class="pt">LOVE</span></div>
+      <div class="row">P(15)−13=2=C &nbsp; B(1)−13=14=O &nbsp; Q(16)−13=3=D &nbsp; R(17)−13=4=E &nbsp; F(5)−13=18=S → <span class="pt">CODES</span></div>
+    </div>
+    <div class="callout green">Answer: <strong>CODEBUSTERS LOVE CODES</strong> &nbsp;·&nbsp; Shift = 13 (ROT13)</div>
+    <div class="callout blue">Teaching note: ROT13 is self-inverse — applying it twice returns the original. A great shortcut to remember.</div>
+  </div>
+
+  <!-- ── EP2 Problem restate ── -->
+  <div class="slide">
+    <h2>Exam Practice 2 — Atbash (D) · Problem</h2>
+    <div class="callout yellow">No key needed — the reverse-alphabet mapping is always on the resource sheet.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">OVZIM GSV XRKSVI</div>
+    </div>
+    <ul class="sub">
+      <li>Three words: 5 letters · 3 letters · 6 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── EP2 Solution ── -->
+  <div class="slide">
+    <h2>Exam Practice 2 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Assumption: Atbash is self-inverse — decode = encode. Apply A↔Z, B↔Y, … to every letter.</div>
+      <div class="lbl">Trick: plain + cipher letter positions sum to 25 (0-indexed). Use this to spot-check.</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 1 — OVZIM</div>
+      <div class="row">O(14)→25−14=11=L &nbsp; V(21)→4=E &nbsp; Z(25)→0=A &nbsp; I(8)→17=R &nbsp; M(12)→13=N</div>
+      <div class="row pt">L E A R N ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 2 — GSV</div>
+      <div class="row">G(6)→19=T &nbsp; S(18)→7=H &nbsp; V(21)→4=E</div>
+      <div class="row pt">T H E ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 3 — XRKSVI</div>
+      <div class="row">X(23)→2=C &nbsp; R(17)→8=I &nbsp; K(10)→15=P &nbsp; S(18)→7=H &nbsp; V(21)→4=E &nbsp; I(8)→17=R</div>
+      <div class="row pt">C I P H E R ✓</div>
+    </div>
+    <div class="callout green">Answer: <strong>LEARN THE CIPHER</strong></div>
+    <div class="callout blue">Teaching note: watch the midpoint pair M(12)↔N(13) — students often stumble here. Spot-check: M+N = 12+13 = 25 ✓</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HOMEWORK SOLUTIONS
+       ══════════════════════════════════════════ -->
+
+  <!-- ── HW1 Problem restate ── -->
+  <div class="slide">
+    <h2>Homework 1 — Caesar (C) · Problem</h2>
+    <div class="callout yellow">No shift given — students must find it.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">XLAWP HTYD DELEP</div>
+    </div>
+    <ul class="sub">
+      <li>Three words: 5 letters · 4 letters · 5 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── HW1 Solution ── -->
+  <div class="slide">
+    <h2>Homework 1 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Method A — guess from a short word</div>
+      <div class="row">4-letter word HTYD. Try common 4-letter words. Attempt <span class="pt">WINS</span>:</div>
+      <div class="row">H = cipher, W = guessed plain. Shift = H(7) − W(22) = −15 ≡ <strong>11</strong> (mod 26)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Method B — guess from the last word</div>
+      <div class="row">5-letter word DELEP ending in P. Attempt <span class="pt">STATE</span>:</div>
+      <div class="row">D = cipher, S = guessed plain. Shift = D(3) − S(18) = −15 ≡ <strong>11</strong> (mod 26)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Verify shift = 11: subtract 11 from each letter (add 26 if result &lt; 0)</div>
+      <div class="row">X(23)−11=12=M &nbsp; L(11)−11=0=A &nbsp; A(0)−11=15=P &nbsp; W(22)−11=11=L &nbsp; P(15)−11=4=E → <span class="pt">MAPLE</span> ✓</div>
+      <div class="row">H(7)−11=22=W &nbsp; T(19)−11=8=I &nbsp; Y(24)−11=13=N &nbsp; D(3)−11=18=S → <span class="pt">WINS</span> ✓</div>
+      <div class="row">D(3)−11=18=S &nbsp; E(4)−11=19=T &nbsp; L(11)−11=0=A &nbsp; E(4)−11=19=T &nbsp; P(15)−11=4=E → <span class="pt">STATE</span> ✓</div>
+    </div>
+    <div class="callout green">Answer: <strong>MAPLE WINS STATE</strong> &nbsp;·&nbsp; Shift = 11</div>
+    <div class="callout blue">Teaching note: shift 11 isn't in the "common" list (3, 13). Students who only try those will get stuck — reinforce systematic brute-force or word-guessing from short words.</div>
+  </div>
+
+  <!-- ── HW2 Problem restate ── -->
+  <div class="slide">
+    <h2>Homework 2 — Atbash · Problem</h2>
+    <div class="callout yellow">Standard Atbash — resource sheet always provided.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">XLWVYFHGVIH MVEVI TREV FK</div>
+    </div>
+    <ul class="sub">
+      <li>Four words: 11 letters · 5 letters · 4 letters · 2 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── HW2 Solution ── -->
+  <div class="slide">
+    <h2>Homework 2 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Assumption: Atbash maps each letter to position 25 − (its position). Apply to every letter.</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 1 — XLWVYFHGVIH (11 letters)</div>
+      <div class="row">X(23)→2=C &nbsp; L(11)→14=O &nbsp; W(22)→3=D &nbsp; V(21)→4=E &nbsp; Y(24)→1=B</div>
+      <div class="row">F(5)→20=U &nbsp; H(7)→18=S &nbsp; G(6)→19=T &nbsp; V(21)→4=E &nbsp; I(8)→17=R &nbsp; H(7)→18=S</div>
+      <div class="row pt">C O D E B U S T E R S ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 2 — MVEVI</div>
+      <div class="row">M(12)→13=N &nbsp; V(21)→4=E &nbsp; E(4)→21=V &nbsp; V(21)→4=E &nbsp; I(8)→17=R → <span class="pt">NEVER</span> ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 3 — TREV</div>
+      <div class="row">T(19)→6=G &nbsp; R(17)→8=I &nbsp; E(4)→21=V &nbsp; V(21)→4=E → <span class="pt">GIVE</span> ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 4 — FK</div>
+      <div class="row">F(5)→20=U &nbsp; K(10)→15=P → <span class="pt">UP</span> ✓</div>
+    </div>
+    <div class="callout green">Answer: <strong>CODEBUSTERS NEVER GIVE UP</strong></div>
+    <div class="callout blue">Teaching note: students may forget K↔P and G↔T — these are less intuitive than A↔Z. Encourage them to write out the full mapping before starting, not just rely on memory.</div>
+  </div>
+
+  <!-- ── HW3 Problem restate ── -->
+  <div class="slide">
+    <h2>Homework 3 — Caesar (C) #2 · Problem</h2>
+    <div class="callout yellow">No shift given — students must find it.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.4rem;letter-spacing:0.12em">YAJLCRLN FRWB</div>
+    </div>
+    <ul class="sub">
+      <li>Two words: 8 letters · 4 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── HW3 Solution ── -->
+  <div class="slide">
+    <h2>Homework 3 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Method — guess from the 4-letter word</div>
+      <div class="row">FRWB: 4 letters. Try <span class="pt">WINS</span>: F(5) = W(22) + shift → shift = 5 − 22 = −17 ≡ <strong>9</strong> (mod 26)</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Verify shift = 9: subtract 9 from each letter (add 26 if result &lt; 0)</div>
+      <div class="row">Y(24)−9=15=P &nbsp; A(0)−9=17=R &nbsp; J(9)−9=0=A &nbsp; L(11)−9=2=C &nbsp; C(2)−9=19=T &nbsp; R(17)−9=8=I &nbsp; L(11)−9=2=C &nbsp; N(13)−9=4=E → <span class="pt">PRACTICE</span> ✓</div>
+      <div class="row">F(5)−9=22=W &nbsp; R(17)−9=8=I &nbsp; W(22)−9=13=N &nbsp; B(1)−9=18=S → <span class="pt">WINS</span> ✓</div>
+    </div>
+    <div class="callout green">Answer: <strong>PRACTICE WINS</strong> &nbsp;·&nbsp; Shift = 9</div>
+    <div class="callout blue">Teaching note: shift 9 won't be found by trying only 3 or 13. Students who brute-force systematically (or make a smart guess from a common word) will reach it in at most a few tries.</div>
+  </div>
+
+  <!-- ── HW4 Problem restate ── -->
+  <div class="slide">
+    <h2>Homework 4 — Atbash #2 · Problem</h2>
+    <div class="callout yellow">Standard Atbash — resource sheet always provided.</div>
+    <div class="example">
+      <div class="lbl">Ciphertext</div>
+      <div class="row ct" style="font-size:1.3rem;letter-spacing:0.12em">PMLDOVWTV RH KLDVI</div>
+    </div>
+    <ul class="sub">
+      <li>Three words: 9 letters · 2 letters · 5 letters</li>
+    </ul>
+  </div>
+
+  <!-- ── HW4 Solution ── -->
+  <div class="slide">
+    <h2>Homework 4 — Solution</h2>
+    <div class="example">
+      <div class="lbl">Assumption: Atbash maps each letter to position 25 − (its position). Apply to every letter.</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 1 — PMLDOVWTV (9 letters)</div>
+      <div class="row">P(15)→10=K &nbsp; M(12)→13=N &nbsp; L(11)→14=O &nbsp; D(3)→22=W &nbsp; O(14)→11=L</div>
+      <div class="row">V(21)→4=E &nbsp; W(22)→3=D &nbsp; T(19)→6=G &nbsp; V(21)→4=E</div>
+      <div class="row pt">K N O W L E D G E ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 2 — RH</div>
+      <div class="row">R(17)→8=I &nbsp; H(7)→18=S → <span class="pt">IS</span> ✓</div>
+    </div>
+    <div class="example">
+      <div class="lbl">Word 3 — KLDVI</div>
+      <div class="row">K(10)→15=P &nbsp; L(11)→14=O &nbsp; D(3)→22=W &nbsp; V(21)→4=E &nbsp; I(8)→17=R → <span class="pt">POWER</span> ✓</div>
+    </div>
+    <div class="callout green">Answer: <strong>KNOWLEDGE IS POWER</strong></div>
+    <div class="callout blue">Teaching note: W↔D is an easy pair to miss in a long word. Have students write the full plain alphabet and mirror it before decoding rather than looking up each letter individually.</div>
+  </div>
+
+</div><!-- /.deck -->
+
+<nav class="slide-nav">
+  <a class="back" href="/admin.html">← Admin</a>
+  <button id="prev" disabled>&#8592;</button>
+  <span class="counter"></span>
+  <button id="next">&#8594;</button>
+</nav>
+
+<script src="/scripts/slides.js"></script>
+</body>
+</html>

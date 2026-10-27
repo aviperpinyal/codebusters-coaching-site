@@ -1,0 +1,7 @@
+.env
+*.xlsx
+*.pdf
+!public/*.pdf
+node_modules/
+data/
+.DS_Store
